@@ -1,6 +1,4 @@
-package domino;
-
-public enum MNKGameState {
+public enum GameState {
 	OPEN,  
 	ENDED,  
 	WINP1, 

@@ -1,7 +1,4 @@
 
-//TODO metodi add NON devono controllare compatibilità, responsabilità delegata alle funzioni che si occupano di fare le mosse
-
-
 /*
 creare metodi per gestire la partita:
 fare 1 mossa (sapendo chi è giocatore corrente)
@@ -27,50 +24,121 @@ l'alfabeta pruntin USA la classe table, però è esterna
 il main alloca la table con la configurazuibne di gioco e lancia alfabeta pruning con quella configurazione e da lì otteniamo il vincitore
 vogliamo sapere anche quanti punti vengono fatti dai 2 giocatori
 
+    far partire chi ha doppio 6 e poi essere in grado di capire chi è in grado di giocare 
+    una tessera,
+    sostanzialmente gestire bene i turni che possono essere multipli
+
 table deve permettere di giocare anche con meno di 14 tessere
 gestire anche la possibilità che non ci sia doppio6 e anche che nessuno abbia coppia quindi resettare la partita
+
+
+? è giusto mettere i metodi private?
+? problema: in alcune versioni, ad es double-9, si hanno 55 tessere, quindi distribuendole tutte qualcuno si ritroverebbe con una tessera in piu'
+? è giusto fare le funzioni void e modificare lì i campi, o sarebbe meglio fare ad esempio: starting_player = chooseStartingPlayer() ?
 */
-package domino;
 
-public class Table{
-    List<Tile> tiles;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+public class Table {
+    List<Tile> all_tiles;     
+    List<Tile> played_tiles;
+    List<Tile> unplayed_tiles;
+    List<Tile> p1_hand, p2_hand;
     int head, tail;
-    int current_player;
+    int current_player;     // 1:P1, 2:P2
+    int starting_player;
 
-    public Table(){
-        this.tiles = new ArrayList<>();
-        this.head = -1;                     // valori fake per tavolo inizialmente vuoto
-        this.tail = -1;
+    public Table(int max_tile) {
+
+        generateAllTiles(max_tile);
+        dealPlayersHands();
+        chooseStartingPlayer();
+
+        played_tiles = new ArrayList<>();
+        unplayed_tiles = all_tiles;
     }
 
-//? da sostituire alle funzioni addHead e addTail?
+    
     public playTile(){
+        //? da sostituire alle funzioni addHead e addTail?
+        // controllare legalità della mossa
 
     }
 
+    
     public void addHead(Tile tile, int head){
         tiles.add(0, tile);
         this.head = head;
     }
 
-    public void addTail(Tile tile, int tail){
+    
+    public void addTail(Tile tile, int tail) {
         tiles.add(tile);
         this.tail = tail;
     }
+    
 
-    public Tile getHead(){
-        return head;
+    public int getHead() { return head; }
+
+    
+    public int getTail() { return tail; }
+    
+
+    public int getCurrentPlayer() {    }
+
+    
+    public void resetTable() {}
+    
+
+    private void generateAllTiles(int max_tile) {
+        all_tiles = new ArrayList<>();
+
+        for (int i = 0; i <= max_tile; i++) {
+            for (int j = i; j <= max_tile; j++) {
+                all_tiles.add(new Tile(i, j));
+            }
+        }
+        Collections.shuffle(all_tiles);
     }
 
-    public Tile getTail(){
-        return tail;
+
+    private void dealPlayersHands() {
+        p1_hand = new ArrayList<>();
+        p2_hand = new ArrayList<>();
+
+        while (all_tiles.size() > 0) {
+            p1_hand.add(all_tiles.remove(0));
+            p2_hand.add(all_tiles.remove(0));
+        }
     }
 
-    public int getCurrentPlayer(){
 
-    }
+    private void chooseStartingPlayer() {
+        int max_val_p1 = -1, max_val_p2 = -1; 
 
-    public void reset(){
+        for (int i = 0; i < p1_hand.size(); i++) {
+            Tile tmp_tile = p1_hand.get(i);
+            if ((tmp_tile.val_1 == tmp_tile.val_2) && (tmp_tile.val_1 > max_val_p1)) {
+                max_val_p1 = tmp_tile.val_1;
+            }
+        }
+        for (int i = 0; i < p2_hand.size(); i++) {
+            Tile tmp_tile = p2_hand.get(i);
+            if ((tmp_tile.val_1 == tmp_tile.val_2) && (tmp_tile.val_1 > max_val_p2)) {
+                max_val_p2 = tmp_tile.val_1;
+            }
+        }
 
+        if (max_val_p1 > max_val_p2) {
+            starting_player = 1;
+        }
+        if (max_val_p2 > max_val_p1) {
+            starting_player = 2;
+        }
+        else {
+            resetTable();
+        }
     }
 }

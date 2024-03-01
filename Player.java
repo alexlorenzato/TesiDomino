@@ -1,11 +1,7 @@
 
+//! Mettere in pausa questa classe e fare tutto su table
 //TODO aggiungere variabile "sommatoria punti in mano" ?
-//? la funzione initPlayer è meglio qui oppure in Game?
-//? ci va il package?
 
-// Mettere in pausa questa classe e fare tutto su table
-
-package domino;
 
 public class Player {
     boolean turn;
