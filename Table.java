@@ -33,7 +33,6 @@ gestire anche la possibilità che non ci sia doppio6 e anche che nessuno abbia c
 
 
 ? è giusto mettere i metodi private?
-? problema: in alcune versioni, ad es double-9, si hanno 55 tessere, quindi distribuendole tutte qualcuno si ritroverebbe con una tessera in piu'
 ? è giusto fare le funzioni void e modificare lì i campi, o sarebbe meglio fare ad esempio: starting_player = chooseStartingPlayer() ?
 */
 
@@ -50,10 +49,10 @@ public class Table {
     int current_player;     // 1:P1, 2:P2
     int starting_player;
 
-    public Table(int max_tile) {
+    public Table(int max_tile, int hand_size) {
 
         generateAllTiles(max_tile);
-        dealPlayersHands();
+        dealPlayersHands(hand_size);
         chooseStartingPlayer();
 
         played_tiles = new ArrayList<>();
@@ -104,14 +103,15 @@ public class Table {
     }
 
 
-    private void dealPlayersHands() {
+    private void dealPlayersHands(int hand_size) {
         p1_hand = new ArrayList<>();
         p2_hand = new ArrayList<>();
 
-        while (all_tiles.size() > 0) {
+        for(int i = 0; i < hand_size; i++){
             p1_hand.add(all_tiles.remove(0));
             p2_hand.add(all_tiles.remove(0));
         }
+        
     }
 
 
