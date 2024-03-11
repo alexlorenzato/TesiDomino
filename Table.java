@@ -41,10 +41,10 @@ import java.util.Collections;
 import java.util.List;
 
 public class Table {
-    List<Tile> all_tiles;     
-    List<Tile> played_tiles;
-    List<Tile> reserve_tiles;
-    List<Tile> p1_hand, p2_hand;
+    ArrayList<Tile> all_tiles;     
+    ArrayList<Tile> played_tiles;
+    ArrayList<Tile> reserve_tiles;
+    ArrayList<ArrayList<Tile>> p_hands;
     int head, tail;
     int current_player; // 1:P1, 2:P2
     
@@ -53,59 +53,89 @@ public class Table {
     public Table(int max_tile, int hand_size) {
 
         if (max_tile > 0 && hand_size >= 0) {
-            this.max_tile = max_tile;
+            this.max_tile  = max_tile;
             this.hand_size = hand_size;
 
-            generateAllTiles(max_tile);
-            //printTiles(all_tiles);
-            dealPlayersHands(hand_size);
+            all_tiles     = new ArrayList<>();
+            reserve_tiles = new ArrayList<>();
+            played_tiles  = new ArrayList<>();
+            p_hands       = new ArrayList<>();
+            p_hands.add(new ArrayList<>());
+            p_hands.add(new ArrayList<>());
+
+            generateAllTiles();  
+            dealPlayersHands();
             chooseStartingPlayer();
-            getCurrentPlayer();
 
-            played_tiles = new ArrayList<>();
-            reserve_tiles = all_tiles;
+            startGame();
         }
-        else { System.err.println("Error: invalid constructor parameters."); }
+        else { System.err.println("Error [Table]: invalid constructor parameters."); }
     }
 
-    
-    public void playTile(){
-        //? da sostituire alle funzioni addHead e addTail?
-        // controllare legalità della mossa
+
+    /*************************************/
+    /*               ACTIONS             */
+    /*************************************/    
+
+    public void startGame(){
+        printTableConfig();
+        
+        int move = -1;
+        move = firstMove();
+        playTile(move);
+
+        printTableConfig();
+        // eccezione prima mossa
+        // while partita non finita
+        // turno del giocatore attivo
+            // capire che mosse può fare
+            // sceglierne una a caso
+                // giocare
+                // passare
+            // se non può farne
+                // passare
+            // verificare se partita finita
+            // cambiare current_player (se..)
     }
 
-    
-    public void addHead(Tile tile, int head){
-        played_tiles.add(0, tile);
-        this.head = head;
+
+    public int firstMove(){ 
+        int max_val = -1, chosen_tile = -1;
+        for (int i = 0; i < p_hands.get(current_player -1).size(); i++) {
+            Tile tmp_tile = p_hands.get(current_player -1).get(i);
+            if ((tmp_tile.val_1 == tmp_tile.val_2) && (tmp_tile.val_1 > max_val)) {
+                max_val = tmp_tile.val_1;
+                chosen_tile = i;
+            }
+        }
+        return chosen_tile;
     }
-
     
-    public void addTail(Tile tile, int tail) {
-        played_tiles.add(tile);
-        this.tail = tail;
+
+    //todo manca un modo di selezionare il lato a cui voglio giocare
+    public void playTile(int move){
+        if(move != -1){
+            Tile played_tile = p_hands.get(current_player -1).remove(move);
+            played_tiles.add(played_tile);
+        }
+        else{
+            System.err.println("Error [playTile]: Invalid move value.");
+        }
     }
     
 
-    public int getHead() { return head; }
+    /*************************************/
+    /*               SETUP               */
+    /*************************************/
 
-    
-    public int getTail() { return tail; }
-    
-
-    public int getCurrentPlayer() { return current_player; }
-
-    
     public void resetTable() {
-        generateAllTiles(max_tile);
-        dealPlayersHands(hand_size);
+        generateAllTiles();
+        dealPlayersHands();
         chooseStartingPlayer();
     }
     
 
-    private void generateAllTiles(int max_tile) {
-        all_tiles = new ArrayList<>();
-
+    private void generateAllTiles() {
         for (int i = 0; i <= max_tile; i++) {
             for (int j = i; j <= max_tile; j++) {
                 all_tiles.add(new Tile(i, j));
@@ -115,28 +145,26 @@ public class Table {
     }
 
 
-    private void dealPlayersHands(int hand_size) {
-        p1_hand = new ArrayList<>();
-        p2_hand = new ArrayList<>();
-
+    private void dealPlayersHands() {
         for(int i = 0; i < hand_size; i++){
-            p2_hand.add(all_tiles.remove(0));
-            p1_hand.add(all_tiles.remove(0));
+            p_hands.get(0).add(all_tiles.remove(0));
+            p_hands.get(1).add(all_tiles.remove(0));
         }
+        reserve_tiles = all_tiles;
     }
 
 
     private void chooseStartingPlayer() {
         int max_val_p1 = -1, max_val_p2 = -1;
 
-        for (int i = 0; i < p1_hand.size(); i++) {
-            Tile tmp_tile = p1_hand.get(i);
+        for (int i = 0; i < p_hands.get(0).size(); i++) {
+            Tile tmp_tile = p_hands.get(0).get(i);
             if ((tmp_tile.val_1 == tmp_tile.val_2) && (tmp_tile.val_1 > max_val_p1)) {
                 max_val_p1 = tmp_tile.val_1;
             }
         }
-        for (int i = 0; i < p2_hand.size(); i++) {
-            Tile tmp_tile = p2_hand.get(i);
+        for (int i = 0; i < p_hands.get(1).size(); i++) {
+            Tile tmp_tile = p_hands.get(1).get(i);
             if ((tmp_tile.val_1 == tmp_tile.val_2) && (tmp_tile.val_1 > max_val_p2)) {
                 max_val_p2 = tmp_tile.val_1;
             }
@@ -146,26 +174,43 @@ public class Table {
         else if (max_val_p2 > max_val_p1) { current_player = 2; } 
         else { resetTable(); }
     }
-    
+
+
+    /*************************************/
+    /*               GETTER              */
+    /*************************************/
+
+    public int getHead() { return head; }
+    public int getTail() { return tail; }
+    public int getCurrentPlayer() { return current_player; }
+
+
+    /*************************************/
+    /*               PRINT               */
+    /*************************************/
 
     public void printTableConfig() {
+
         System.out.println("____________________");
         System.out.println("Current Player: " + current_player);
         System.out.println("Players hands:");
         System.out.println("--- P1 ---");
-        printTiles(p1_hand);
+        printTiles(p_hands.get(0));
         System.out.println("--- P2 ---");
-        printTiles(p2_hand);
+        printTiles(p_hands.get(1));
         System.out.println("--- Unplayed ---");
         printTiles(reserve_tiles);
+        System.out.println("--- Table ---");
+        printTiles(played_tiles);
         System.out.println("____________________");
     }
 
 
-    public void printTiles(List<Tile> tiles) {
+    public void printTiles(ArrayList<Tile> tiles) {
         for (int i = 0; i < tiles.size(); i++) {
             Tile tmp_tile = tiles.get(i);
             Tile.printTile(tmp_tile);
         }
     }
 }
+

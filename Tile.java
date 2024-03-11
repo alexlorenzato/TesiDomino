@@ -2,6 +2,8 @@ public class Tile {
     int val_1, val_2;
     int owner; // 1:P1, 2:P2
 
+    public Tile(){}
+
 
     public Tile(int val_1, int val_2) {
         this.val_1 = val_1;
