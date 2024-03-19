@@ -26,6 +26,6 @@ public class Tile {
     }
 
     public static void printTile(Tile t) {
-        System.out.println(t.val_1 + "|" + t.val_2);
+        System.out.print(t.val_1 + "|" + t.val_2);
     }
 }
