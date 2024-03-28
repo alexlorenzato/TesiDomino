@@ -14,6 +14,28 @@ vogliamo sapere anche quanti punti vengono fatti dai 2 giocatori
 ? per fare la cronologia mosse, conviene fare un oggetto "Move"?
 */
 
+/*
+
+5. Non so se possa essere rilevante dato il piccolo numero di tessere, ma potremmo pensare
+a qualche altra idea per velocizzare la availableMoves evitando una scansione
+lineare su tutte le tessere. Lo scopo è quello di di velocizzare l’alfabeta (ed eventualmente
+anche la playTile() se viene modificata come spiegato in 4).
+Questo potrebbe portare a cambiare (anche di molto) la rappresentazione
+sottostante di p_hands, ed è possibile che sia inutile se giochiamo
+con set di 7 o 14 tessere per giocatore. Teniamo quindi in considerazione questa modifica,
+da provare eventualmente più avanti. Relativamente ad una modifica, una tabella hash
+(HashMap) potrebbe velocizzare di molto verificare se un giocatore possiede
+o meno una certa tessera, ma d’altra parte potrebbe essere più lento andare
+a cercare le tessere giocabili. Bisogna pensarci.
+
+6. Implementerei played_tiles con una Deque, e aggiungerei in testa o coda a seconda della mossa
+giocata. In questo modo è semplice stampare di volta in volta tutto il “serpente”. La lista
+di mosse effettuate può essere gestita con una pila dove si indica semplicemente: “testa", “coda”,
+“turno passato”. 
+
+? in che senso una pila in cui indicare semplicemente testa, cosa e turno passato?
+*/
+
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -21,7 +43,7 @@ import java.util.Random;
 
 public class Table {
     ArrayList<Tile> all_tiles;     
-    ArrayList<Tile> played_tiles;
+    ArrayList<Tile> played_tiles;  //todo implementare con Deque
     ArrayList<Tile> reserve_tiles;
     ArrayList<ArrayList<Tile>> p_hands;
     int head, tail;
@@ -54,6 +76,10 @@ public class Table {
             startGame();
         }
         else { System.err.println("Error [Table]: invalid constructor parameters."); }
+    }
+
+    public Table(){
+        //todo prendere in input due liste di tile che fanno da mani, non servono le unplayed
     }
 
 
@@ -122,7 +148,10 @@ public class Table {
 
     //* Move the given tile from the current player's hand to the table
     // move[0] = index of the tile (in player hand), move[1] = 0->head of table, 1-> tail of table
+//todo prendere input una tile (null se si passa), verificare che gioc possieda la tile, verificare che sia effettivamente giocabile
+//todo per capire lato da giocare: usare 1° dei due numeri 
     public void playTile(int[] move) {
+        //todo verificare legalità mossa e in caso lanciare eccezione
         Tile played_tile = p_hands.get(current_player).remove(move[0]);
 
         if (move[1] == 0) { // head
@@ -140,6 +169,7 @@ public class Table {
                 tail = played_tile.val_1;
             }
         }
+        //todo gestire qui il passaggio di turno (passando mossa vuota?)
         System.out.println("playTile(): " + played_tile.val_1 + "|" + played_tile.val_2);
     }
     
@@ -147,6 +177,7 @@ public class Table {
     //* Change the current player if the other player has available moves, if he hasn't
     //* then keep the current player, if neither game is over
     public void passTurn() {
+        //todo aggiungere la mano vuota come condizione di fine partita
         if (current_player == 1) {
             if (availableMoves(0).size() > 0) {
                 current_player = 0;
