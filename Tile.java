@@ -17,15 +17,7 @@ public class Tile {
         this.owner = owner;
     }
 
-    public void addOwner(Tile t, int player) {
-        if (player != 1 || player != 2) {
-            //TODO come/dove generare errore?
-        } else {
-            t.owner = player;
-        }
-    }
-
     public static void printTile(Tile t) {
-        System.out.print(t.val_1 + "|" + t.val_2);
+        System.out.print(t.val_1 + "|" + t.val_2 + "(" + t.owner + ")");
     }
 }

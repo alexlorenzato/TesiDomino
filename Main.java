@@ -1,12 +1,9 @@
 public class Main {
    public static void main(String[] args) {
 
-      int max_tile = 4, hand_size = 5;
+      int max_tile = 7, hand_size = 7;
 
       Table t = new Table(max_tile, hand_size);
 
-      //t.printTableConfig();
-
-      
    }
 }
