@@ -1,6 +1,6 @@
 public class Tile {
     int val_1, val_2;
-    int owner; // 1:P1, 2:P2
+    int owner; // 0:P1, 1:P2
 
     public Tile(){}
 
@@ -19,5 +19,15 @@ public class Tile {
 
     public static void printTile(Tile t) {
         System.out.print(t.val_1 + "|" + t.val_2 + "(" + t.owner + ")");
+    }
+
+    public void printTile() {
+        System.out.print(this.val_1 + "|" + this.val_2 + "(" + this.owner + ")");
+    }
+
+    public void swapTile(){
+        int tmp = this.val_1;
+        this.val_1 = this.val_2;
+        this.val_2 = tmp;
     }
 }
