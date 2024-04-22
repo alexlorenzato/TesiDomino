@@ -1,21 +1,12 @@
 
 /*
-fare undo quante volte si vuole (utile per minimax), serve pila che memorizzi mosse per poter tornare indietro
-attenzione, ricordare anche quando è stato saltato il turno perché facendo undo devo ricordarmi di chi era la tessera
-
 
 noi lanciamo minimax su questo gioco, dove la radice sarà il 6,6, avremo un risultato e si ritorna il vincitore
 l'alfabeta pruning USA la classe table, però è esterna
 il main alloca la table con la configurazione di gioco e lancia alfabeta pruning con quella configurazione e da lì otteniamo il vincitore
 vogliamo sapere anche quanti punti vengono fatti dai 2 giocatori
 
-
-? meglio fare le funzioni con parametro player invece che prenderlo dall'oggetto table?
-? devo essere in grado di fare una partita dal Main per poter essere in grado di usare alphaBeta? ad esempio t.playTile, t.showHand, etc..
-? per fare la cronologia mosse, conviene fare un oggetto "Move"?
-*/
-
-/*
+-------------------------------------------------------------------------------------------
 
 5. Non so se possa essere rilevante dato il piccolo numero di tessere, ma potremmo pensare
 a qualche altra idea per velocizzare la availableMoves evitando una scansione
@@ -29,12 +20,35 @@ da provare eventualmente più avanti. Relativamente ad una modifica, una tabella
 o meno una certa tessera, ma d’altra parte potrebbe essere più lento andare
 a cercare le tessere giocabili. Bisogna pensarci.
 
-6. Implementerei played_tiles con una Deque, e aggiungerei in testa o coda a seconda della mossa
-giocata. In questo modo è semplice stampare di volta in volta tutto il “serpente”. La lista
-di mosse effettuate può essere gestita con una pila dove si indica semplicemente: “testa", “coda”,
-“turno passato”. 
+-------------------------------------------------------------------------------------------
 
-? in che senso una pila in cui indicare semplicemente testa, cosa e turno passato?
+! APPUNTI PER PROFESSORE:
+
+    - randomMove(): è un pò brutto da leggere il codice, ma è stato necessario gestire alcune casistiche di swap, perché:
+      playTile() ha bisogno di sapere in qualche modo quale è la faccia da giocare, perché sennò ci sono ambiguità 
+      (es: head= 4, tail=5, P1 gioca 4|5 e la passa a playTile(), come si fa a sapere che lato giocare?), per risolverle
+      ho fatto in modo che in tile.val_1 ci DEVE essere il numero che io voglio attaccare a una delle due estremità
+
+    - availableMoves(): non è più usata per sapere l'indice del tile da giocare, ora è utile solo per sapere se il numero di mosse
+      che può fare un giocatore è 0 o no (ad es. utile su checkEndGame()); si potrebbe ottimizzare fermandosi appena si vede che 
+      c'é almeno una mossa disponibile;
+
+    - undo(): usa una pila history, che contiene dei caratteri che indicano l'evento di quel turno (f -> first turn, p -> pass, 
+      h -> tile in head, t -> tile in tail); inoltre deve venire usato DOPO che il turno è stato passato, questo perché la prima cosa 
+      che fa è invertire current_player, in modo da ridargli in mano la tile giocata nel turno precedente
+
+
+? DOMANDE PER PROFESSORE:
+
+    - undo(): va bene che l'undo possa venir fatto solo dopo aver passato il turno? perché idealmente sarebbe interessante anche poter posizionare
+      la tessere per "provare" e poi eventualmente cambiarla (quindi fare una sorta di "undo parziale"), ma questo è anche ciò che farà minmax quindi
+      forse va bene com'é ora
+
+
+TODO
+
+    - punti vittoria vengono persi ogni volta che riavvio tavolo
+
 */
 
 
@@ -43,15 +57,19 @@ import java.util.Collections;
 import java.util.Random;
 import java.util.Deque;
 import java.util.ArrayDeque;
+import java.util.Stack;
 
 public class Table {
 
     ArrayList<Tile> all_tiles;     
     ArrayList<Tile> reserve_tiles;
-    Deque<Tile>     played_tiles;  
+    int max_tile, hand_size;
+
+    Deque<Tile> played_tiles;  
     ArrayList<ArrayList<Tile>> p_hands;
-    int head, tail, max_tile, hand_size, current_player;  // current_player -> 0:P1, 1:P2
+    int head, tail, current_player;  // current_player -> 0:P1, 1:P2
     GameState game_state;
+    Stack<Character> history;
 
 
     public Table(int max_tile, int hand_size) {
@@ -69,11 +87,12 @@ public class Table {
             p_hands       = new ArrayList<>();
             p_hands.add(new ArrayList<>());
             p_hands.add(new ArrayList<>());
+            history = new Stack<>();
 
             generateAllTiles();  
             dealPlayersHands();
             chooseStartingPlayer();
-            playGame();
+            playRandomGame();
         }
         else { System.err.println("Error [Table()]: invalid constructor parameters."); }
     }
@@ -81,24 +100,21 @@ public class Table {
 
     public Table(ArrayList<Tile> p1_hand, ArrayList<Tile> p2_hand){
         if (p1_hand != null && p2_hand != null && p1_hand.size() == p2_hand.size() && p1_hand.size() > 0) {
-            //* max_tile qui non viene considerato ma non dovrebbe essere influente
 
             game_state = GameState.OPEN;
             this.hand_size = p1_hand.size();
-    
             head = -1;
             tail = -1;
     
-            // all_tiles = new ArrayList<>();
-            // reserve_tiles = new ArrayList<>();
             played_tiles  = new ArrayDeque<>();
             p_hands   = new ArrayList<>();
+            history = new Stack<>();
 
             p_hands.add(p1_hand); 
             p_hands.add(p2_hand); 
     
             chooseStartingPlayer();
-            playGame();
+            playRandomGame();
         } else {
             System.err.println("Error [Table()]: invalid hands.");
         }
@@ -112,21 +128,40 @@ public class Table {
 
 
     // INFO: manage game from start to end
-    public void playGame(){
-        int[] move = new int[] {-1, -1};     // {index of the tile in player hands, head=0/tail=1 of table}
+    public void playRandomGame(){
+        Tile tile_to_play;
 
-        System.out.println("\n-------------------- START GAME ---------------------");
+        System.out.println("\n-------------------- START GAME --------------------");
 
         printTableConfig();
         firstMove();
-        passTurn();
 
         while (game_state == GameState.OPEN) {
             printTableConfig();
-            move = randomMove();
-            playTile(move);
-            passTurn();
+            tile_to_play = randomMove();
+            playTile(tile_to_play);
         }
+        
+        System.out.println("\n--------------------- END GAME ---------------------\n");
+
+        System.out.println();
+
+        System.out.println("HISTORY: ");
+        for (char move : history) {
+            System.out.print(move + " -> ");
+        }
+
+        System.out.println();
+        System.out.println();
+        
+        System.out.println("UNDO:");
+        while (!history.isEmpty()) {
+            undo();
+        }
+
+        System.out.println();
+        System.out.println();
+
         printTableConfig();
     }
 
@@ -134,6 +169,8 @@ public class Table {
     // INFO: select and play the starting tile (starting player decided by chooseStartingPlayer)
     public void firstMove(){ 
         int max_tile = -1, index_tile = -1;
+
+        // find the highest double tile
         for (int i = 0; i < p_hands.get(current_player).size(); i++) {
             Tile tmp_tile = p_hands.get(current_player).get(i);
             if ((tmp_tile.val_1 == tmp_tile.val_2) && (tmp_tile.val_1 > max_tile)) {
@@ -141,86 +178,104 @@ public class Table {
                 index_tile = i;
             }
         }
-        Tile played_tile = p_hands.get(current_player).remove(index_tile);
-        played_tiles.addFirst(played_tile);
-        head = played_tile.val_1;
-        tail = played_tile.val_2;
+
+        // move double tile from hand to table
+        Tile tile_to_play = p_hands.get(current_player).remove(index_tile);
+        played_tiles.addFirst(tile_to_play);
+
+        // update: history/head/tail
+        history.push('f');            // f -> first move
+        head = tile_to_play.val_1;
+        tail = tile_to_play.val_2;
+
+        // pass turn and check for end game
+        current_player = (current_player == 0) ? 1 : 0;    // invert current_player
+        checkEndGame();
+
+        System.out.print("firstMove(): ");
+        tile_to_play.printTile();
+        System.out.println();
     }
 
 
-    //* Return a random index of a playable tile in the current player's hand 
-    public int[] randomMove(){
+    // INFO: choose random tile to play, if no moves available return null
+    public Tile randomMove(){
         ArrayList<int[]> moves = availableMoves(current_player);
 
         if (!moves.isEmpty()) {
             Random rand = new Random();
             int random_index = rand.nextInt(moves.size());
-            return moves.get(random_index);
+            Tile tile_to_play = p_hands.get(current_player).get(moves.get(random_index)[0]);
+
+            if((tile_to_play.val_2 == head) && (tail == head)){
+                System.out.print("swap: " + tile_to_play.val_1);
+                tile_to_play.swapTile();
+                System.out.println(" -> " + tile_to_play.val_1);
+            }
+            else if((head != tail) && ( (tile_to_play.val_1 != head) &&  (tile_to_play.val_1 != tail) ) ) {
+                System.out.print("swap: " + tile_to_play.val_1);
+                tile_to_play.swapTile();
+                System.out.println(" -> " + tile_to_play.val_1);
+            }
+            return tile_to_play;
         } 
         else {
-            int[] move = new int[2];
-            move[0] = -1;
-            move[1] = -1; 
-            return move; 
+            return null;
         }
     }
-    
-
-    // INFO: move the given tile from the current player's hand to the table
-    public void playTile(int[] move) {   // move[0] = index of the tile (in player hand), move[1] = 0->head of table, 1-> tail of table
-        //todo verificare legalità mossa e in caso lanciare eccezione
-        Tile played_tile = p_hands.get(current_player).remove(move[0]);
-
-        if (move[1] == 0) { // head
-            played_tiles.addFirst(played_tile);
-            if (played_tile.val_1 == head) {
-                head = played_tile.val_2;
-            } else {
-                head = played_tile.val_1;
-            }
-        } else { // tail
-            played_tiles.addLast(played_tile);
-            if (played_tile.val_1 == tail) {
-                tail = played_tile.val_2;
-            } else {
-                tail = played_tile.val_1;
-            }
-        }
-        //todo gestire qui il passaggio di turno (passando mossa vuota?)
-        System.out.println("playTile(): " + played_tile.val_1 + "|" + played_tile.val_2);
-    }
 
 
-    // INFO: play the tile
-    public void playTile(Tile t){
-        //todo prendere input una tile (null se si passa), verificare che gioc possieda la tile, verificare che sia effettivamente giocabile
-        //todo per capire lato da giocare: usare 1° dei due numeri 
+    // INFO: play the tile, ora pass turn if t is null
+    // NOTE: t.val1 MUST be the number you want to 'attach'
+    public void playTile(Tile t){   
         if(t == null){
-            passTurn();
+            System.out.println("playTile(): null");
+            history.push('p');
+            checkEndGame();
+            current_player = (current_player == 0) ? 1 : 0;    // pass the turn
         }
         else{
-            if(pOwnsTile(t) && isPlayableTile(t)){
+            if(pOwnsTile(t, current_player) && isPlayableTile(t)){
+                System.out.print("playTile(): ");
+                t.printTile();
+                System.out.println();
 
+                rmvTileHand(t);
+
+                if(t.val_1 == head){
+                    played_tiles.addFirst(t);
+                    head = t.val_2;
+                    history.push('h');
+                    checkEndGame();
+                    current_player = (current_player == 0) ? 1 : 0;    // pass the turn
+                }
+                else{
+                    played_tiles.addLast(t);
+                    tail = t.val_2;
+                    history.push('t');
+                    checkEndGame();
+                    current_player = (current_player == 0) ? 1 : 0;    // pass the turn
+                }
+            }
+            else{
+                System.out.println("Error [playTile()]: tile not owned or unplayable.");
             }
         }
+
+        for (char move : history) {
+            System.out.print(move + " -> ");
+        }
+        System.out.println();
     }
     
     
-    // INFO: change current player if other player has moves, otherwise keep current, if neither game over
-    public void passTurn() {
-        //todo aggiungere la mano vuota come condizione di fine partita
-        if (current_player == 1) {
-            if (availableMoves(0).size() > 0) {
-                current_player = 0;
-            } else if (availableMoves(1).size() == 0) {
-                endGame();
-            }
-        } else {
-            if (availableMoves(1).size() > 0) {
-                current_player = 1;
-            } else if (availableMoves(0).size() == 0) {
-                endGame();
-            }
+    // INFO: 
+    public void checkEndGame(){
+        if(p_hands.get(current_player).size() == 0){  
+            endGame("Empty hand.");   
+        }
+        else if(availableMoves(0).size() == 0 && availableMoves(1).size() == 0){  // no player has available moves
+            endGame("No available moves.");
         }
     }
     
@@ -256,32 +311,120 @@ public class Table {
                 moves.add(move); 
             }
         }
+        // System.out.print("P"+ (player + 1) +" has " + moves.size() + " moves ");
         return moves;
     }
 
 
     // INFO: manage a game over
-    public void endGame() {
+    public void endGame(String msg) {
         game_state = GameState.ENDED;
-        System.out.println("Game Over");
-        //todo conta punti
+        System.out.println("Game Over: " + msg);
+        
+        // pv count
+        int pv1 = 0, pv2 = 0;
+        for(int i = 0; i < p_hands.get(0).size(); i++){
+            Tile tmp_tile = p_hands.get(0).get(i);
+            pv1 += (tmp_tile.val_1 + tmp_tile.val_2);
+        }
+        for(int i = 0; i < p_hands.get(1).size(); i++){
+            Tile tmp_tile = p_hands.get(1).get(i);
+            pv2 += (tmp_tile.val_1 + tmp_tile.val_2);
+        }
+
+        System.out.println("PV1: " + pv1 + " PV2: " + pv2);
     }
+
+
+    // INFO: 
+    // NOTE: undo MUST be used after turn has been passed 
+    public void undo(){
+        char last_move = history.peek();
+
+        System.out.print("Undoing: " + last_move + ",");
+        if(last_move == 'p'){
+            current_player = (current_player == 0) ? 1 : 0;
+            history.pop();
+
+            System.out.print(" from P" + (current_player+1));
+            System.out.println();
+        }
+        else if(last_move == 'h'){
+            current_player = (current_player == 0) ? 1 : 0;
+            Tile removed_tile = played_tiles.pollFirst();
+            p_hands.get(current_player).add(removed_tile);
+            head = (removed_tile.val_1 == head) ? removed_tile.val_2 : removed_tile.val_1;
+            history.pop();
+
+            System.out.print(" from P" + (current_player+1) +", tile: ");
+            removed_tile.printTile();
+            System.out.println();
+        }
+        else if(last_move == 't'){
+            current_player = (current_player == 0) ? 1 : 0;  
+            Tile removed_tile = played_tiles.pollLast();
+            p_hands.get(current_player).add(removed_tile);
+            tail = (removed_tile.val_1 == tail) ? removed_tile.val_2 : removed_tile.val_1;
+            history.pop();
+
+            System.out.print(" from P" + (current_player+1) +", tile: ");
+            removed_tile.printTile();
+            System.out.println();
+        }
+        else {  // letter 'f' (first move)
+            current_player = (current_player == 0) ? 1 : 0;
+            Tile removed_tile = played_tiles.pollLast();
+            p_hands.get(current_player).add(removed_tile);
+            tail = -1;
+            head = -1;
+            history.pop();
+
+            System.out.print(" from P" + (current_player+1) +", tile: ");
+            removed_tile.printTile();
+            System.out.println();
+        }
+    } 
+
+
+
+    /*************************************/
+    /*               UTILS               */
+    /*************************************/
     
 
-    //INFO: heck if a move is legal
-    public boolean isLegalMove(int player, int[] move) {    // move[0] = index of the tile (in player hand), move[1] = 0->head of table, 1-> tail of table
-        if (move[1] == 0) {
-            if(p_hands.get(player).get(move[0]).val_1 == head || p_hands.get(player).get(move[0]).val_2 == head){
+    // INFO: check if the player has in his hand the tile t
+    public boolean pOwnsTile(Tile t, int player){
+        for (int i = 0; i < p_hands.get(player).size(); i++){
+            Tile tmp_tile = p_hands.get(player).get(i);
+
+            if( (tmp_tile.val_1 == t.val_1 && tmp_tile.val_2 == t.val_2) || (tmp_tile.val_1 == t.val_2 && tmp_tile.val_2 == t.val_1)){
                 return true;
             }
-            return false;
         }
-        else {
-            if (p_hands.get(player).get(move[0]).val_1 == tail || p_hands.get(player).get(move[0]).val_2 == tail) {
-                return true;
+        return false;
+    }
+
+
+    // INFO: 
+    public boolean isPlayableTile(Tile t){
+        if(t.val_1 == head || t.val_2 == head || t.val_1 == tail || t.val_2 == tail){
+            return true;
+        }
+        return false;
+    }
+
+
+    // INFO: remova a tile from current player hand
+    public Tile rmvTileHand(Tile t){
+        for (int i = 0; i < p_hands.get(current_player).size(); i++){
+            Tile tmp_tile = p_hands.get(current_player).get(i);
+
+            if((t.val_1 == tmp_tile.val_1 && t.val_2 == tmp_tile.val_2) || (t.val_1 == tmp_tile.val_2 && t.val_2 == tmp_tile.val_1)){
+                p_hands.get(current_player).remove(i);
+                return tmp_tile;
             }
-            return false;
         }
+        return null;
     }
 
 
@@ -289,6 +432,7 @@ public class Table {
     /*************************************/
     /*               SETUP               */
     /*************************************/
+
 
     // INFO:
     public void resetTable() {
@@ -298,7 +442,7 @@ public class Table {
     }
     
 
-    // INFO: generate the tile set that is going to be used for the whole game
+    // INFO: generate the whole tile set
     private void generateAllTiles() {
         for (int i = 0; i <= max_tile; i++) {
             for (int j = i; j <= max_tile; j++) {
@@ -325,7 +469,7 @@ public class Table {
     }
     
     
-    // INFO: 
+    // INFO: player with highest double is starting
     private void chooseStartingPlayer() {
         int max_val_p1 = -1, max_val_p2 = -1;
 
@@ -344,25 +488,6 @@ public class Table {
         if      (max_val_p1 > max_val_p2) { current_player = 0; }
         else if (max_val_p2 > max_val_p1) { current_player = 1; } 
         else { resetTable(); }   // if no one has a double
-    }
-
-
-
-    /*************************************/
-    /*               UTILS               */
-    /*************************************/
-    
-
-    // INFO: check if the player has in his hand the tile t
-    public boolean pOwnsTile(Tile t, int player){
-        for (int i = 0; i < p_hands.get(player).size(); i++){
-            Tile tmp_tile = p_hands.get(player).get(i);
-
-            if( (tmp_tile.val_1 == t.val_1 && tmp_tile.val_2 == t.val_2) || (tmp_tile.val_1 == t.val_2 && tmp_tile.val_2 == t.val_1)){
-                return true;
-            }
-        }
-        return false;
     }
 
 
@@ -416,14 +541,6 @@ public class Table {
             Tile.printTile(tmp);
         }
     }
-
-
-    /*public void printPlayedTiles(){
-        for (int i = 0; i < played_tiles.size(); i++) {
-            Tile tmp_tile = played_tiles.get(i);
-            System.out.print(tmp_tile.val_1 + "|" + tmp_tile.val_2 + " - ");
-        }
-    }*/
 
 
     public void printPlayedTiles(Deque<Tile> tiles) {
