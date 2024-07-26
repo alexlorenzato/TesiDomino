@@ -1,4 +1,9 @@
 
+# Compilaziione ed esecuzione
+
+`javac *.java` dal percorso ../TesiDomino per compilare tutti i file
+`java Main` oppure `java MainManual` per lanciare il codice, sempre da ../TesiDomino
+
 # Regole 
 
 ### Double-6
@@ -28,7 +33,7 @@ Fonte iniziale per le regole: https://www.mastersofgames.com/rules/dominoes-rule
 
 
 &nbsp;
-# Pseudocodice MinMax
+# Pseudocodice MinMax   
 ```
 function minimax(position, depth, aplha, beta, maximizing_player)
     if depth == 0 OR game over in position 
