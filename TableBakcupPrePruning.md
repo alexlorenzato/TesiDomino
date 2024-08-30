@@ -15,9 +15,10 @@ public class Table {
     ArrayList<ArrayList<Tile>> p_hands;
     GameState game_state;
     Stack<Character> history;
-    boolean DEBUG = false;
 
-
+// prendere i set da riga di comando
+// a termine partita ritornare chi vince e anche tutte le partite che possono venire giocate con quel set
+// rimuovere alpha-beta
 
     /*************************************/
     /*            CONSTRUCTORS           */
@@ -76,15 +77,17 @@ public class Table {
             this.hand_size = p1_hand.size();
             head = -1;
             tail = -1;
-            
+    
             played_tiles  = new ArrayDeque<>();
             p_hands       = new ArrayList<>();
             history       = new Stack<>();
-            
+
             p_hands.add(p1_hand); 
             p_hands.add(p2_hand); 
-            
-            chooseStartingPlayer(); 
+
+            current_player = 0;
+            //chooseStartingPlayer(); 
+            head = 4; tail = 4;
             playGame();
         } 
         else { System.err.println("Error [Table()]: invalid hands."); }
@@ -103,23 +106,21 @@ public class Table {
     public void playGame(){
         Tile tile_to_play;
 
-        printForTerminal();
-
-        if(DEBUG) { System.out.println("\n-------------------- START GAME --------------------");}
-        if(DEBUG) { printTableConfig();}
-        firstMove();
+        System.out.println("\n-------------------- START GAME --------------------");
+       // printTableConfig();
+       // firstMove();
 
         while (game_state == GameState.OPEN) {
-            if(DEBUG) { printTableConfig(); }
+            printTableConfig();
             tile_to_play = bestMove();
-            if(DEBUG) { System.out.print("\ntile_to_play: "); }
-            if(DEBUG) { if(tile_to_play != null) { tile_to_play.printTile(); } }
+            System.out.print("\ntile_to_play: ");
+            if(tile_to_play != null) { tile_to_play.printTile(); }
             playTile(tile_to_play);
             if(checkEndGame()){ endGame(null); }
         }
         
-        if(DEBUG) { System.out.println("\n--------------------- END GAME ---------------------\n");}
-        if(DEBUG) { printTableConfig(); }
+        System.out.println("\n--------------------- END GAME ---------------------\n");
+        printTableConfig();
     }
 
 
@@ -131,9 +132,9 @@ public class Table {
         boolean swap_flag = false;  
 
         // list available moves
-        if(DEBUG){ System.out.print("bestMove(P"+ (current_player+1) +") - available moves: ");}
+        System.out.print("bestMove(P"+ (current_player+1) +") - available moves: ");
         ArrayList<Integer> moves = availableMoves(current_player);
-        if(DEBUG) { printTilesByIndex(moves, current_player); }
+        printTilesByIndex(moves, current_player);
 
         // for each available move
         for (int move : moves) {
@@ -148,15 +149,15 @@ public class Table {
             }
 
             // play the tile and obtain a value for the move by investigating the possibilities of the opponent
-            if(DEBUG){ System.out.println(); }
+            System.out.println();
             playTile(tile_to_play);
-            move_value = minimax(0, false);  
+            move_value = minimax(0, Integer.MIN_VALUE, Integer.MAX_VALUE, false);  
 
             // undo the move and proceed to see if it would be the best move
             undo();  
-            if(DEBUG){ System.out.print("move_value: " + move_value + " con ");}
-            if(DEBUG){ tile_to_play.printTile(); }
-            if(DEBUG){ System.out.println(); }
+            System.out.print("move_value: " + move_value + " con ");
+            tile_to_play.printTile();
+            System.out.println();
 
             // new best move is found, update the best move
             if (move_value > best_value) {  
@@ -164,16 +165,16 @@ public class Table {
                 best_value = move_value;
                 best_move = tile_to_play;
 
-                if(DEBUG){ System.out.print("best_move: ");}
-                if(DEBUG){ tile_to_play.printTile();}
-                if(DEBUG){System.out.print(".....");} 
-                if(DEBUG){ best_move.printTile(); }
-                if(DEBUG){ System.out.println(" with best_value: " + best_value);}
+                System.out.print("best_move: ");
+                tile_to_play.printTile();
+                System.out.print("....."); 
+                best_move.printTile(); 
+                System.out.println(" with best_value: " + best_value);
             }
             else {  
-                if(DEBUG){ System.out.print("sub_move: ");}
-                if(DEBUG){ tile_to_play.printTile(); }
-                if(DEBUG){ System.out.println(" with value: " + move_value);}
+                System.out.print("sub_move: ");
+                tile_to_play.printTile(); 
+                System.out.println(" with value: " + move_value);
             }
             last_move = tile_to_play;
         }
@@ -183,30 +184,30 @@ public class Table {
 
 
     // INFO: 
-    private int minimax(int depth, boolean is_maximizing) {
+    private int minimax(int depth, int alpha, int beta, boolean is_maximizing) {
 
         // minimax stops either if MAX_DEPTH has been reached or if a endgame condition
         // is triggered: a player has no more tiles or both players can0t make a move
         if (checkEndGame() || depth == MAX_DEPTH) {
-            if(DEBUG){ printSpacesLn(depth, "Ascending - value: " + evaluateGameScoring() );}
+            printSpacesLn(depth, "Ascending - value: " + evaluateGameScoring() );
             return evaluateGameScoring();  
         }
 
         // list of available moves
         ArrayList<Integer> moves = availableMoves(current_player);
 
-        if(DEBUG) { printSpaces(depth, null); }
-        if(DEBUG){System.out.print("depth:" + depth + " - P" + (current_player+1) +  " - h|t " + head + "|" + tail + " ha mosse: ");}
-        if(DEBUG) { printTilesByIndex(moves, current_player); }
+        printSpaces(depth, null);
+        System.out.print("depth:" + depth + " - P" + (current_player+1) +  " - h|t " + head + "|" + tail + " ha mosse: ");
+        printTilesByIndex(moves, current_player);
 
         // managing cases where there's a "pass": play a null Tile and call minimax with is_maximizing inverted 
         if(moves.isEmpty()) {
-            if(DEBUG){printSpaces(depth, null);}
+            printSpaces(depth, null);
 
             playTile(null);
-            int eval = minimax(depth + 1, !is_maximizing);
+            int eval = minimax(depth + 1, alpha, beta, !is_maximizing);
 
-            if(DEBUG){printSpaces(depth, null);}
+            printSpaces(depth, null);
             undo();
             return eval;
         }
@@ -233,12 +234,12 @@ public class Table {
                     }
 
                     // try the move and get an evaluation by investigating deeper layers
-                    if(DEBUG){ printSpaces(depth, null);}
+                    printSpaces(depth, null);
 
                     playTile(tile_to_play);
-                    int eval = minimax(depth + 1, false);
+                    int eval = minimax(depth + 1, alpha, beta, false);
 
-                    if(DEBUG){ printSpaces(depth, null);}
+                    printSpaces(depth, null);
 
                     undo();  
 
@@ -248,8 +249,14 @@ public class Table {
                         tile_to_play.swapTile();
                     }
         
-                    // update the best value if found
+                    // update the best value if found, then prune if needed
+                    // note: alpha is the best value that the maximizing player can achieve 
                     max_eval = Math.max(max_eval, eval);
+                    alpha = Math.max(alpha, eval);
+                    if (beta <= alpha) { 
+                        printSpacesLn(depth, "BREAK"); 
+                        break; 
+                    }
                 }
                 return max_eval;
             } 
@@ -261,15 +268,14 @@ public class Table {
                 for (int move : moves) {
                     Tile tile_to_play = p_hands.get(current_player).get(move);
         
-                    if(tileNeedsSwap(last_move, tile_to_play)){ 
-                        tile_to_play.swapTile();  
+                    if(tileNeedsSwap(last_move, tile_to_play)){ tile_to_play.swapTile();  
                         unswap_flag = true;
                     }
 
-                    if(DEBUG){ printSpaces(depth, null);}
+                    printSpaces(depth, null);
                     playTile(tile_to_play);  
-                    int eval = minimax(depth + 1, true);
-                    if(DEBUG){ printSpaces(depth, null);  }
+                    int eval = minimax(depth + 1, alpha, beta, true);
+                    printSpaces(depth, null);  
                     undo();  
                     if(unswap_flag){
                         unswap_flag = false;
@@ -277,6 +283,11 @@ public class Table {
                     }
         
                     min_eval = Math.min(min_eval, eval);
+                    beta = Math.min(beta, eval);
+                    if (beta <= alpha) {
+                        printSpacesLn(depth, "BREAK");
+                        break;
+                    }
                 }
                 return min_eval;
             }
@@ -289,7 +300,7 @@ public class Table {
     // NOTE: when passing the parameter t, t.val1 MUST already be the number you want to 'attach'
     public void playTile(Tile t){   
         if(t == null){
-            if(DEBUG){ System.out.println("playTile(): null"); }
+            System.out.println("playTile(): null");
             history.push('p');
             current_player = (current_player == 0) ? 1 : 0;    // pass the turn
         }
@@ -297,9 +308,9 @@ public class Table {
             // (t.val_1 == head || t.val_1 == tail) is to make sure the tile is passed correctly since .val_1 has to be
             // the value that is going to be played, so it's not possibile that it doesn't match head or tail
             if(pOwnsTile(t, current_player) && (t.val_1 == head || t.val_1 == tail) ){
-                if(DEBUG){ System.out.print("playTile(): "); }
-                if(DEBUG) {t.printTile();}
-                if(DEBUG){ System.out.println(); }
+                System.out.print("playTile(): ");
+                t.printTile();
+                System.out.println();
                 rmvTileHand(t);
 
                 if(t.val_1 == head){
@@ -336,13 +347,13 @@ public class Table {
     public void undo(){
         char last_move = history.peek();
 
-        if(DEBUG){ System.out.print("Undoing: " + last_move + ",");}
+        System.out.print("Undoing: " + last_move + ",");
         if(last_move == 'p'){                                // last move was a pass
             current_player = (current_player == 0) ? 1 : 0;
             history.pop();
 
-            if(DEBUG){ System.out.print(" from P" + (current_player+1));}
-            if(DEBUG){ System.out.println();}
+            System.out.print(" from P" + (current_player+1));
+            System.out.println();
         }
         else if(last_move == 'h'){                          // last move was in head 
             current_player = (current_player == 0) ? 1 : 0;
@@ -352,9 +363,9 @@ public class Table {
 
             head = (removed_tile.val_1 == head) ? removed_tile.val_2 : removed_tile.val_1; 
             history.pop();
-            if(DEBUG){ System.out.print(" from P" + (current_player+1) +", tile: ");}
-            if(DEBUG){ removed_tile.printTile(); }
-            if(DEBUG){ System.out.println();}
+            System.out.print(" from P" + (current_player+1) +", tile: ");
+            removed_tile.printTile();
+            System.out.println();
         }
         else if(last_move == 't'){                          // last move was in tail 
             current_player = (current_player == 0) ? 1 : 0;  
@@ -364,9 +375,9 @@ public class Table {
 
             tail = (removed_tile.val_1 == tail) ? removed_tile.val_2 : removed_tile.val_1;
             history.pop();
-            if(DEBUG){ System.out.print(" from P" + (current_player+1) +", tile: ");}
-            if(DEBUG){removed_tile.printTile();}
-            if(DEBUG){ System.out.println();}
+            System.out.print(" from P" + (current_player+1) +", tile: ");
+            removed_tile.printTile();
+            System.out.println();
         }
         else {                                            // letter 'f' (first move)
             current_player = (current_player == 0) ? 1 : 0;
@@ -378,9 +389,9 @@ public class Table {
             head = -1;
             history.pop();
 
-            if(DEBUG){ System.out.print(" from P" + (current_player+1) +", tile: ");}
-            if(DEBUG){removed_tile.printTile();}
-            if(DEBUG){ System.out.println();}
+            System.out.print(" from P" + (current_player+1) +", tile: ");
+            removed_tile.printTile();
+            System.out.println();
         }
         checkAndSortPlayerHand(current_player);
     } 
@@ -441,9 +452,9 @@ public class Table {
         // pass turn and check for end game
         current_player = (current_player == 0) ? 1 : 0;    // invert current_player
 
-        if(DEBUG){ System.out.print("firstMove(): ");}
-        if(DEBUG){ tile_to_play.printTile();}
-        if(DEBUG){ System.out.println();}
+        System.out.print("firstMove(): ");
+        tile_to_play.printTile();
+        System.out.println();
     }
 
 
@@ -509,19 +520,20 @@ public class Table {
     // INFO: manage a game over
     public void endGame(String msg) {
         game_state = GameState.ENDED;
-        if(DEBUG){ System.out.print("\n\nGame Over: ");}
+        System.out.print("\n\nGame Over: ");
         
         // pv count
-        int pv1 = sumPlayerPoints(0);
-        int pv2 = sumPlayerPoints(1);
+        int pv1 = evaluatePlayerPoints(0);
+        int pv2 = evaluatePlayerPoints(1);
 
-        if(DEBUG){ System.out.print(" PV1: " + pv1 + " PV2: " + pv2 + " ");}
+        System.out.print(" PV1: " + pv1 + " PV2: " + pv2 + " ");
     }
 
 
 
     // INFO: calculate the actual points a player has in hand
-    public int sumPlayerPoints(int player) {
+    //todo decisamente da modificare
+    public int evaluatePlayerPoints(int player) {
         int score = 0;
 
         for (Tile tile : p_hands.get(player)) {
@@ -542,7 +554,6 @@ public class Table {
         for (Tile tile : p_hands.get(1)) {
             score_p2 += tile.val_1 + tile.val_2;
         }
-        System.out.print(score_p2 - score_p1 + " ");
         return (score_p2 - score_p1);
     }
 
@@ -698,7 +709,6 @@ public class Table {
 
     // INFO:
     public void resetTable() {
-        if(DEBUG) { System.out.println("resetting table"); }
         generateAllTiles();
         dealPlayersHands();
         chooseStartingPlayer();
@@ -806,6 +816,20 @@ public class Table {
 
 
 
+    public void printAvailableMoves(int player){
+        ArrayList<Integer> moves = availableMoves(player);
+        for(int i = 0; i < moves.size(); i++){
+            Tile tmp = p_hands.get(player).get(moves.get(i));
+            Tile.printTile(tmp);
+            System.out.print(", ");
+        }
+        if(moves.size() == 0){
+            System.out.print("x");
+        }
+    }
+
+
+
     public void printPlayedTiles(Deque<Tile> tiles) {
         for (Tile element : tiles) {
             Tile.printTile(element);
@@ -853,20 +877,6 @@ public class Table {
 
 
 
-    public void printForTerminal(){
-        
-        for (Tile tile : p_hands.get(0)) {
-            tile.printTileSimple();
-            System.out.print(" ");
-        }
-        System.out.print("\t");
-        
-        for (Tile tile : p_hands.get(1)) {
-            tile.printTileSimple();
-            System.out.print(" ");
-        }
-        System.out.print("\t");
-    }
 
 
     /*************************************/
@@ -909,7 +919,7 @@ public class Table {
         System.out.println();
         System.out.println();
 
-        if(DEBUG) { printTableConfig(); }
+        printTableConfig();
     }
 
 

@@ -31,6 +31,10 @@ public class Tile {
         System.out.print(val_1 + "|" + val_2  + "[" + index + "]" + "(" + owner + ")"); 
     }
 
+    public void printTileSimple(){
+        System.out.print(val_1 + "|" + val_2);
+    }
+
     public void swapTile(){
         int tmp = this.val_1;
         this.val_1 = this.val_2;
