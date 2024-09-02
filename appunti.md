@@ -4,6 +4,8 @@
 `javac *.java` dal percorso ../TesiDomino per compilare tutti i file
 `java Main` oppure `java MainManual` per lanciare il codice, sempre da ../TesiDomino
 
+'java Manual "6|6 5|2 0|4 4|5 1|1 1|2 2|2" "6|5 6|2 6|3 0|0 5|1 5|0 3|0”'
+
 # Regole 
 
 ### Double-6

@@ -109,14 +109,14 @@ public class Table {
         if(DEBUG) { printTableConfig();}
         firstMove();
 
-        while (game_state == GameState.OPEN) {
+        //while (game_state == GameState.OPEN) {
             if(DEBUG) { printTableConfig(); }
             tile_to_play = bestMove();
             if(DEBUG) { System.out.print("\ntile_to_play: "); }
             if(DEBUG) { if(tile_to_play != null) { tile_to_play.printTile(); } }
             playTile(tile_to_play);
             if(checkEndGame()){ endGame(null); }
-        }
+        //}
         
         if(DEBUG) { System.out.println("\n--------------------- END GAME ---------------------\n");}
         if(DEBUG) { printTableConfig(); }
@@ -201,7 +201,7 @@ public class Table {
 
         // managing cases where there's a "pass": play a null Tile and call minimax with is_maximizing inverted 
         if(moves.isEmpty()) {
-            if(DEBUG){printSpaces(depth, null);}
+            if(DEBUG){ printSpaces(depth, null); }
 
             playTile(null);
             int eval = minimax(depth + 1, !is_maximizing);
@@ -228,6 +228,9 @@ public class Table {
                     // the tile to play is the same one as last_move, that means it's time to swap it to try the second move with that tile
                     // also set the flag for unswapping later 
                     if(tileNeedsSwap(last_move, tile_to_play)){ 
+                        if(DEBUG){
+                            System.out.print("SWAP1" );
+                        }
                         tile_to_play.swapTile();  
                         unswap_flag = true;
                     }
@@ -250,6 +253,7 @@ public class Table {
         
                     // update the best value if found
                     max_eval = Math.max(max_eval, eval);
+                    last_move = tile_to_play; //""
                 }
                 return max_eval;
             } 
@@ -262,14 +266,19 @@ public class Table {
                     Tile tile_to_play = p_hands.get(current_player).get(move);
         
                     if(tileNeedsSwap(last_move, tile_to_play)){ 
+                        if(DEBUG){
+                            System.out.print("SWAP2");
+                        }
                         tile_to_play.swapTile();  
                         unswap_flag = true;
                     }
 
-                    if(DEBUG){ printSpaces(depth, null);}
+                    if(DEBUG){ printSpaces(depth, null); }
+
                     playTile(tile_to_play);  
                     int eval = minimax(depth + 1, true);
-                    if(DEBUG){ printSpaces(depth, null);  }
+
+                    if(DEBUG){ printSpaces(depth, null); }
                     undo();  
                     if(unswap_flag){
                         unswap_flag = false;
@@ -277,6 +286,7 @@ public class Table {
                     }
         
                     min_eval = Math.min(min_eval, eval);
+                    last_move = tile_to_play; //""
                 }
                 return min_eval;
             }
