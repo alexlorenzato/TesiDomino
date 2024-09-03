@@ -9,7 +9,7 @@ import java.util.Stack;
 
 public class Table {
 
-    int max_tile, hand_size, head, tail, current_player, MAX_DEPTH = 1000;     // current_player -> 0:P1, 1:P2
+    int max_tile, hand_size, head, tail, current_player, MAX_DEPTH = 10000;     // current_player -> 0:P1, 1:P2
     ArrayList<Tile> all_tiles, reserve_tiles;
     Deque<Tile> played_tiles;  
     ArrayList<ArrayList<Tile>> p_hands;
@@ -177,6 +177,9 @@ public class Table {
             }
             last_move = tile_to_play;
         }
+
+        System.out.print("\t" + best_value);
+
         return best_move;
     }
 
@@ -552,7 +555,15 @@ public class Table {
         for (Tile tile : p_hands.get(1)) {
             score_p2 += tile.val_1 + tile.val_2;
         }
-        System.out.print(score_p2 - score_p1 + " ");
+
+        
+        if(p_hands.get(0).size() != 0 && p_hands.get(1).size() != 0){   // at least a player has still tiles in hand
+            System.out.print(score_p2 - score_p1 + "X ");
+        }   
+        else {
+            System.out.print(score_p2 - score_p1 + " ");
+        }
+
         return (score_p2 - score_p1);
     }
 
