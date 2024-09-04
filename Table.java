@@ -127,7 +127,7 @@ public class Table {
     // INFO: return the tile that represents the best move available for the current player
     public Tile bestMove(){
         int  best_value = Integer.MIN_VALUE, move_value = Integer.MIN_VALUE;   
-        Tile best_move = null, last_move = null;
+        Tile best_move = null, last_move = null, tile_to_play = null;
         boolean swap_flag = false;  
 
         // list available moves
@@ -135,49 +135,78 @@ public class Table {
         ArrayList<Integer> moves = availableMoves(current_player);
         if(DEBUG) { printTilesByIndex(moves, current_player); }
 
-        // for each available move
-        for (int move : moves) {
-            Tile tile_to_play = p_hands.get(current_player).get(move);
 
-            // a tile needs to be swapped in 2 cases:
-            // 1) the value that has to be played is on val_2, in order to be used by playTile() it has to be in val_1
-            // 2) the tile can be played in 2 different ways, so once it is played normally and a second time it is played swapped
-            // the tile to play is the same one as last_move, that means it's time to swap it to try the second move with that tile
-            if(tileNeedsSwap(last_move, tile_to_play)){ 
-                tile_to_play.swapTile(); 
+        // if the player has no moves, pass the turn and if the other player has no moves end the game
+        // otherwise use the minimax to generate the tree
+        if (moves.size() == 0) {         
+            playTile(null);
+            moves = availableMoves(current_player);
+
+            if(moves.size() == 0){
+                best_value = evaluateGameScoring();
             }
+            else {
+                for (int move : moves) {
+                    tile_to_play = p_hands.get(current_player).get(move);
+                    if(tileNeedsSwap(last_move, tile_to_play)){ 
+                        tile_to_play.swapTile(); 
+                    }
+                    playTile(tile_to_play);
+                    move_value = minimax(0, false);
+                    undo();
+                    if (move_value > best_value) {  
 
-            // play the tile and obtain a value for the move by investigating the possibilities of the opponent
-            if(DEBUG){ System.out.println(); }
-            playTile(tile_to_play);
-            move_value = minimax(0, false);  
-
-            // undo the move and proceed to see if it would be the best move
-            undo();  
-            if(DEBUG){ System.out.print("move_value: " + move_value + " con ");}
-            if(DEBUG){ tile_to_play.printTile(); }
-            if(DEBUG){ System.out.println(); }
-
-            // new best move is found, update the best move
-            if (move_value > best_value) {  
-
-                best_value = move_value;
-                best_move = tile_to_play;
-
-                if(DEBUG){ System.out.print("best_move: ");}
-                if(DEBUG){ tile_to_play.printTile();}
-                if(DEBUG){System.out.print(".....");} 
-                if(DEBUG){ best_move.printTile(); }
-                if(DEBUG){ System.out.println(" with best_value: " + best_value);}
+                        best_value = move_value;
+                        best_move = tile_to_play;
+                    }
+                    last_move = tile_to_play;
+                }
             }
-            else {  
-                if(DEBUG){ System.out.print("sub_move: ");}
-                if(DEBUG){ tile_to_play.printTile(); }
-                if(DEBUG){ System.out.println(" with value: " + move_value);}
-            }
-            last_move = tile_to_play;
         }
+        else{
+            // for each available move
+            for (int move : moves) {
+                tile_to_play = p_hands.get(current_player).get(move);
 
+                // a tile needs to be swapped in 2 cases:
+                // 1) the value that has to be played is on val_2, in order to be used by playTile() it has to be in val_1
+                // 2) the tile can be played in 2 different ways, so once it is played normally and a second time it is played swapped
+                // the tile to play is the same one as last_move, that means it's time to swap it to try the second move with that tile
+                if(tileNeedsSwap(last_move, tile_to_play)){ 
+                    tile_to_play.swapTile(); 
+                }
+
+                // play the tile and obtain a value for the move by investigating the possibilities of the opponent
+                if(DEBUG){ System.out.println(); }
+                playTile(tile_to_play);
+                move_value = minimax(0, false);  
+
+                // undo the move and proceed to see if it would be the best move
+                undo();  
+                if(DEBUG){ System.out.print("move_value: " + move_value + " con ");}
+                if(DEBUG){ tile_to_play.printTile(); }
+                if(DEBUG){ System.out.println(); }
+
+                // new best move is found, update the best move
+                if (move_value > best_value) {  
+
+                    best_value = move_value;
+                    best_move = tile_to_play;
+
+                    if(DEBUG){ System.out.print("best_move: "); }
+                    if(DEBUG){ tile_to_play.printTile(); }
+                    if(DEBUG){ System.out.print("....."); } 
+                    if(DEBUG){ best_move.printTile(); }
+                    if(DEBUG){ System.out.println(" with best_value: " + best_value); }
+                }
+                else {  
+                    if(DEBUG){ System.out.print("sub_move: "); }
+                    if(DEBUG){ tile_to_play.printTile(); }
+                    if(DEBUG){ System.out.println(" with value: " + move_value); }
+                }
+                last_move = tile_to_play;
+            }
+        }
         System.out.print("\t" + best_value);
 
         return best_move;
