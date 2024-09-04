@@ -118,7 +118,7 @@ public class Table {
             if(checkEndGame()){ endGame(null); }
         //}
         
-        if(DEBUG) { System.out.println("\n--------------------- END GAME ---------------------\n");}
+        if(DEBUG) { System.out.println("\n--------------------- END GAME ---------------------\n"); }
         if(DEBUG) { printTableConfig(); }
     }
 
@@ -454,7 +454,7 @@ public class Table {
         // pass turn and check for end game
         current_player = (current_player == 0) ? 1 : 0;    // invert current_player
 
-        if(DEBUG){ System.out.print("firstMove(): ");}
+        if(DEBUG){ System.out.print("firstMove(): "); }
         if(DEBUG){ tile_to_play.printTile();}
         if(DEBUG){ System.out.println();}
     }
@@ -550,12 +550,11 @@ public class Table {
         int score_p1 = 0,  score_p2 = 0;
 
         for (Tile tile : p_hands.get(0)) {
-            score_p1 += tile.val_1 + tile.val_2;
+            score_p1 += (tile.val_1 + tile.val_2);
         }
         for (Tile tile : p_hands.get(1)) {
-            score_p2 += tile.val_1 + tile.val_2;
+            score_p2 += (tile.val_1 + tile.val_2);
         }
-
         
         if(p_hands.get(0).size() != 0 && p_hands.get(1).size() != 0){   // at least a player has still tiles in hand
             System.out.print(score_p2 - score_p1 + "X ");
@@ -887,78 +886,6 @@ public class Table {
             System.out.print(" ");
         }
         System.out.print("\t");
-    }
-
-
-    /*************************************/
-    /*               BACKUP               */
-    /*************************************/
-
-    // INFO: manage a game with random moves from start to end
-    public void playRandomGame(){
-        Tile tile_to_play;
-
-        System.out.println("\n-------------------- START GAME --------------------");
-
-        printTableConfig();
-        firstMove();
-
-        while (game_state == GameState.OPEN) {
-            printTableConfig();
-            tile_to_play = randomMove();
-            playTile(tile_to_play);
-        }
-        
-        System.out.println("\n--------------------- END GAME ---------------------\n");
-
-        System.out.println();
-
-        System.out.println("HISTORY: ");
-        for (char move : history) {
-            System.out.print(move + " -> ");
-        }
-
-        System.out.println();
-        System.out.println();
-        
-        System.out.println("UNDO:");
-        while (!history.isEmpty()) {
-            undo();
-            //System.out.println("undo random");
-        }
-
-        System.out.println();
-        System.out.println();
-
-        if(DEBUG) { printTableConfig(); }
-    }
-
-
-
-    // INFO: choose random tile to play, if no moves available return null
-    public Tile randomMove(){
-        ArrayList<Integer> moves = availableMoves(current_player);
-
-        if (!moves.isEmpty()) {
-            Random rand = new Random();
-            int random_index = rand.nextInt(moves.size());
-            Tile tile_to_play = p_hands.get(current_player).get(moves.get(random_index));
-
-            if((tile_to_play.val_2 == head) && (tail == head)){
-                System.out.print("swap: " + tile_to_play.val_1);
-                tile_to_play.swapTile();
-                System.out.println(" -> " + tile_to_play.val_1);
-            }
-            else if((head != tail) && ( (tile_to_play.val_1 != head) &&  (tile_to_play.val_1 != tail) ) ) {
-                System.out.print("swap: " + tile_to_play.val_1);
-                tile_to_play.swapTile();
-                System.out.println(" -> " + tile_to_play.val_1);
-            }
-            return tile_to_play;
-        } 
-        else {
-            return null;
-        }
     }
 
 }  // parentesi chiusura classe  
