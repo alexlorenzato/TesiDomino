@@ -1,0 +1,42 @@
+password: alex.lorenzato     cambiare subito
+
+ssh lorenzato@tuiring.disi.unibo.it
+
+
+cd /work/lorenzato   -> lavorare qui
+
+run lancia il set di istruzioni double
+
+screen -> apre uno screen da cui lancio run2, esco dallo screeen con CTRL+A+B
+
+screen -x -> mi ricollego allo screen, se ne creo di più specifico il nome dopo la x
+
+nel caso uso screen, imparare i comandi base
+se spezzetto in 50, devo loggare su 50 screen
+
+
+qsub nomescript, se anche sloggo lo script gira lo stesso
+
+qsub -o /dev/null -e /dev/null run2 -> importante per non trovare un casino di file nella home
+qstat per vedere stato dello script
+
+for i in {1..50}; do qsub -o /dev/null -e /dev/null run$i; done
+
+
+
+split per spezzettare un file ma poi bisogna ricordarsi, si può spezzettare secondo diversi parameteri (man split per sapere di più)
+split -l 1000000 crea file da 1000000 di righe
+c'é anche un modo di dare un nome specifico ai file che vengono creati
+
+run lancia la roba che c'era nel file splittato e scrive l'outpunt in un altro file
+
+una volta splittato il file bisogna creare i file run1, run2, run3 etc posso decidere se mandarli in esecuzione con screen o qsub
+
+qsub deve sapere in che directory sposstarsi perché non sa dove è Manual
+
+COSA DEVO TESTARE DI PRECISO?
+
+c'é quel problema dei punteggi invertiti in base a chi inizia
+inoltre c'é da correggere l'esempio con le 2 tile ciascuno 11 al posto di 8
+ilò primo giocatore dev'essere sempre quello che fa la prima mossa!
+configurazioni assurde tipo: avversario può fare max 1m ossa e pure io, funziona in casi così? comunque testare robe strane
