@@ -3,7 +3,7 @@ public class Main {
 
       int max_tile = 4, hand_size = 4;
 
-      Table t = new Table(max_tile, hand_size);
+      //Table t = new Table(max_tile, hand_size);
 
    }
 }

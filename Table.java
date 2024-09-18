@@ -9,7 +9,7 @@ import java.util.Stack;
 
 public class Table {
 
-    int max_tile, hand_size, head, tail, current_player, MAX_DEPTH = 10000;     // current_player -> 0:P1, 1:P2
+    int max_tile, head, tail, current_player, starting_player, MAX_DEPTH = 10000;     // current_player -> 0:P1, 1:P2
     ArrayList<Tile> all_tiles, reserve_tiles;
     Deque<Tile> played_tiles;  
     ArrayList<ArrayList<Tile>> p_hands;
@@ -23,73 +23,28 @@ public class Table {
     /*            CONSTRUCTORS           */
     /*************************************/ 
 
-    public Table(int max_tile, int hand_size) { 
-        game_state = GameState.OPEN;
-        this.max_tile  = max_tile;
-        this.hand_size = hand_size;
-        head = -1;
-        tail = -1;
-
-        all_tiles     = new ArrayList<>();
-        reserve_tiles = new ArrayList<>();   // used only during setup
-        played_tiles  = new ArrayDeque<>();
-        p_hands       = new ArrayList<>();
-        p_hands.add(new ArrayList<>());
-        p_hands.add(new ArrayList<>());
-        history = new Stack<>();
-
-        generateAllTiles();  
-        dealPlayersHands();
-        chooseStartingPlayer();
-        playGame();
-    }
-
-
-    public Table(ArrayList<Tile> p1_hand, ArrayList<Tile> p2_hand, int head, int tail, int starting_player){
-        if (p1_hand != null && p2_hand != null && p1_hand.size() > 0) { 
-
-            game_state = GameState.OPEN;
-            this.hand_size = p1_hand.size();
-            this.head = head;
-            this.tail = tail;
-    
-            played_tiles  = new ArrayDeque<>();
-            p_hands       = new ArrayList<>();
-            history       = new Stack<>();
-
-            p_hands.add(p1_hand); 
-            p_hands.add(p2_hand); 
-    
-            if(starting_player == -1){ chooseStartingPlayer(); }
-            else{ current_player = starting_player; }
-            playGame();
-        } 
-        else { System.err.println("Error [Table()]: invalid hands."); }
-    }
-
-
     // for Manual.java
     public Table(ArrayList<Tile> p1_hand, ArrayList<Tile> p2_hand){
-        if (p1_hand != null && p2_hand != null && p1_hand.size() > 0) { 
-
-            game_state = GameState.OPEN;
-            this.hand_size = p1_hand.size();
-            head = -1;
-            tail = -1;
-            
-            played_tiles  = new ArrayDeque<>();
-            p_hands       = new ArrayList<>();
-            history       = new Stack<>();
-            
-            p_hands.add(p1_hand); 
-            p_hands.add(p2_hand); 
-            
-            chooseStartingPlayer(); 
-            playGame();
-        } 
-        else { System.err.println("Error [Table()]: invalid hands."); }
+        
+        game_state = GameState.OPEN;
+        head = -1;
+        tail = -1;
+        
+        played_tiles  = new ArrayDeque<>();
+        p_hands       = new ArrayList<>();
+        history       = new Stack<>();
+        
+        p_hands.add(p1_hand); 
+        p_hands.add(p2_hand); 
+        
+        chooseStartingPlayer(); 
+        //playGame();
+        Tile tile_to_play;
+        printForTerminal();
+        firstMove();
+        tile_to_play = bestMove();
+        
     }
-
 
 
 
@@ -98,9 +53,9 @@ public class Table {
     /*************************************/    
 
 
-
     // INFO: manage game from start to end
     public void playGame(){
+        /* 
         Tile tile_to_play;
 
         printForTerminal();
@@ -115,18 +70,24 @@ public class Table {
             if(DEBUG) { System.out.print("\ntile_to_play: "); }
             if(DEBUG) { if(tile_to_play != null) { tile_to_play.printTile(); } }
             playTile(tile_to_play);
-            if(checkEndGame()){ endGame(null); }
+            //if(checkEndGame()){ endGame(null); }
         //}
         
         if(DEBUG) { System.out.println("\n--------------------- END GAME ---------------------\n"); }
         if(DEBUG) { printTableConfig(); }
+        */
+
+        Tile tile_to_play;
+        printForTerminal();
+        firstMove();
+        tile_to_play = bestMove();
     }
 
 
  
     // INFO: return the tile that represents the best move available for the current player
     public Tile bestMove(){
-        int  best_value = Integer.MIN_VALUE, move_value = Integer.MIN_VALUE;   
+        int  best_value = Integer.MAX_VALUE, move_value = Integer.MIN_VALUE;   
         Tile best_move = null, last_move = null, tile_to_play = null;
         boolean swap_flag = false;  
 
@@ -188,7 +149,7 @@ public class Table {
                 if(DEBUG){ System.out.println(); }
 
                 // new best move is found, update the best move
-                if (move_value > best_value) {  
+                if (move_value < best_value) {  
 
                     best_value = move_value;
                     best_move = tile_to_play;
@@ -207,7 +168,7 @@ public class Table {
                 last_move = tile_to_play;
             }
         }
-        System.out.print("\t" + best_value);
+        System.out.print("\t " + best_value);
 
         return best_move;
     }
@@ -285,7 +246,7 @@ public class Table {
         
                     // update the best value if found
                     max_eval = Math.max(max_eval, eval);
-                    last_move = tile_to_play; //""
+                    last_move = tile_to_play; 
                 }
                 return max_eval;
             } 
@@ -318,7 +279,7 @@ public class Table {
                     }
         
                     min_eval = Math.min(min_eval, eval);
-                    last_move = tile_to_play; //""
+                    last_move = tile_to_play; 
                 }
                 return min_eval;
             }
@@ -480,8 +441,8 @@ public class Table {
         head = tile_to_play.val_1;
         tail = tile_to_play.val_2;
 
-        // pass turn and check for end game
-        current_player = (current_player == 0) ? 1 : 0;    // invert current_player
+        // pass turn
+        current_player = (current_player == 0) ? 1 : 0;   
 
         if(DEBUG){ System.out.print("firstMove(): "); }
         if(DEBUG){ tile_to_play.printTile();}
@@ -548,33 +509,8 @@ public class Table {
 
 
 
-    // INFO: manage a game over
-    public void endGame(String msg) {
-        game_state = GameState.ENDED;
-        if(DEBUG){ System.out.print("\n\nGame Over: ");}
-        
-        // pv count
-        int pv1 = sumPlayerPoints(0);
-        int pv2 = sumPlayerPoints(1);
-
-        if(DEBUG){ System.out.print(" PV1: " + pv1 + " PV2: " + pv2 + " ");}
-    }
-
-
-
-    // INFO: calculate the actual points a player has in hand
-    public int sumPlayerPoints(int player) {
-        int score = 0;
-
-        for (Tile tile : p_hands.get(player)) {
-            score += tile.val_1 + tile.val_2;
-        }
-        return score;
-    }
-
-
-
     // INFO: 
+    /*
     public int evaluateGameScoring() {
         int score_p1 = 0,  score_p2 = 0;
 
@@ -594,7 +530,30 @@ public class Table {
 
         return (score_p2 - score_p1);
     }
+    */
+    public int evaluateGameScoring() {
+        int score_starting_player = 0,  score_second_player = 0;
 
+        int second_player = -1;
+        second_player = (starting_player == 0) ? 1 : 0; 
+
+        for (Tile tile : p_hands.get(starting_player)) {
+            score_starting_player += (tile.val_1 + tile.val_2);
+        }
+        for (Tile tile : p_hands.get(second_player)) {
+            score_second_player += (tile.val_1 + tile.val_2);
+        }
+        //System.out.print(" || start_p:"+ score_starting_player + " second_p:"+ score_second_player +" || ");
+        
+        if(p_hands.get(0).size() != 0 && p_hands.get(1).size() != 0){   // at least a player has still tiles in hand
+            System.out.print(score_second_player - score_starting_player + "X ");
+        }   
+        else {
+            System.out.print(score_second_player - score_starting_player + " ");
+        }
+
+        return (score_second_player - score_starting_player);
+    }
 
 
 
@@ -690,14 +649,6 @@ public class Table {
     }
 
 
-    // INFO: 
-    public boolean isPlayableTile(Tile t){
-        if(t.val_1 == head || t.val_2 == head || t.val_1 == tail || t.val_2 == tail){
-            return true;
-        }
-        return false;
-    }
-
 
     // INFO: remova a tile from current player hand
     public Tile rmvTileHand(Tile t){
@@ -744,45 +695,6 @@ public class Table {
     /*************************************/
     /*               SETUP               */
     /*************************************/
-
-    // INFO:
-    public void resetTable() {
-        if(DEBUG) { System.out.println("resetting table"); }
-        generateAllTiles();
-        dealPlayersHands();
-        chooseStartingPlayer();
-    }
-    
-
-    // INFO: generate the tile set
-    private void generateAllTiles() {
-        for (int i = 0; i <= max_tile; i++) {
-            for (int j = i; j <= max_tile; j++) {
-                all_tiles.add(new Tile(i, j));
-            }
-        }
-        Collections.shuffle(all_tiles);
-    }
-
-
-    // INFO: 
-    private void dealPlayersHands() {
-        for (int i = 0; i < hand_size; i++) {                 
-            Tile tileForPlayer1 = all_tiles.remove(0);
-            Tile tileForPlayer2 = all_tiles.remove(0);
-    
-            // Set owner and index for player 1's tile
-            tileForPlayer1.owner = 0;
-            tileForPlayer1.index = p_hands.get(0).size();
-            p_hands.get(0).add(tileForPlayer1);
-    
-            // Set owner and index for player 2's tile
-            tileForPlayer2.owner = 1;
-            tileForPlayer2.index = p_hands.get(1).size();
-            p_hands.get(1).add(tileForPlayer2);
-        }
-        reserve_tiles = all_tiles;
-    }
     
 
     
@@ -802,9 +714,12 @@ public class Table {
                 max_val_p2 = tmp_tile.val_1;
             }
         }
-        if      (max_val_p1 > max_val_p2) { current_player = 0; }
-        else if (max_val_p2 > max_val_p1) { current_player = 1; } 
-        else { resetTable(); }   // if no one has a double
+        if      (max_val_p1 > max_val_p2) { current_player = 0; starting_player = 0; }
+        else if (max_val_p2 > max_val_p1) { current_player = 1; starting_player = 1; } 
+        else {    // if no one has a double
+            //resetTable(); 
+            System.out.println("No Player has a double.");
+        }   
     }
 
 
@@ -920,3 +835,132 @@ public class Table {
 }  // parentesi chiusura classe  
 
 
+
+
+
+/*************************************/
+/*              BACKUP               */
+/*************************************/
+
+/*
+
+    public Table(int max_tile, int hand_size) { 
+        game_state = GameState.OPEN;
+        this.max_tile  = max_tile;
+        this.hand_size = hand_size;
+        head = -1;
+        tail = -1;
+
+        all_tiles     = new ArrayList<>();
+        reserve_tiles = new ArrayList<>();   // used only during setup
+        played_tiles  = new ArrayDeque<>();
+        p_hands       = new ArrayList<>();
+        p_hands.add(new ArrayList<>());
+        p_hands.add(new ArrayList<>());
+        history = new Stack<>();
+
+        generateAllTiles();  
+        dealPlayersHands();
+        chooseStartingPlayer();
+        playGame();
+    }
+
+
+    public Table(ArrayList<Tile> p1_hand, ArrayList<Tile> p2_hand, int head, int tail, int starting_player){
+        if (p1_hand != null && p2_hand != null && p1_hand.size() > 0) { 
+
+            game_state = GameState.OPEN;
+            this.hand_size = p1_hand.size();
+            this.head = head;
+            this.tail = tail;
+    
+            played_tiles  = new ArrayDeque<>();
+            p_hands       = new ArrayList<>();
+            history       = new Stack<>();
+
+            p_hands.add(p1_hand); 
+            p_hands.add(p2_hand); 
+    
+            if(starting_player == -1){ chooseStartingPlayer(); }
+            else{ current_player = starting_player; }
+            playGame();
+        } 
+        else { System.err.println("Error [Table()]: invalid hands."); }
+    }
+
+
+
+        // INFO: manage a game over
+    public void endGame(String msg) {
+        game_state = GameState.ENDED;
+        if(DEBUG){ System.out.print("\n\nGame Over: ");}
+        
+        // pv count
+        int pv1 = sumPlayerPoints(0);
+        int pv2 = sumPlayerPoints(1);
+
+        if(DEBUG){ System.out.print(" PV1: " + pv1 + " PV2: " + pv2 + " ");}
+    }
+
+
+
+        // INFO: calculate the actual points a player has in hand
+    public int sumPlayerPoints(int player) {
+        int score = 0;
+
+        for (Tile tile : p_hands.get(player)) {
+            score += tile.val_1 + tile.val_2;
+        }
+        return score;
+    }
+
+
+        // INFO: 
+    public boolean isPlayableTile(Tile t){
+        if(t.val_1 == head || t.val_2 == head || t.val_1 == tail || t.val_2 == tail){
+            return true;
+        }
+        return false;
+    }
+
+
+
+       // INFO:
+    public void resetTable() {
+        if(DEBUG) { System.out.println("resetting table"); }
+        generateAllTiles();
+        dealPlayersHands();
+        chooseStartingPlayer();
+    }
+    
+
+    // INFO: generate the tile set
+    private void generateAllTiles() {
+        for (int i = 0; i <= max_tile; i++) {
+            for (int j = i; j <= max_tile; j++) {
+                all_tiles.add(new Tile(i, j));
+            }
+        }
+        Collections.shuffle(all_tiles);
+    }
+
+
+    // INFO: 
+    private void dealPlayersHands() {
+        for (int i = 0; i < hand_size; i++) {                 
+            Tile tileForPlayer1 = all_tiles.remove(0);
+            Tile tileForPlayer2 = all_tiles.remove(0);
+    
+            // Set owner and index for player 1's tile
+            tileForPlayer1.owner = 0;
+            tileForPlayer1.index = p_hands.get(0).size();
+            p_hands.get(0).add(tileForPlayer1);
+    
+            // Set owner and index for player 2's tile
+            tileForPlayer2.owner = 1;
+            tileForPlayer2.index = p_hands.get(1).size();
+            p_hands.get(1).add(tileForPlayer2);
+        }
+        reserve_tiles = all_tiles;
+    }
+*/
