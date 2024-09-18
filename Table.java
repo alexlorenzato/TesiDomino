@@ -44,6 +44,9 @@ public class Table {
         firstMove();
         tile_to_play = bestMove();
         
+        if(tile_to_play == null){
+
+        }
     }
 
 
@@ -102,6 +105,12 @@ public class Table {
         if (moves.size() == 0) {         
             playTile(null);
             moves = availableMoves(current_player);
+
+            // necessary for the case where the 2nd player has no moves so best_move does not get a value
+            // so the turn is passed again to the 1st player, but the 1st player aims to maximize 
+            // (the 2nd instead has to minimize the formula of evaluateGameScoring)
+            // that's why MAX_VALUE is echanged for MIN_VALUE, because it's the 1st player turn
+            best_value = Integer.MIN_VALUE;
 
             if(moves.size() == 0){
                 best_value = evaluateGameScoring();
