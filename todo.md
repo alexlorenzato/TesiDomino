@@ -1,3 +1,59 @@
+## Tmp
+
+**Preliminare**
+
+Estrae 4 righe dalla lista di comandi
+```
+head -n 4 lines 
+```
+
+**Script 0**
+
+Divide file `lines` in sotto-file da 2 righe con formato `lineXY`
+
+```
+#!/bin/bash
+
+split -l 2 lines line
+
+count=1
+
+for file in line*; do
+    mv "$file" "line$count"
+    ((count++))
+done
+```
+
+**Script 1**
+
+Crea file eseguibili da lanciare poi con `qsub`:
+- cat crea file con nome file_name
+- 
+
+```
+#!/bin/bash
+
+for i in {1..2}; do
+    file_name="runn$i.sh"
+    
+    cat << EOF > $file_name
+#!/bin/bash
+cd /work/lorenzato
+./line$i > line$i.log
+EOF
+
+    chmod +x $file_name
+done
+```
+
+**Script 2**
+
+```
+
+```
+
+
+
 ## Login
 
 ssh lorenzato@turing.disi.unibo.it
@@ -9,7 +65,8 @@ password: d0min099
 ## Procedimento
 
 1. Dividere il file ``allsets7.double.run`` con `split`.
-    - `split -l 3 allsets7.double.run run_` per avere file da 3 righe ciascuno a partire dal file `allsets7.double.run`, nominati come run1, run2, etc
+    - `split -l 100 allsets7.double.run run_` per avere file da 100 righe ciascuno a partire dal file `allsets7.double.run`, nominati come run1, run2, etc
+
 2. Creare script che permetta di creare una serie di file eseguibili così strutturati:
     ```
     #!/bin/bash
@@ -19,7 +76,7 @@ password: d0min099
 
     I file eseguibili (quelli con .sh) serviranno per essere lanciati con qsub, prenderanno i comandi da runXY e scriveranno i risultati in runXY.log.
 
-    Lo script per fare ciò è:
+    Lo script per creare gli script quindi è:
     ```
     #!/bin/bash
 
@@ -43,9 +100,7 @@ password: d0min099
     Lo script è:
     ```
     for i in {1..3}; do
-    qsub -N run_$i -o run_$i.out -e run_$i.err \
-    -l walltime=01:00:00 -l nodes=1:ppn=1 \
-    -- ./run_$i.sh
+    qsub -N prova9_part_$i -- ./prova9_part_$i.sh
     done
     ```
 
