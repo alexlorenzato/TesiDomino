@@ -4,17 +4,17 @@
 
 Estrae 4 righe dalla lista di comandi
 ```
-head -n 4 lines 
+head -n 4 allsets7.double.run > lins 
 ```
 
 **Script 0**
 
-Divide file `lines` in sotto-file da 2 righe con formato `lineXY`
+Divide file `lins` in sotto-file da 2 righe con formato `lineX`
 
 ```
 #!/bin/bash
 
-split -l 2 lines line
+split -l 2 lins line
 
 count=1
 
@@ -26,9 +26,9 @@ done
 
 **Script 1**
 
-Crea file eseguibili da lanciare poi con `qsub`:
-- cat crea file con nome file_name
-- 
+Crea file eseguibili `runnX.sh` da lanciare poi con `qsub`:
+- cat crea file con nome `runnX.sh`
+- questi file eseguiranno `lineX` e scriveranno il log su `lineX.log`
 
 ```
 #!/bin/bash
@@ -48,8 +48,14 @@ done
 
 **Script 2**
 
-```
+Lancia i file eseguibili `runnX.sh` creati dallo script 1.
 
+```
+#!/bin/bash
+
+for i in {1..2}; do
+    qsub runn$i.sh
+done
 ```
 
 

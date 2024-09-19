@@ -43,10 +43,6 @@ public class Table {
         printForTerminal();
         firstMove();
         tile_to_play = bestMove();
-        
-        if(tile_to_play == null){
-
-        }
     }
 
 
@@ -122,7 +118,9 @@ public class Table {
                         tile_to_play.swapTile(); 
                     }
                     playTile(tile_to_play);
-                    move_value = minimax(0, false);
+                    // here is_maximizing needs to be true, that is because the move is being played
+                    // by the starting_player, which is the one interested in maximizing the score value
+                    move_value = minimax(0, true);
                     undo();
                     if (move_value > best_value) {  
 

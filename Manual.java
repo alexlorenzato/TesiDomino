@@ -50,7 +50,7 @@ public class Manual {
 
 
 /*
-//java Manual "6|6 5|2 0|4 4|5 1|1 1|2 2|2" "6|5 6|2 6|3 0|0 5|1 5|0 3|0”
+//java Manual "6|6 5|2 0|4 4|5 1|1 1|2 2|2" "6|5 6|2 6|3 0|0 5|1 5|0 3|0"
 // java Manual "1|3 4|2 3|4" "1|4 3|5 4|5"
 import java.util.ArrayList;
 
