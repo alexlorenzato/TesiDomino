@@ -117,10 +117,10 @@ public class Table {
                     if(tileNeedsSwap(last_move, tile_to_play)){ 
                         tile_to_play.swapTile(); 
                     }
-                    playTile(tile_to_play);
+                    playTile(tile_to_play);             //!!!
                     // here is_maximizing needs to be true, that is because the move is being played
                     // by the starting_player, which is the one interested in maximizing the score value
-                    move_value = minimax(0, true);
+                    move_value = minimax(0, false);    //!!!
                     undo();
                     if (move_value > best_value) {  
 
@@ -146,8 +146,8 @@ public class Table {
 
                 // play the tile and obtain a value for the move by investigating the possibilities of the opponent
                 if(DEBUG){ System.out.println(); }
-                playTile(tile_to_play);
-                move_value = minimax(0, false);  
+                playTile(tile_to_play);            //!!!
+                move_value = minimax(0, true);     //!!!
 
                 // undo the move and proceed to see if it would be the best move
                 undo();  
@@ -215,6 +215,7 @@ public class Table {
             // trying to win (maximizing score), when is_maximizing = true this is the branch that is executed
             // instead if it's P2's turn, the else branch will be executed
             if (is_maximizing) {
+                if(DEBUG){printSpaces(depth, null); System.out.println("IS_MAX"); }
                 int     max_eval    = Integer.MIN_VALUE; 
                 Tile    last_move   = null;
                 boolean unswap_flag = false; 
@@ -258,6 +259,7 @@ public class Table {
                 return max_eval;
             } 
             else {
+                if(DEBUG){printSpaces(depth, null); System.out.println("IS_MIN"); }
                 int min_eval = Integer.MAX_VALUE;
                 Tile last_move = null;
                 boolean unswap_flag = false; 
