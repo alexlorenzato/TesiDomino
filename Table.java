@@ -827,14 +827,16 @@ public class Table {
 
 
     public void printForTerminal(){
+
+        int second_player = (starting_player == 0) ? 1 : 0;
         
-        for (Tile tile : p_hands.get(0)) {
+        for (Tile tile : p_hands.get(starting_player)) {
             tile.printTileSimple();
             System.out.print(" ");
         }
         System.out.print("\t");
         
-        for (Tile tile : p_hands.get(1)) {
+        for (Tile tile : p_hands.get(second_player)) {
             tile.printTileSimple();
             System.out.print(" ");
         }

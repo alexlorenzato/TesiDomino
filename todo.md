@@ -1,25 +1,55 @@
-## Tmp
+# ToDo
 
-**Preliminare**
 
-Estrae 4 righe dalla lista di comandi
-```
-head -n 4 allsets7.double.run > lins 
-```
+spezzare tutto in file da 1milione di righe
 
-**Script 0**
+lanciarlo su 40 processori, in 2 gg dovrebbe avere finito
 
-Divide file `lins` in sotto-file da 2 righe con formato `lineX`
+
+htop per vedere lo stato di carico dei processori, se load average è vicino al 100% vuol dire chec è in sovraccarico
+
+
+# Scripting
+
+## Procedimento
+
+**Script 00**
+
+Estrarre righe e aggiungere `java -cp ./TesiDomino-main Manual` ad ogni riga.
 
 ```
 #!/bin/bash
 
-split -l 2 lins line
+# Estrarre le prime 4 righe da allsets7.double.run e salvarle nel file commands
+head -n 4 allsets7.double.run > commands
+
+# Leggi ogni riga di commands, sostituisci la stringa e riscrivi nel file
+while read -r line; do
+    # Sostituisci la parola "java" con "java -cp ./TesiDomino-main"
+    modified_line=$(echo "$line" | sed 's/java /java -cp .\/TesiDomino-main /')
+    
+    # Scrivi la riga modificata su un nuovo file, oppure puoi sovrascrivere commands
+    echo "$modified_line" >> commands_modified
+done < commands
+
+# Sovrascrivi il file originale 'commands' con quello modificato
+mv commands_modified commands
+
+```
+
+**Script 0**
+
+Divide file `commands` in sotto-file da 2 righe con formato `cmdX`
+
+```
+#!/bin/bash
+
+split -l 2 commands cmd
 
 count=1
 
-for file in line*; do
-    mv "$file" "line$count"
+for file in cmd*; do
+    mv "$file" "cmd$count"
     ((count++))
 done
 ```
@@ -28,7 +58,7 @@ done
 
 Crea file eseguibili `runnX.sh` da lanciare poi con `qsub`:
 - cat crea file con nome `runnX.sh`
-- questi file eseguiranno `lineX` e scriveranno il log su `lineX.log`
+- questi file eseguiranno `cmdX` e scriveranno il log su `cmdX.log`
 
 ```
 #!/bin/bash
@@ -39,7 +69,7 @@ for i in {1..2}; do
     cat << EOF > $file_name
 #!/bin/bash
 cd /work/lorenzato
-./line$i > line$i.log
+./cmd$i > cmd$i.log
 EOF
 
     chmod +x $file_name
@@ -67,54 +97,6 @@ ssh lorenzato@turing.disi.unibo.it
 password: d0min099
 
 `cd /work/lorenzato`   
-
-## Procedimento
-
-1. Dividere il file ``allsets7.double.run`` con `split`.
-    - `split -l 100 allsets7.double.run run_` per avere file da 100 righe ciascuno a partire dal file `allsets7.double.run`, nominati come run1, run2, etc
-
-2. Creare script che permetta di creare una serie di file eseguibili così strutturati:
-    ```
-    #!/bin/bash
-    cd /work/lorenzato/TesiDomino-main
-    ../run1 > run1.log
-    ```
-
-    I file eseguibili (quelli con .sh) serviranno per essere lanciati con qsub, prenderanno i comandi da runXY e scriveranno i risultati in runXY.log.
-
-    Lo script per creare gli script quindi è:
-    ```
-    #!/bin/bash
-
-    output_dir="/work/lorenzato/TesiDomino-main"
-
-    for i in {1..3}; do
-        file_name="run_$i.sh"
-        
-        cat << 'EOF' > $file_name
-    #!/bin/bash
-    cd /work/lorenzato/TesiDomino-main
-    ../run_$i > run_$i.log
-    EOF
-
-        chmod +x $file_name
-    done
-    ```
-
-3. Creare script che permetta di lanciare gli altri script.
-
-    Lo script è:
-    ```
-    for i in {1..3}; do
-    qsub -N prova9_part_$i -- ./prova9_part_$i.sh
-    done
-    ```
-
-    Dopo aver scritto e salvato questo script, renderlo eseguibile con `chmod +x nome_file.sh`
-
-4. Raccogliere output degli script dai file Y.
-
-
 
 
 
