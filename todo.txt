@@ -6,8 +6,7 @@ statistiche da estrarre:
 - per ogni set di tile: 
 	- numero di partite giocabili con 2 set (numero medio)
 	- di queste partite giocabili, in media quante finiscono in patta o terminando tessere o altro
-- tempo medio partita
-- dati 2 set di tile, quante partite (foglie§) sono possibili? e di queste, quante finiscono perché uno si è bloccato?
+- dati 2 set di tile, quante partite (foglie) sono possibili? e di queste, quante finiscono perché uno si è bloccato?
 
 RIORDINARE I LOG QUANDO FINISCONO
 

@@ -43,7 +43,7 @@ def parseLine(line):
     sections = re.split(r'\s{2,}', line.strip())
 
     if len(sections) < 5:
-        print(f"Errore: la riga non contiene abbastanza sezioni.")
+        print(f"Errore: la riga non contiene abbastanza sezioni. Ne contiene: ", len(sections))
         return None  
     
     player1_hand   = parseHand(sections[0])
