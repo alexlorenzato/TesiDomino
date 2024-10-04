@@ -2,11 +2,6 @@ RECAP:
 
 vedere comando AWK cosa faceva
 
-lancio di nuovi test:
-- prendere set di ogni riga e invece di passarli al giocatore, unirli e dividerli randomicamente
-(comando python, su directory tool, c'é drawTiles, devo randomizzare le mani e poi rilanciare i test
-file che si chiama Tiles, il comando per lanciarlo è: "python3 drawtiles.py tiles.txt", bisogna modificarlo in modo da ricombinare, c'é anche da rimuovere i set che non contengono alcun doppio)
-
 statistiche da estrarre:
 - per ogni set di tile: 
 	- numero di partite giocabili con 2 set (numero medio)
@@ -14,6 +9,7 @@ statistiche da estrarre:
 - tempo medio partita
 - dati 2 set di tile, quante partite (foglie§) sono possibili? e di queste, quante finiscono perché uno si è bloccato?
 
+RIORDINARE I LOG QUANDO FINISCONO
 
 futuro:
 - prendere dei set specifici e verificare se vince sempre (tutti tile con 0) o perde sempre (formato da tutte le coppie) oppure come si comporta in generale, partendo sia come primo che come secondo
