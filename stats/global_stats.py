@@ -41,6 +41,8 @@ def parseMinimaxScores(scores_str):
 
 def parseLine(line):
     sections = re.split(r'\s{2,}', line.strip())
+    if len(sections[-1].split()) > 1:
+        sections.extend(sections.pop().split())
 
     if len(sections) < 5:
         print(f"Errore: la riga non contiene abbastanza sezioni. Ne contiene: ", len(sections))
@@ -76,7 +78,7 @@ def avgTime(list):
     return avg / len(list)
 
 
-""" Numero medio di foglie di un albero """
+""" Numero medio di foglie di un albero (nota: non valore, ma numero di foglie) """
 def avgLeaves(list):
     avg = 0
     for item in list:
@@ -95,23 +97,33 @@ def avgEndings(list):
                count+=1
         total += (count / len(item.minimax_scores))
     return total / len(list)
+
+
 ###### Codice da eseguire ######
 
 
 def main():
     parser = argparse.ArgumentParser(description="Processa un file di domino.")
-    parser.add_argument('file_path', type=str, help="Il percorso del file di dati domino.")
+    parser.add_argument('file_paths', type=str, nargs='+', help="Il percorso del file di dati domino.")
     args = parser.parse_args()
-    game_data_list = parseFile(args.file_path) 
 
-    avg_time    = avgTime(game_data_list)
-    avg_leaves  = avgLeaves(game_data_list)
-    avg_endings = avgEndings(game_data_list)
+    all_game_data = []
+    
+    # Processa ogni file e aggiungi i dati alla lista globale
+    for file_path in args.file_paths:
+        print(f"Processando file: {file_path}")
+        game_data_list = parseFile(file_path)
+        all_game_data.extend(game_data_list)
+
+    # Calcola le statistiche sui dati aggregati
+    if all_game_data:
+        avg_time    = avgTime(all_game_data)
+        avg_leaves  = avgLeaves(all_game_data)
+        avg_endings = avgEndings(all_game_data)
 
     print("avg_time:",    avg_time)
     print("avg_leaves:",  avg_leaves)
     print("avg_endings:", avg_endings)
-
 
 
 # Avvia il programma

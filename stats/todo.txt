@@ -1,6 +1,10 @@
-RECAP:
 
-vedere comando AWK cosa faceva
+Recap:
+
+1. Scrivere programma global_stats.py: deve poter leggere tutti i log ed estrarre i dati desiderati.
+2. Scrivere programma set_stats.py:    deve poter leggere tutti i log ed estrarre i dati desiderati dalle righe in cui un giocatore ha la mano specificata in input.
+3. Riordinare i log già calcolati mettendo in ordine le mani dei giocatori. 
+
 
 statistiche da estrarre:
 - per ogni set di tile: 
@@ -8,12 +12,12 @@ statistiche da estrarre:
 	- di queste partite giocabili, in media quante finiscono in patta o terminando tessere o altro
 - dati 2 set di tile, quante partite (foglie) sono possibili? e di queste, quante finiscono perché uno si è bloccato?
 
-RIORDINARE I LOG QUANDO FINISCONO
 
-futuro:
+
+Futuro:
 - prendere dei set specifici e verificare se vince sempre (tutti tile con 0) o perde sempre (formato da tutte le coppie) oppure come si comporta in generale, partendo sia come primo che come secondo
 
------
+
 
 
 
