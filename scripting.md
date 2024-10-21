@@ -1,6 +1,7 @@
 
 # Accesso rapido
 
+
 ## Comandi esecuzione
 python3 reorder.py cmd1.log cmd2.log cmd3.log cmd4.log cmd5.log cmd6.log cmd7.log cmd8.log cmd9.log cmd10.log cmd11.log cmd12.log cmd13.log cmd14.log cmd15.log cmd16.log cmd17.log cmd18.log cmd19.log cmd20.log cmd21.log cmd22.log cmd23.log cmd24.log cmd25.log cmd26.log cmd27.log cmd28.log cmd29.log cmd30.log cmd31.log cmd32.log cmd33.log cmd34.log cmd35.log cmd36.log cmd37.log cmd38.log cmd39.log cmd40.log cmd41.log
 
@@ -8,14 +9,14 @@ python3 reorder.py cmd1.log cmd2.log cmd3.log cmd4.log cmd5.log cmd6.log cmd7.lo
 ## Login
 
 ssh lorenzato@turing.disi.unibo.it
-
 password: d0min099
-
 `cd /work/lorenzato` 
+
 
 ## Github pull via terminale
 
-git clone git@github.com:username/repository.git
+git pull origin main, lanciarlo dalla cartella TesiDomino
+git clone git@github.com:alexlorenzato/TesiDomino.git, serve per il primo pull, altrimenti usare il comando sopra
 
 
 
