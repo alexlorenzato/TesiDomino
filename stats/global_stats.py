@@ -1,6 +1,13 @@
 import re
 import argparse
 
+"""
+Da eseguire dalla cartella in cui sono presenti i file .log da dargli in input!
+
+Prende una serie di file .log in input da riga di comando, li parsa tutti linea per linea strutturandone i dati.
+Una volta concluso il parsing di tutti i file di input, calcola delle statistiche sui dati raccolti.
+"""
+
 ###### Classe ######
 
 class GameData:
