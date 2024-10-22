@@ -40,21 +40,27 @@ def parse_minimax_scores(scores_str):
 
 # Funzione per parsare una singola riga del file di log e restituire un oggetto GameData
 def parse_line(line):
-    sections = re.split(r'\s{2,}', line.strip())
-    if len(sections[-1].split()) > 1:
-        sections.extend(sections.pop().split())
+    try:
+        sections = re.split(r'\s{2,}', line.strip())
+        if len(sections[-1].split()) > 1:
+            sections.extend(sections.pop().split())
 
-    if len(sections) < 5:
-        return None  # Ritorna None se la riga non ha abbastanza dati
+        if len(sections) < 5:
+            return None  # Ritorna None se la riga non ha abbastanza dati
+        
+        # Parsiamo i dati della partita
+        player1_hand   = parse_hand(sections[0])
+        player2_hand   = parse_hand(sections[1])
+        minimax_scores = parse_minimax_scores(sections[2])
+        best_value     = int(sections[3])
+        game_duration  = int(sections[4])
+
+        return GameData(player1_hand, player2_hand, minimax_scores, best_value, game_duration)
     
-    # Parsiamo i dati della partita
-    player1_hand   = parse_hand(sections[0])
-    player2_hand   = parse_hand(sections[1])
-    minimax_scores = parse_minimax_scores(sections[2])
-    best_value     = int(sections[3])
-    game_duration  = int(sections[4])
-
-    return GameData(player1_hand, player2_hand, minimax_scores, best_value, game_duration)
+    except (ValueError, IndexError) as e:
+        # Se si verifica un errore durante il parsing della riga, la ignoriamo
+        print(f"Errore nel parsing della riga: {line.strip()} -- {e}")
+        return None
 
 # Funzione per leggere un file di log e filtrare le partite in base alla mano specificata
 # Salva se la mano appartiene al giocatore 1 o 2
