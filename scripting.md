@@ -19,6 +19,12 @@ git pull origin main, lanciarlo dalla cartella TesiDomino
 git clone git@github.com:alexlorenzato/TesiDomino.git, serve per il primo pull, altrimenti usare il comando sopra
 
 
+## Esecuzione set_stats.py
+
+python3 set_stats.py --hand "0|1 0|3 0|6 1|3 1|4 1|5 2|2" cmd1.log
+
+
+
 
 # Scripting
 
