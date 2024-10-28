@@ -1,0 +1,102 @@
+% !TEX root =path to root.tex
+\documentclass[a4paper.12pt]{report} % "report" è ottimo per tesi, include chapter
+
+\usepackage[utf8]{inputenc}          % Supporta caratteri con accenti
+\usepackage[italian]{babel}
+\usepackage{amsmath, amssymb}         % Pacchetti per la matematica avanzata
+\usepackage{graphicx}                 % Per inserire immagini
+\usepackage{hyperref}                 % Per link interni
+\usepackage{geometry}                 % Imposta margini del documento
+\geometry{left=3cm, right=3cm, top=3cm, bottom=3cm}
+
+\begin{document}
+
+\title{Studio sul Gioco del Domino}
+\author{Alex Lorenzato}
+\maketitle
+
+\tableofcontents % Crea automaticamente un indice dei contenuti
+
+%TODO: capitolo che parla del gioco, inserire un pò di storia del gioco, parlare in maniera approfondita della variante che stiamo considerando, citare altre varianti del gioco, noi stiamo considerando la blocks, esiste anche la variante draw, queste sono le due principali, pooi ce ne sono altre
+%? devo usare la prima persona singolare?
+
+
+\chapter{Introduzione}
+
+\section{Il Domino}
+
+Il domino è un antico gioco da tavolo di origine cinese. I componenti di gioco sono tessere rettangolari, ciascuna divisa in due metà, ognuna delle quali mostra un valore numerico compreso tra 0 e 6, solitamente rappresentato con dei pallini che indicano il punteggio della tessera.
+
+L'obiettivo del gioco, pur con alcune varianti, rimane fondamentalmente lo stesso: liberarsi di quante più tessere possibili dalla propria mano prima della fine della partita. Il gioco procede a turni in senso orario: ogni giocatore, nel suo turno, può posizionare una tessera dalla propria mano all'inizio o alla fine della fila di tessere sul tavolo, a condizione che il numero sulla metà della tessera combaci con il valore della tessera a cui si collega.
+
+Nella variante classica, la partita inizia con il giocatore che possiede la tessera doppia con il valore più alto. 
+
+La versione a 2 giocatori è la più diffusa, ma si può arrivare anche a 6 giocatori.
+
+
+\section{Storia del Domino}
+
+Il domino con le tessere nacque in Cina grazie all'opera di uno statista del 1120 presentato all'imperatore del tempo Hui Tsung. 
+
+Fu anche usato come strumento di divinazione intorno al XIII secolo, successivamente fu utilizzato per giocare. 
+
+Venne introdotto in Italia dagli arabi e si è poi diffuso in Francia e da lì in tutta Europa. Il suo nome, domino, deriva dal latino dominus, cioè padrone.\footnote{Fonte: Wikipedia, "Domino", https://it.wikipedia.org/wiki/Domino (accesso il 25 ottobre 2024).}
+
+
+\section{Variante "Block"}
+
+La variante block è quella usata per lo studio di questa tesi.
+
+Questa versione utilizza un set di tessere con valori da 0 a 6, come nel classico domino. Ogni giocatore pesca sette tessere all'inizio del gioco, mentre le tessere rimanenti vengono scartate e non utilizzate nella partita.
+
+La partita termina in due casi:
+\begin{enumerate}
+\item Quando un giocatore riesce a liberarsi di tutte le tessere in mano
+\item Quando il gioco è "bloccato" perché nessuno dei due giocatori può più fare una mossa valida
+\end{enumerate}
+
+Vince il giocatore con il minor numero di punti in mano, dove i punti sono la sommatoria delle facce delle tile in mano; chi esaurisce la mano quindi è necessariamente il vincitore.
+
+La formula per il calcolo del punteggio è data da: $punti_giocatore_iniziale - punti_giocatore_finale$, ne segue che il giocatore iniziale vuole minimizzare il punteggio e viceversa.
+
+\section{Altre varianti}
+
+Una macro-variante, assieme alla "Block" è la "Draw", la differenza sta nella possibilità di pescare altre tile nel caso in cui non si possano fare mosse valide, al contrario della Block in cui le tile date a inizio partita ai giocatori sono le uniche che verranno usate, quelle avanzate vengono rimosse totalmente dalla partita.
+
+All'interno della stessa Draw possono esserci molte variazioni, come l'obbligo di pescare tile fintanto che non si ha una mossa valida in contrapposizione all'obbligo di pescare al massimo una tessera nel caso in cui non si abbiano mosse disponibili in quel turno.
+
+Esistono moltissime varianti del domino, da quelle fan-made a quelle competitive, ognuna con variazioni più o meno importanti rispetto alle due varianti principali Block e Draw.
+
+Ad esempio oltre alla classica modalità dove lo scopo è esaurire la propria mano ci sono modalità dove viene premiata la creazione di certe configurazioni nel tavolo.
+
+
+\chapter{Risultati}
+
+\section{Statistiche}
+
+Il numero totale possibile di configurazioni delle mani iniziali nel domino è: \(137.281.098.240\), ed è calcolato nel seguente modo:
+
+
+\begin{enumerate}
+    \item Possibili set da 14 tessere: \(\binom{28}{14} = 40.116.600\), ai quali bisogna sottrarre tutti i set che non contengono nessuna tessera doppia.
+    \item Set che non contengono nessuna tessera doppia: \(\binom{21}{14} = 116.280\).
+    \item Possibili set da 14 tessere validi per poter iniziare una partita: \(40.116.600 - 116.280 = 40.000.320\), ovvero il totale di set possibili esclusi quelli senza una tessera doppia.
+    \item Ognuna delle \(40.000.320\) possibili partite è costituita da un set di 14 tile, che però possono essere distrubuite in \(\binom{14}{7} = 3432\) modi diversi tra i 2 giocatori
+    \item Il numero totale di partite esistenti con un set da 28 tile e mani da 7 tile ciascuna quindi è: \(40.000.320 * 3432 = 137.281.098.240\)
+\end{enumerate}
+
+Testare l'algoritmo su tutte le possibili partite non è temporalmente possibile con gli strumenti a disposizione, questo perché supponendo una media di 70ms a partita (media calcolata sui dati raccolti) ci vorrebbero \(137.281.098.240 * 70  = 9.609.676.876.800\) ms, equivalenti a \(304.7\) anni su un sistema monoprocessore; avendo avuto a disposizione un server con 40 processori, il tempo di calcolo necessario sarebbe stato \(304 / 40 \tilde= 7.5\) anni. 
+
+
+
+\chapter{Conclusioni}
+% Riassumi i risultati e le possibili applicazioni
+
+\appendix
+\chapter{Codice sorgente}
+% Includi eventuali porzioni di codice
+
+\bibliographystyle{plain} % Stile della bibliografia
+\bibliography{bibliografia} % File .bib con riferimenti
+
+\end{document}

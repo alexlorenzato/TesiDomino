@@ -1,0 +1,20 @@
+
+
+
+
+meglio risistemare i file reinserendo i tab
+
+il numero di foglie determina la complessità della partita, non sappiamo quale sia la partita con foglie massime, eventualmente si può provare e spiegare cosa succede e peché è così lunga, si può fare lo stesso con quella più breve
+
+calcolare numero di partite con una sola foglia in confronto a tutti gli altri, si può usare density() in R, tracciato grafico con strano picco iniziale
+
+ci sono circa 356000 partite con una fogli sola, quasi l'1%
+
+numero di partite che terminano subito dopo una mossa
+
+possono esserci altre stats interessanti!
+
+altra cosa interessante: se le partite con 1 foglia sono banali, ancora più banali sono quelle con più foglie ma il risultato non cambia, quindi indipententemente dalla bravura l'esito è lo stesso, la % di queste è: 
+
+set di tile più scarso possibile? il più forte?
+

@@ -21,9 +21,14 @@ git clone git@github.com:alexlorenzato/TesiDomino.git, serve per il primo pull, 
 
 ## Esecuzione set_stats.py
 
-python3 set_stats.py --hand "0|1 0|3 0|6 1|3 1|4 1|5 2|2" cmd1.log
+`python3 set_stats.py --hand "0|1 0|3 0|6 1|3 1|4 1|5 2|2" cmd1.log`, questo comando restituisce: `java -cp ./TesiDomino-main Manual '0|0 0|1 0|2 0|3 0|5 0|6 1|3' '2|3 2|4 2|6 3|4 5|5 5|6 6|6'`
 
 
+
+
+## Bug di righe inaccessibili
+
+awk 'NR==973960' cmd1.log
 
 
 # Scripting

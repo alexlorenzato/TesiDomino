@@ -127,6 +127,7 @@ def main():
         avg_time    = avgTime(all_game_data)
         avg_leaves  = avgLeaves(all_game_data)
         avg_endings = avgEndings(all_game_data)
+        
 
     print("avg_time:",    avg_time)
     print("avg_leaves:",  avg_leaves)
