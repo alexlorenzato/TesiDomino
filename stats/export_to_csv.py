@@ -1,12 +1,3 @@
-
-"""
-Comando:
-
-python3 export_to_csv.py cmd1.log cmd2.log cmd3.log cmd4.log cmd5.log cmd6.log cmd7.log cmd8.log cmd9.log cmd10.log cmd11.log cmd12.log cmd13.log cmd14.log cmd15.log cmd16.log cmd17.log cmd18.log cmd19.log cmd20.log cmd21.log cmd22.log cmd23.log cmd24.log cmd25.log cmd26.log cmd27.log cmd28.log cmd29.log cmd30.log cmd31.log cmd32.log cmd33.log cmd34.log cmd35.log cmd36.log cmd37.log cmd38.log cmd39.log cmd40.log cmd41.log --output raw_data.csv
-
-"""
-
-
 import re
 import csv
 import argparse
@@ -41,9 +32,12 @@ def collect_raw_data(file_path):
     raw_data = []
     with open(file_path, 'r') as file:
         for line in file:
-            sections = parse_line(line)
-            if sections:
-                raw_data.append(sections)  # Aggiunge la riga come lista di sezioni
+            try:
+                sections = parse_line(line)
+                if sections:
+                    raw_data.append(sections)  # Aggiunge la riga come lista di sezioni
+            except (ValueError, IndexError) as e:
+                print(f"Riga ignorata per errore di parsing: {line.strip()} - Errore: {e}")
     return raw_data
 
 # Funzione per esportare i dati grezzi in CSV
