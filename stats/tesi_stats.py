@@ -35,7 +35,11 @@ def parseHand(hand_str):
 def parseMinimaxScores(scores_str):
     minimax_scores = []
     
+    tmp = 0
     for score in scores_str.split():
+        tmp += 1
+        if(tmp % 100000):
+            print(tmp) 
         if 'X' in score:
             minimax_scores.append((int(score.replace('X', '')), True))
         else:
