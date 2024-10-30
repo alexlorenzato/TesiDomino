@@ -1,5 +1,5 @@
 # Fdb version 4
-["bibtex tesi"] 0 "tesi.aux" "tesi.bbl" "tesi" 1730281480.05314 0
+["bibtex tesi"] 0 "tesi.aux" "tesi.bbl" "tesi" 1730294316.51252 0
   "C:/Users/alexl/AppData/Local/Programs/MiKTeX/bibtex/bst/bibtex/plain.bst" 1291864736 20613 bd3fbfa9f64872b81ac57a0dd2ed855f ""
   "bibliografia.bib" 0 -1 0 ""
   "tesi.aux" 0 -1 0 "pdflatex"
@@ -7,7 +7,7 @@
   "tesi.bbl"
   "tesi.blg"
   (rewritten before read)
-["pdflatex"] 1730281478.98486 "d:/User Directories/Documents/GitHub/TesiDomino/tesi/tesi.tex" "tesi.pdf" "tesi" 1730281480.05352 0
+["pdflatex"] 1730294315.33584 "d:/User Directories/Documents/GitHub/TesiDomino/tesi/tesi.tex" "tesi.pdf" "tesi" 1730294316.51289 0
   "C:/Users/alexl/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1729866165 80909 eab91d9745dd2edfd62a31d53cd5fe15 ""
   "C:/Users/alexl/AppData/Local/MiKTeX/miktex/data/le/pdftex/pdflatex.fmt" 1729865522 11948279 0100d9d566f56e2286f1c5737be549f9 ""
   "C:/Users/alexl/AppData/Local/Programs/MiKTeX/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1233951848 1004 54797486969f23fa377b128694d548df ""
@@ -103,12 +103,12 @@
   "C:/Users/alexl/AppData/Local/Programs/MiKTeX/tex/latex/refcount/refcount.sty" 1576433952 9878 9e94e8fa600d95f9c7731bb21dfb67a4 ""
   "C:/Users/alexl/AppData/Local/Programs/MiKTeX/tex/latex/rerunfilecheck/rerunfilecheck.sty" 1657800696 9714 ba3194bd52c8499b3f1e3eb91d409670 ""
   "C:/Users/alexl/AppData/Local/Programs/MiKTeX/tex/latex/url/url.sty" 1388490452 12796 8edb7d69a20b857904dd0ea757c14ec9 ""
-  "d:/User Directories/Documents/GitHub/TesiDomino/tesi/tesi.tex" 1730281478 7927 47233b84fa5d2a59e3e9e988ee138c29 ""
-  "tesi.aux" 1730281479 1658 6b50025c3c70e30f442c6a5c2b3f9f2c "pdflatex"
+  "d:/User Directories/Documents/GitHub/TesiDomino/tesi/tesi.tex" 1730294314 9193 efd1c9c735a7d5b50334d5d6530d563a ""
+  "tesi.aux" 1730294315 1658 6b50025c3c70e30f442c6a5c2b3f9f2c "pdflatex"
   "tesi.bbl" 0 -1 0 "bibtex tesi"
-  "tesi.out" 1730281479 1035 20b3e1c188e017808ae38175438a2dbe "pdflatex"
-  "tesi.tex" 1730281478 7927 47233b84fa5d2a59e3e9e988ee138c29 ""
-  "tesi.toc" 1730281479 703 b4c7465be8899b690d84a5ee4741e243 "pdflatex"
+  "tesi.out" 1730294315 1035 20b3e1c188e017808ae38175438a2dbe "pdflatex"
+  "tesi.tex" 1730294314 9193 efd1c9c735a7d5b50334d5d6530d563a ""
+  "tesi.toc" 1730294315 703 b4c7465be8899b690d84a5ee4741e243 "pdflatex"
   (generated)
   "tesi.aux"
   "tesi.log"
