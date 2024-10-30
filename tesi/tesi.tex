@@ -63,7 +63,7 @@ Queste varianti danno origine a una vasta gamma di regole aggiuntive e variazion
 
 \section{Statistiche}
 
-Il numero totale possibile di configurazioni delle mani iniziali nel domino è: \(137.281.098.240\), ed è calcolato nel seguente modo:
+Il numero totale di configurazioni delle mani iniziali, corrispondente al numero di partite diverse giocabili nel domino è: \(137.281.098.240\), calcolato nel seguente modo:
 
 
 \begin{enumerate}
@@ -76,28 +76,38 @@ Il numero totale possibile di configurazioni delle mani iniziali nel domino è: 
 
 Testare l'algoritmo su tutte le possibili partite non è temporalmente possibile con gli strumenti a disposizione, questo perché supponendo una media di 70ms a partita (media calcolata sui dati raccolti) ci vorrebbero \(137.281.098.240 * 70  = 9.609.676.876.800\) ms, equivalenti a \(304.7\) anni su un sistema monoprocessore; avendo avuto a disposizione un server con 40 processori, il tempo di calcolo necessario sarebbe stato \(304 / 40 \tilde= 7.5\) anni. 
 
+%todo calcolare le partite in cui l'ordine di gioco delle cose non cambia (come calcolarlo?)
+%todo calcolare numero di partite con una sola foglia
+%todo convertire ogni numero in %
+%todo grafico della distribuzione del numero di foglie
+
 Altre statistiche interessanti: 
 \begin{enumerate}
-    \item ci sono \( \) partite con una sola foglia, equivalenti al \( X\%\), questo accade perché\dots
-    \item 
+    \item ci sono \( X \) partite con una sola foglia, equivalenti al \( X\%\), questo accade perché\dots
+    \item ci sono X partite in cui l'ordine in cui si giocano le tessere non cambia (come calcolarlo?)
 \end{enumerate}
 
-Una sola foglia vuol dire che la partita ha una sola mossa possibile.. spiega
-il numero di foglie determina la complessità della partita
+Il numero di foglie è indice della complessità della partita, con una sola foglia la partita è banale e non necessita che vengano prese decisioni, al contrario se si hanno migliaia di foglie la partita permette molta libertà d'azione e l'ordine in cui vengono giocate le tessere assume molta più importanza.
 
-Partita con numero di foglie massimo:  e ha mani: .. questo accade perché.. spiega
+Un esempio banale di partita ad una sola foglia è dato da un giocatore che parte con la tessera doppio-6 e nessuno dei due giocatori ha altre tessere in cui compaia un 6, la partita quindi termina immediatamente procedendo al calcolo del punteggio.
 
-altra cosa interessante: se le partite con 1 foglia sono banali, ancora più banali sono quelle con più foglie ma il risultato non cambia, quindi indipententemente dalla bravura l'esito è lo stesso, la % di queste è: 
+Non è comunque garantito che un alto numero di foglie indichi una partita complessa, spesso si presentano dinamiche per cui l'ordine in cui vengono giocate le tessere è ininfluente ai fini del risultato finale; questo tipo di partite hanno solo una complessità apparente, ma di fatto sono banali quanto quelle con poche foglie.
 
-Grafico della distribuzione del numero di foglie:
+%todo calcolare partita con numero di foglie massimo, e dire che mani hanno i giocatori, e farci sopra dei ragionamenti
 
 
 
 \chapter{Conclusioni}
 
-Il set più scarso possibile è: .. questo perché
+%todo investigare i seguenti set di tessere
+Set da investigare:
+0|0 0|1 0|2 0|3 0|4 0|5 0|6
+0|0 1|1 2|2 3|3 4|4 5|5 6|6
+0|0 0|1 0|2 0|3 1|1 1|2 1|3 -> inizia per secondo probabilmente, però ha tessere a basso valore che tagliano fuori l'avversario
+6|6 6|5 6|4 6|3 6|2 6|1 6|0 -> come la precedente ma con numeri atli
+0|1 1|2 2|3 3|4 4|5 5|6 6|0 -> tessere consecutive e connettibili
 
-Il set più forte possibile è: .., questo perché
+%todo dopo aver calcolato stats dei set, dire quale più forte e quale più scarso
 
 
 

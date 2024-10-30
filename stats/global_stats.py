@@ -1,5 +1,7 @@
 import re
 import argparse
+from collections import Counter
+import matplotlib.pyplot as plt
 
 """
 Da eseguire dalla cartella in cui sono presenti i file .log da dargli in input!
@@ -106,6 +108,26 @@ def avgEndings(list):
     return total / len(list)
 
 
+def leafDistribution(game_data_list):
+    leaf_counts = [len(game.minimax_scores) for game in game_data_list if game is not None]
+    distribution = Counter(leaf_counts)
+    return distribution
+
+def plotLeafDistribution(distribution):
+    # Estrai i numeri di foglie e le rispettive frequenze
+    leaf_counts = list(distribution.keys())
+    frequencies = list(distribution.values())
+    
+    # Crea il grafico
+    plt.figure(figsize=(10, 6))
+    plt.bar(leaf_counts, frequencies, color="skyblue", edgecolor="black")
+    plt.xlabel("Numero di foglie")
+    plt.ylabel("Frequenza")
+    plt.title("Distribuzione del numero di foglie per partita")
+    plt.xticks(leaf_counts)  # Imposta le etichette dell'asse x per mostrare ogni valore di foglie
+    plt.show()
+
+
 ###### Codice da eseguire ######
 
 
@@ -123,15 +145,17 @@ def main():
         all_game_data.extend(game_data_list)
 
     # Calcola le statistiche sui dati aggregati
-    if all_game_data:
-        avg_time    = avgTime(all_game_data)
-        avg_leaves  = avgLeaves(all_game_data)
-        avg_endings = avgEndings(all_game_data)
+    #if all_game_data:
+    #    avg_time    = avgTime(all_game_data)
+    #    avg_leaves  = avgLeaves(all_game_data)
+    #    avg_endings = avgEndings(all_game_data)
         
+    distribution = leafDistribution(all_game_data)
+    plotLeafDistribution(distribution)
 
-    print("avg_time:",    avg_time)
-    print("avg_leaves:",  avg_leaves)
-    print("avg_endings:", avg_endings)
+    #print("avg_time:",    avg_time)
+    #print("avg_leaves:",  avg_leaves)
+    #print("avg_endings:", avg_endings)
 
 
 # Avvia il programma
