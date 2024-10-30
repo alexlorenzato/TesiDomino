@@ -25,49 +25,38 @@
 
 \section{Il Domino}
 
-Il domino è un antico gioco da tavolo di origine cinese. I componenti di gioco sono tessere rettangolari, ciascuna divisa in due metà, ognuna delle quali mostra un valore numerico compreso tra 0 e 6, solitamente rappresentato con dei pallini che indicano il punteggio della tessera.
+Il domino è un antico gioco da tavolo, le cui origini risalgono alla Cina imperiale. Le tessere di gioco sono rettangolari e suddivise in due metà; su ciascuna metà è presente un valore numerico che varia tra 0 e 6, rappresentato tipicamente con dei pallini, o "pip", simili a quelli presenti sui dadi che indicano il punteggio della tessera. Le tessere formano una combinazione unica di numeri, con 28 tessere totali in un set "double-six", ovvero la cui tessere di maggior valore è quella in cui appaiono due 6.
 
-L'obiettivo del gioco, pur con alcune varianti, rimane fondamentalmente lo stesso: liberarsi di quante più tessere possibili dalla propria mano prima della fine della partita. Il gioco procede a turni in senso orario: ogni giocatore, nel suo turno, può posizionare una tessera dalla propria mano all'inizio o alla fine della fila di tessere sul tavolo, a condizione che il numero sulla metà della tessera combaci con il valore della tessera a cui si collega.
+L'obiettivo generale del gioco, sebbene esistano diverse varianti, è di liberarsi di quante più tessere possibili dalla propria mano prima della fine della partita. Il gioco procede a turni in senso orario: ogni giocatore, al suo turno, ha la possibilità di aggiungere una tessera dalla propria mano all'inizio o alla fine della sequenza di tessere presenti sul tavolo, rispettando la condizione che il valore su una delle estremità della tessera coincida con il valore della tessera a cui si collega. 
 
-Nella variante classica, la partita inizia con il giocatore che possiede la tessera doppia con il valore più alto. 
-
-La versione a 2 giocatori è la più diffusa, ma si può arrivare anche a 6 giocatori.
-
+Nella variante classica, la partita inizia con il giocatore che possiede la tessera doppia con il valore più alto, di conseguenza il doppio-6 è la tessera che garantisce di partire per primi. Questa versione è particolarmente popolare nella modalità a 2 giocatori, ma può essere giocata anche da un massimo di 4 o 6 giocatori, con regole e adattamenti per gestire il numero di tessere e i turni.
 
 \section{Storia del Domino}
 
-Il domino con le tessere nacque in Cina grazie all'opera di uno statista del 1120 presentato all'imperatore del tempo Hui Tsung. 
+Il domino con tessere nacque in Cina intorno al XII secolo e si ritiene che sia stato sviluppato da uno statista nel 1120, come dono per l'imperatore Hui Tsung. Inizialmente, il domino aveva anche un ruolo come strumento di divinazione intorno al XIII secolo, diventando poi un gioco da tavolo vero e proprio.
 
-Fu anche usato come strumento di divinazione intorno al XIII secolo, successivamente fu utilizzato per giocare. 
-
-Venne introdotto in Italia dagli arabi e si è poi diffuso in Francia e da lì in tutta Europa. Il suo nome, domino, deriva dal latino dominus, cioè padrone.\footnote{Fonte: Wikipedia, "Domino", https://it.wikipedia.org/wiki/Domino (accesso il 25 ottobre 2024).}
-
+Nel corso del tempo, il gioco del domino si diffuse dal continente asiatico all'Europa, probabilmente grazie agli scambi culturali mediati dal mondo arabo. Giunto in Italia, il gioco si diffuse rapidamente in Francia e successivamente in tutta Europa. Il termine "domino" deriva dal latino \textit{dominus}, che significa "padrone", e sembra essere legato al senso di controllo e strategia che il gioco richiede.\footnote{Fonte: Wikipedia, "Domino", https://it.wikipedia.org/wiki/Domino (accesso il 25 ottobre 2024).}
 
 \section{Variante "Block"}
 
-La variante block è quella usata per lo studio di questa tesi.
+La variante "Block" è la versione del domino utilizzata come oggetto di studio in questa tesi, nonché la variante più diffusa e popolare.
 
-Questa versione utilizza un set di tessere con valori da 0 a 6, come nel classico domino. Ogni giocatore pesca sette tessere all'inizio del gioco, mentre le tessere rimanenti vengono scartate e non utilizzate nella partita.
+Questa versione utilizza un set di tessere "double-six", ovvero tessere con valori che vanno da 0 a 6 su ciascuna metà. Ogni giocatore pesca sette tessere all'inizio del gioco, e le rimanenti 14 tessere vengono scartate e non utilizzate per tutta la durata della partita. La partita termina in due casi:
 
-La partita termina in due casi:
 \begin{enumerate}
-\item Quando un giocatore riesce a liberarsi di tutte le tessere in mano
-\item Quando il gioco è "bloccato" perché nessuno dei due giocatori può più fare una mossa valida
+    \item Quando un giocatore riesce a liberarsi di tutte le tessere in mano, vincendo automaticamente.
+    \item Quando la partita è "bloccata", ossia nessuno dei due giocatori può posizionare una tessera valida.
 \end{enumerate}
 
-Vince il giocatore con il minor numero di punti in mano, dove i punti sono la sommatoria delle facce delle tile in mano; chi esaurisce la mano quindi è necessariamente il vincitore.
+In caso di "blocco", vince il giocatore con il minor punteggio totale in mano, dove il punteggio è calcolato come la somma dei valori presenti sulle tessere rimanenti. Se un giocatore riesce a esaurire tutte le sue tessere, è dichiarato automaticamente vincitore.
 
-La formula per il calcolo del punteggio è data da: $punti_giocatore_iniziale - punti_giocatore_finale$, ne segue che il giocatore iniziale vuole minimizzare il punteggio e viceversa.
 
 \section{Altre varianti}
 
-Una macro-variante, assieme alla "Block" è la "Draw", la differenza sta nella possibilità di pescare altre tile nel caso in cui non si possano fare mosse valide, al contrario della Block in cui le tile date a inizio partita ai giocatori sono le uniche che verranno usate, quelle avanzate vengono rimosse totalmente dalla partita.
+Assieme alla variante "Block", esiste la variante "Draw", che differisce per l'uso delle tessere non distribuite ai giocatori. Mentre nella "Block" le tessere avanzate vengono rimosse definitivamente dalla partita, nella variante "Draw" i giocatori possono pescare tessere aggiuntive quando non riescono a fare una mossa valida. Le modalità di pesca variano: in alcune versioni il giocatore è obbligato a pescare fino a trovare una tessera giocabile, mentre in altre può pescare solo una tessera per turno.
 
-All'interno della stessa Draw possono esserci molte variazioni, come l'obbligo di pescare tile fintanto che non si ha una mossa valida in contrapposizione all'obbligo di pescare al massimo una tessera nel caso in cui non si abbiano mosse disponibili in quel turno.
 
-Esistono moltissime varianti del domino, da quelle fan-made a quelle competitive, ognuna con variazioni più o meno importanti rispetto alle due varianti principali Block e Draw.
-
-Ad esempio oltre alla classica modalità dove lo scopo è esaurire la propria mano ci sono modalità dove viene premiata la creazione di certe configurazioni nel tavolo.
+Queste varianti danno origine a una vasta gamma di regole aggiuntive e variazioni del gioco. Esistono inoltre numerose versioni del domino fan-made e competitive, ognuna con modifiche più o meno significative alle regole delle varianti "Block" e "Draw". Per esempio, oltre all’obiettivo tradizionale di esaurire la propria mano, alcune modalità premiano configurazioni particolari di tessere sul tavolo, rendendo il gioco ancora più strategico e vario.
 
 
 \chapter{Risultati}
@@ -87,10 +76,30 @@ Il numero totale possibile di configurazioni delle mani iniziali nel domino è: 
 
 Testare l'algoritmo su tutte le possibili partite non è temporalmente possibile con gli strumenti a disposizione, questo perché supponendo una media di 70ms a partita (media calcolata sui dati raccolti) ci vorrebbero \(137.281.098.240 * 70  = 9.609.676.876.800\) ms, equivalenti a \(304.7\) anni su un sistema monoprocessore; avendo avuto a disposizione un server con 40 processori, il tempo di calcolo necessario sarebbe stato \(304 / 40 \tilde= 7.5\) anni. 
 
+Altre statistiche interessanti: 
+\begin{enumerate}
+    \item ci sono \( \) partite con una sola foglia, equivalenti al \( X\%\), questo accade perché\dots
+    \item 
+\end{enumerate}
+
+Una sola foglia vuol dire che la partita ha una sola mossa possibile.. spiega
+il numero di foglie determina la complessità della partita
+
+Partita con numero di foglie massimo:  e ha mani: .. questo accade perché.. spiega
+
+altra cosa interessante: se le partite con 1 foglia sono banali, ancora più banali sono quelle con più foglie ma il risultato non cambia, quindi indipententemente dalla bravura l'esito è lo stesso, la % di queste è: 
+
+Grafico della distribuzione del numero di foglie:
+
 
 
 \chapter{Conclusioni}
-% Riassumi i risultati e le possibili applicazioni
+
+Il set più scarso possibile è: .. questo perché
+
+Il set più forte possibile è: .., questo perché
+
+
 
 \appendix
 \chapter{Codice sorgente}

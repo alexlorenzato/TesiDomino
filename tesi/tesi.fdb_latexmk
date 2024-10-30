@@ -1,5 +1,5 @@
 # Fdb version 4
-["bibtex tesi"] 0 "tesi.aux" "tesi.bbl" "tesi" 1730122133.56792 0
+["bibtex tesi"] 0 "tesi.aux" "tesi.bbl" "tesi" 1730281480.05314 0
   "C:/Users/alexl/AppData/Local/Programs/MiKTeX/bibtex/bst/bibtex/plain.bst" 1291864736 20613 bd3fbfa9f64872b81ac57a0dd2ed855f ""
   "bibliografia.bib" 0 -1 0 ""
   "tesi.aux" 0 -1 0 "pdflatex"
@@ -7,7 +7,7 @@
   "tesi.bbl"
   "tesi.blg"
   (rewritten before read)
-["pdflatex"] 1730122132.49159 "d:/User Directories/Documents/GitHub/TesiDomino/tesi/tesi.tex" "tesi.pdf" "tesi" 1730122133.56829 0
+["pdflatex"] 1730281478.98486 "d:/User Directories/Documents/GitHub/TesiDomino/tesi/tesi.tex" "tesi.pdf" "tesi" 1730281480.05352 0
   "C:/Users/alexl/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1729866165 80909 eab91d9745dd2edfd62a31d53cd5fe15 ""
   "C:/Users/alexl/AppData/Local/MiKTeX/miktex/data/le/pdftex/pdflatex.fmt" 1729865522 11948279 0100d9d566f56e2286f1c5737be549f9 ""
   "C:/Users/alexl/AppData/Local/Programs/MiKTeX/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1233951848 1004 54797486969f23fa377b128694d548df ""
@@ -31,11 +31,11 @@
   "C:/Users/alexl/AppData/Local/Programs/MiKTeX/fonts/tfm/public/cm/cmsy10.tfm" 1136765053 1124 6c73e740cf17375f03eec0ee63599741 ""
   "C:/Users/alexl/AppData/Local/Programs/MiKTeX/fonts/tfm/public/cm/cmsy6.tfm" 1136765053 1116 933a60c408fc0a863a92debe84b2d294 ""
   "C:/Users/alexl/AppData/Local/Programs/MiKTeX/fonts/tfm/public/cm/cmsy8.tfm" 1136765053 1120 8b7d695260f3cff42e636090a8002094 ""
+  "C:/Users/alexl/AppData/Local/Programs/MiKTeX/fonts/tfm/public/cm/cmti10.tfm" 1136765053 1480 aa8e34af0eb6a2941b776984cf1dfdc4 ""
   "C:/Users/alexl/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx10.pfb" 1247596666 34811 78b52f49e893bcba91bd7581cdc144c0 ""
   "C:/Users/alexl/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb" 1247596666 32080 340ef9bf63678554ee606688e7b5339d ""
   "C:/Users/alexl/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb" 1247596667 30251 6afa5cb1d0204815a708a080681d4674 ""
   "C:/Users/alexl/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb" 1247596667 36299 5f9df58c2139e7edcf37c8fca4bd384d ""
-  "C:/Users/alexl/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi7.pfb" 1247596667 36281 c355509802a035cadc5f15869451dcee ""
   "C:/Users/alexl/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb" 1247596667 35752 024fb6c41858982481f6968b5fc26508 ""
   "C:/Users/alexl/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb" 1247596667 32722 d7379af29a190c3f453aba36302ff5a9 ""
   "C:/Users/alexl/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr17.pfb" 1247596666 32362 bc3f3eec7ab7d65fe700963d4017d32c ""
@@ -43,6 +43,7 @@
   "C:/Users/alexl/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr7.pfb" 1247596667 32762 7fee39e011c23b3589931effd97b9702 ""
   "C:/Users/alexl/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr8.pfb" 1247596667 32726 39f0f9e62e84beb801509898a605dbd5 ""
   "C:/Users/alexl/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb" 1247596667 32569 5e5ddc8df908dea60932f3c484a54c0d ""
+  "C:/Users/alexl/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti10.pfb" 1247596667 37944 359e864bd06cde3b1cf57bb20757fb06 ""
   "C:/Users/alexl/AppData/Local/Programs/MiKTeX/tex/context/base/mkii/supp-pdf.mkii" 1580390158 71627 94eb9990bed73c364d7f53f960cc8c5b ""
   "C:/Users/alexl/AppData/Local/Programs/MiKTeX/tex/generic/atbegshi/atbegshi.sty" 1575571100 24708 5584a51a7101caf7e6bbf1fc27d8f7b1 ""
   "C:/Users/alexl/AppData/Local/Programs/MiKTeX/tex/generic/babel/babel.sty" 1728116595 146637 c6f107c31e90888b08c062a67ea340e7 ""
@@ -102,12 +103,12 @@
   "C:/Users/alexl/AppData/Local/Programs/MiKTeX/tex/latex/refcount/refcount.sty" 1576433952 9878 9e94e8fa600d95f9c7731bb21dfb67a4 ""
   "C:/Users/alexl/AppData/Local/Programs/MiKTeX/tex/latex/rerunfilecheck/rerunfilecheck.sty" 1657800696 9714 ba3194bd52c8499b3f1e3eb91d409670 ""
   "C:/Users/alexl/AppData/Local/Programs/MiKTeX/tex/latex/url/url.sty" 1388490452 12796 8edb7d69a20b857904dd0ea757c14ec9 ""
-  "d:/User Directories/Documents/GitHub/TesiDomino/tesi/tesi.tex" 1730122132 6302 23c2c6191ff8385971733e4e006b9e4f ""
-  "tesi.aux" 1730122132 1658 6b50025c3c70e30f442c6a5c2b3f9f2c "pdflatex"
+  "d:/User Directories/Documents/GitHub/TesiDomino/tesi/tesi.tex" 1730281478 7927 47233b84fa5d2a59e3e9e988ee138c29 ""
+  "tesi.aux" 1730281479 1658 6b50025c3c70e30f442c6a5c2b3f9f2c "pdflatex"
   "tesi.bbl" 0 -1 0 "bibtex tesi"
-  "tesi.out" 1730122132 1035 20b3e1c188e017808ae38175438a2dbe "pdflatex"
-  "tesi.tex" 1730122132 6302 23c2c6191ff8385971733e4e006b9e4f ""
-  "tesi.toc" 1730122132 703 b4c7465be8899b690d84a5ee4741e243 "pdflatex"
+  "tesi.out" 1730281479 1035 20b3e1c188e017808ae38175438a2dbe "pdflatex"
+  "tesi.tex" 1730281478 7927 47233b84fa5d2a59e3e9e988ee138c29 ""
+  "tesi.toc" 1730281479 703 b4c7465be8899b690d84a5ee4741e243 "pdflatex"
   (generated)
   "tesi.aux"
   "tesi.log"

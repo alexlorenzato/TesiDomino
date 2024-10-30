@@ -15,7 +15,7 @@ password: d0min099
 
 ## Github pull via terminale
 
-git pull origin main, lanciarlo dalla cartella TesiDomino
+`git pull origin main`, lanciarlo dalla cartella TesiDomino
 git clone git@github.com:alexlorenzato/TesiDomino.git, serve per il primo pull, altrimenti usare il comando sopra
 
 
