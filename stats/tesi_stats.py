@@ -43,31 +43,40 @@ def parseMinimaxScores(scores_str):
     
     return minimax_scores
 
-def parseLine(line):
-    sections = re.split(r'\s{2,}', line.strip())
-    if len(sections[-1].split()) > 1:
-        sections.extend(sections.pop().split())
-
-    if len(sections) < 5:
-        print(f"Errore: la riga non contiene abbastanza sezioni. Ne contiene: ", len(sections))
-        return None  
-    
-    player1_hand   = parseHand(sections[0])
-    player2_hand   = parseHand(sections[1])
-    minimax_scores = parseMinimaxScores(sections[2])
-    best_value     = int(sections[3])
-    game_duration  = int(sections[4])
-
-    return GameData(player1_hand, player2_hand, minimax_scores, best_value, game_duration)
-
-"""Legge il file e parsa ogni riga in un oggetto GameData."""
 def parseFile(file_path):
     game_data_list = []
     with open(file_path, 'r') as file:
         for line in file:
-            game_data = parseLine(line)
-            game_data_list.append(game_data)
+            try:
+                game_data = parseLine(line)
+                if game_data:  # Aggiungi solo se `game_data` non è None
+                    game_data_list.append(game_data)
+            except Exception as e:
+                print(f"Errore durante il parsing della riga: {line.strip()}. Errore: {e}")
     return game_data_list
+
+
+def parseLine(line):
+    try:
+        sections = re.split(r'\s{2,}', line.strip())
+        if len(sections[-1].split()) > 1:
+            sections.extend(sections.pop().split())
+
+        if len(sections) < 5:
+            print(f"Errore: la riga non contiene abbastanza sezioni. Ne contiene: {len(sections)}")
+            return None  
+
+        player1_hand   = parseHand(sections[0])
+        player2_hand   = parseHand(sections[1])
+        minimax_scores = parseMinimaxScores(sections[2])
+        best_value     = int(sections[3])
+        game_duration  = int(sections[4])
+
+        return GameData(player1_hand, player2_hand, minimax_scores, best_value, game_duration)
+
+    except Exception as e:
+        print(f"Errore nel parsing della riga: {line.strip()}. Errore: {e}")
+        return None
 
 
 
