@@ -36,10 +36,7 @@ def parseMinimaxScores(scores_str):
     minimax_scores = []
     
     tmp = 0
-    for score in scores_str.split():
-        tmp += 1
-        if(tmp % 100000):
-            print(tmp) 
+    for score in scores_str.split(): 
         if 'X' in score:
             minimax_scores.append((int(score.replace('X', '')), True))
         else:
@@ -51,6 +48,9 @@ def parseFile(file_path):
     game_data_list = []
     with open(file_path, 'r') as file:
         for line in file:
+            tmp += 1
+            if(tmp % 10000 == 0):
+                print(tmp)
             try:
                 game_data = parseLine(line)
                 if game_data:  # Aggiungi solo se `game_data` non è None
