@@ -5,6 +5,7 @@ import argparse
 Comando: python3 set_stats.py --hand "0|1 0|3 0|6 1|3 1|4 1|5 2|2" cmd1.log 
 
 Prende una mano di tile in ingresso e cerca tutte le partite con quella mano, poi calcola stats su quelle partite.
+Scrive le statistiche in un file di output.
 """
 
 # Classe che rappresenta i dati di una partita
@@ -108,7 +109,7 @@ def calculate_wins(games):
     
     return wins / len(games) if games else 0
 
-# Funzione principale per eseguire il programma
+# Funzione principale per eseguire il programma e scrivere le statistiche su file
 def main():
     parser = argparse.ArgumentParser(description="Processa file di domino e calcola statistiche per mani specifiche.")
     parser.add_argument('file_paths', nargs='+', help="I percorsi dei file di log di domino.")
@@ -123,20 +124,30 @@ def main():
         matching_games = process_file(file_path, args.hand)
         all_matching_games.extend(matching_games)
 
-    # Se ci sono partite trovate, calcola le statistiche
-    if all_matching_games:
-        avg_duration = calculate_avg_duration(all_matching_games)
-        avg_leaves   = calculate_avg_leaves(all_matching_games)
-        win_rate     = calculate_wins(all_matching_games)
-        x_leaves_rate = calculate_x_leaves(all_matching_games)
+    # Nome file di output
+    output_file = "statistics_output.txt"
+    
+    # Scrive le statistiche sul file
+    with open(output_file, 'w') as f:
+        f.write(f"Mano specificata: {args.hand}\n\n")
 
-        print(f"Statistiche per la mano {args.hand}:")
-        print(f"Durata media delle partite: {avg_duration:.2f} ms")
-        print(f"Numero medio di foglie: {avg_leaves:.2f}")
-        print(f"Percentuale di vittorie: {win_rate * 100:.2f}%")
-        print(f"Percentuale di foglie con 'X': {x_leaves_rate * 100:.2f}%")
-    else:
-        print(f"Nessuna partita trovata con la mano {args.hand}.")
+        # Se ci sono partite trovate, calcola le statistiche
+        if all_matching_games:
+            avg_duration = calculate_avg_duration(all_matching_games)
+            avg_leaves   = calculate_avg_leaves(all_matching_games)
+            win_rate     = calculate_wins(all_matching_games)
+            x_leaves_rate = calculate_x_leaves(all_matching_games)
+
+            f.write(f"Match trovati: {len(all_matching_games)}\n")
+            f.write(f"Statistiche per la mano {args.hand}:\n")
+            f.write(f"Durata media delle partite: {avg_duration:.2f} ms\n")
+            f.write(f"Numero medio di foglie: {avg_leaves:.2f}\n")
+            f.write(f"Percentuale di vittorie: {win_rate * 100:.2f}%\n")
+            f.write(f"Percentuale di foglie con 'X': {x_leaves_rate * 100:.2f}%\n")
+        else:
+            f.write(f"Nessuna partita trovata con la mano {args.hand}.\n")
+
+    print(f"Risultati scritti su {output_file}")
 
 # Esegue il programma
 if __name__ == "__main__":
