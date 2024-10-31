@@ -2,10 +2,10 @@ import re
 import argparse
 
 """
-Comando: python3 set_stats.py --hand "0|1 0|3 0|6 1|3 1|4 1|5 2|2" cmd1.log 
+Comando: python3 set_stats.py --hand "0|1 0|3 0|6 1|3 1|4 1|5 2|2" cmd1.log cmd2.log output.txt
 
 Prende una mano di tile in ingresso e cerca tutte le partite con quella mano, poi calcola stats su quelle partite.
-Scrive le statistiche in un file di output.
+Scrive le statistiche in un file di output specificato.
 """
 
 # Classe che rappresenta i dati di una partita
@@ -128,6 +128,7 @@ def main():
     parser = argparse.ArgumentParser(description="Processa file di domino e calcola statistiche per mani specifiche.")
     parser.add_argument('file_paths', nargs='+', help="I percorsi dei file di log di domino.")
     parser.add_argument('--hand', required=True, help="La mano specificata da cercare (es. '1|2 2|3 4|5').")
+    parser.add_argument('--output', required=True, help="Il file di output dove scrivere le statistiche.")
     args = parser.parse_args()
 
     all_matching_games = []
@@ -138,11 +139,8 @@ def main():
         matching_games = process_file(file_path, args.hand)
         all_matching_games.extend(matching_games)
 
-    # Nome file di output
-    output_file = "statistics_output.txt"
-    
-    # Scrive le statistiche sul file
-    with open(output_file, 'w') as f:
+    # Scrive le statistiche sul file specificato
+    with open(args.output, 'w') as f:
         f.write(f"Mano specificata: {args.hand}\n\n")
 
         # Se ci sono partite trovate, calcola le statistiche
@@ -161,7 +159,7 @@ def main():
         else:
             f.write(f"Nessuna partita trovata con la mano {args.hand}.\n")
 
-    print(f"Risultati scritti su {output_file}")
+    print(f"Risultati scritti su {args.output}")
 
 # Esegue il programma
 if __name__ == "__main__":
