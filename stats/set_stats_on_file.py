@@ -25,9 +25,14 @@ class GameData:
             return 2
         return 0
 
-# Funzione per parsare una stringa di domino in una lista di tuple (es. '1|2 3|4' diventa [(1,2), (3,4)])
+# Funzione per parsare una stringa di domino in una lista di tuple (es. '1|2 3|4' diventa [(1,2), (3,4)]),
+# gestendo eventuali errori di parsing.
 def parse_hand(hand_str):
-    return [tuple(map(int, domino.split('|'))) for domino in hand_str.split()]
+    try:
+        return [tuple(map(int, domino.split('|'))) for domino in hand_str.split()]
+    except ValueError as e:
+        print(f"Errore nel parsing della mano: {hand_str} -- {e}")
+        return []
 
 # Funzione per parsare i punteggi minimax, cercando la presenza della 'X' e rimuovendola
 def parse_minimax_scores(scores_str):
@@ -69,14 +74,23 @@ def process_file(file_path, target_hand):
     target_hand = sorted(parse_hand(target_hand))  # Ordina la mano specificata
     matching_games = []
 
-    with open(file_path, 'r') as file:
-        for line in file:
-            game_data = parse_line(line)
-            if game_data:
-                player_position = game_data.contains_hand(target_hand)
-                if player_position:  # Se la mano è trovata
-                    matching_games.append((game_data, player_position))  # Aggiungi la partita e la posizione del giocatore
+    try:
+        with open(file_path, 'r') as file:
+            for line in file:
+                try:
+                    game_data = parse_line(line)
+                    if game_data:
+                        player_position = game_data.contains_hand(target_hand)
+                        if player_position:  # Se la mano è trovata
+                            matching_games.append((game_data, player_position))  # Aggiungi la partita e la posizione del giocatore
+                except Exception as e:
+                    print(f"Errore durante il processamento della riga: {line.strip()} -- {e}")
     
+    except FileNotFoundError:
+        print(f"File non trovato: {file_path}")
+    except Exception as e:
+        print(f"Errore nell'aprire il file: {file_path} -- {e}")
+
     return matching_games
 
 # Funzione per calcolare la durata media delle partite
