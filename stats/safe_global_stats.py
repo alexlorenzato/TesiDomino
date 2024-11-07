@@ -2,11 +2,6 @@ import re
 import argparse
 from collections import Counter
 
-"""
-python3 new_global_stats.py cmd1.log cmd2.log cmd3.log cmd4.log cmd5.log cmd6.log cmd7.log cmd8.log cmd9.log cmd10.log cmd11.log cmd12.log cmd13.log cmd14.log cmd15.log cmd16.log cmd17.log cmd18.log cmd19.log cmd20.log cmd21.log cmd22.log cmd23.log cmd24.log cmd25.log cmd26.log cmd27.log cmd28.log cmd29.log cmd30.log cmd31.log cmd32.log cmd33.log cmd34.log cmd35.log cmd36.log cmd37.log cmd38.log cmd39.log cmd40.log cmd41.log --output statistiche_globali.txt --leaf_distribution distribuzione_foglie.txt
-
-"""
-
 ###### Classe ######
 
 class GameData:
@@ -101,42 +96,42 @@ def findGameWithMostLeaves(game_data_list):
 def main():
     parser = argparse.ArgumentParser(description="Processa file di domino e calcola statistiche.")
     parser.add_argument('file_paths', type=str, nargs='+', help="Il percorso dei file di dati domino.")
-    parser.add_argument('--output', type=str, default="statistics_output.txt", help="File di output per le statistiche.")
-    parser.add_argument('--leaf_distribution', type=str, default="leaf_distribution.txt", help="File per la distribuzione delle foglie.")
     args = parser.parse_args()
 
-    all_game_data = []
-    
     for file_path in args.file_paths:
         print(f"Processando file: {file_path}")
         game_data_list = parseFile(file_path)
-        all_game_data.extend(game_data_list)
 
-    if all_game_data:
-        avg_time = avgTime(all_game_data)
-        avg_leaves = avgLeaves(all_game_data)
-        avg_endings = avgEndings(all_game_data)
-        game_with_most_leaves = findGameWithMostLeaves(all_game_data)
+        if game_data_list:
+            avg_time = avgTime(game_data_list)
+            avg_leaves = avgLeaves(game_data_list)
+            avg_endings = avgEndings(game_data_list)
+            game_with_most_leaves = findGameWithMostLeaves(game_data_list)
+            distribution = leafDistribution(game_data_list)
 
-        with open(args.output, 'w') as stats_file:
-            stats_file.write("Statistiche Partite:\n")
-            stats_file.write(f"Durata media delle partite: {avg_time:.2f} ms\n")
-            stats_file.write(f"Numero medio di foglie: {avg_leaves:.2f}\n")
-            stats_file.write(f"Percentuale media di foglie con 'X': {avg_endings * 100:.2f}%\n")
-            
-            if game_with_most_leaves:
-                stats_file.write("\nPartita con il maggior numero di foglie:\n")
-                stats_file.write(f"Numero di foglie: {len(game_with_most_leaves.minimax_scores)}\n")
-                stats_file.write(f"Mano giocatore 1: {game_with_most_leaves.player1_hand}\n")
-                stats_file.write(f"Mano giocatore 2: {game_with_most_leaves.player2_hand}\n")
-        
+            # Nome file di output specifico per ciascun file di input
+            output_filename = f"{file_path}_stats.txt"
+            distribution_filename = f"{file_path}_leaf_distribution.txt"
 
-        distribution = leafDistribution(all_game_data)
-        with open(args.leaf_distribution, 'w') as dist_file:
-            max_leaves = max(distribution.keys(), default=0)
-            for leaves in range(1, max_leaves + 1):
-                count = distribution.get(leaves, 0) 
-                dist_file.write(f"{leaves}: {count}\n")
+            # Scrivi statistiche nel file di output
+            with open(output_filename, 'w') as stats_file:
+                stats_file.write("Statistiche Partita:\n")
+                stats_file.write(f"Durata media della partita: {avg_time:.2f} ms\n")
+                stats_file.write(f"Numero medio di foglie: {avg_leaves:.2f}\n")
+                stats_file.write(f"Percentuale media di foglie con 'X': {avg_endings * 100:.2f}%\n")
+                
+                if game_with_most_leaves:
+                    stats_file.write("\nPartita con il maggior numero di foglie:\n")
+                    stats_file.write(f"Numero di foglie: {len(game_with_most_leaves.minimax_scores)}\n")
+                    stats_file.write(f"Mano giocatore 1: {game_with_most_leaves.player1_hand}\n")
+                    stats_file.write(f"Mano giocatore 2: {game_with_most_leaves.player2_hand}\n")
+
+            # Scrivi distribuzione delle foglie nel file di distribuzione
+            with open(distribution_filename, 'w') as dist_file:
+                max_leaves = max(distribution.keys(), default=0)
+                for leaves in range(1, max_leaves + 1):
+                    count = distribution.get(leaves, 0) 
+                    dist_file.write(f"{leaves}: {count}\n")
 
 # Avvia il programma
 if __name__ == "__main__":

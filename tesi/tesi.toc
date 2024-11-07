@@ -6,6 +6,7 @@
 \contentsline {section}{\numberline {1.3}Variante "Block"}{2}{section.1.3}%
 \contentsline {section}{\numberline {1.4}Altre varianti}{3}{section.1.4}%
 \contentsline {chapter}{\numberline {2}Risultati}{4}{chapter.2}%
-\contentsline {section}{\numberline {2.1}Statistiche}{4}{section.2.1}%
-\contentsline {chapter}{\numberline {3}Conclusioni}{5}{chapter.3}%
-\contentsline {chapter}{\numberline {A}Codice sorgente}{6}{appendix.Alph1}%
+\contentsline {section}{\numberline {2.1}Statistiche Globali}{4}{section.2.1}%
+\contentsline {section}{\numberline {2.2}Statistiche di set specifici}{5}{section.2.2}%
+\contentsline {chapter}{\numberline {3}Conclusioni}{7}{chapter.3}%
+\contentsline {chapter}{\numberline {A}Codice sorgente}{8}{appendix.Alph1}%
