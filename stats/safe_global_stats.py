@@ -1,16 +1,17 @@
 import re
 import argparse
+import os
 from collections import Counter
 
 ###### Classe ######
 
 class GameData:
     def __init__(self, player1_hand, player2_hand, minimax_scores, best_value, game_duration):
-        self.player1_hand = player1_hand  # Lista di tuple (dominoes)
-        self.player2_hand = player2_hand  # Lista di tuple (dominoes)
-        self.minimax_scores = minimax_scores  # Lista di punteggi minimax
-        self.best_value = best_value  # Miglior punteggio possibile (value)
-        self.game_duration = game_duration  # Durata in millisecondi
+        self.player1_hand = player1_hand
+        self.player2_hand = player2_hand
+        self.minimax_scores = minimax_scores
+        self.best_value = best_value
+        self.game_duration = game_duration
 
     def __repr__(self):
         return f"<GameData Player1: {self.player1_hand}, Player2: {self.player2_hand}, Best Value: {self.best_value}, Duration: {self.game_duration} ms>"
@@ -98,6 +99,9 @@ def main():
     parser.add_argument('file_paths', type=str, nargs='+', help="Il percorso dei file di dati domino.")
     args = parser.parse_args()
 
+    output_folder = "output_files"
+    os.makedirs(output_folder, exist_ok=True)  # Crea la cartella se non esiste
+
     for file_path in args.file_paths:
         print(f"Processando file: {file_path}")
         game_data_list = parseFile(file_path)
@@ -110,8 +114,9 @@ def main():
             distribution = leafDistribution(game_data_list)
 
             # Nome file di output specifico per ciascun file di input
-            output_filename = f"{file_path}_stats.txt"
-            distribution_filename = f"{file_path}_leaf_distribution.txt"
+            base_filename = os.path.basename(file_path)
+            output_filename = os.path.join(output_folder, f"{base_filename}_stats.txt")
+            distribution_filename = os.path.join(output_folder, f"{base_filename}_leaf_distribution.txt")
 
             # Scrivi statistiche nel file di output
             with open(output_filename, 'w') as stats_file:
