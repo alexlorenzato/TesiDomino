@@ -53,6 +53,11 @@ def calculate_global_statistics(file_paths):
                 player1_hand_max = player1_hand
                 player2_hand_max = player2_hand
 
+    print("total_files:", total_files)
+    print("total_duration:", total_duration)
+    print("total_duration:", total_leaves)
+    print("total_duration:", total_x_percent)
+
     # Calcolo delle medie globali
     global_avg_duration = total_duration / total_files if total_files > 0 else 0
     global_avg_leaves = total_leaves / total_files if total_files > 0 else 0
