@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (MiKTeX 24.4) (preloaded format=pdflatex 2024.10.25)  11 NOV 2024 15:01
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (MiKTeX 24.4) (preloaded format=pdflatex 2024.10.25)  12 NOV 2024 13:46
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -9,8 +9,8 @@ LaTeX2e <2024-06-01> patch level 2
 L3 programming layer <2024-09-10>
 (C:\Users\alexl\AppData\Local\Programs\MiKTeX\tex/latex/base\report.cls
 Document Class: report 2024/02/08 v1.4n Standard LaTeX document class
-(C:\Users\alexl\AppData\Local\Programs\MiKTeX\tex/latex/base\size10.clo
-File: size10.clo 2024/02/08 v1.4n Standard LaTeX file (size option)
+(C:\Users\alexl\AppData\Local\Programs\MiKTeX\tex/latex/base\size12.clo
+File: size12.clo 2024/02/08 v1.4n Standard LaTeX file (size option)
 )
 \c@part=\count194
 \c@chapter=\count195
@@ -270,34 +270,45 @@ Package: ifvtex 2019/10/25 v1.7 ifvtex legacy package. Use iftex instead.
 File: l3backend-pdftex.def 2024-05-08 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count301
 \l__pdf_internal_box=\box54
+) (tesi.aux
+
+LaTeX Warning: Label `tab:stats_1' multiply defined.
+
+
+LaTeX Warning: Label `tab:stats_1' multiply defined.
+
+
+LaTeX Warning: Label `fig:etichetta' multiply defined.
+
+
+LaTeX Warning: Label `fig:etichetta' multiply defined.
+
+
+LaTeX Warning: Label `fig:etichetta' multiply defined.
+
 )
-
-LaTeX Warning: Unused global option(s):
-    [a4paper.12pt].
-
-(tesi.aux)
 \openout1 = `tesi.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 12.
-LaTeX Font Info:    ... okay on input line 12.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 12.
-LaTeX Font Info:    ... okay on input line 12.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 12.
-LaTeX Font Info:    ... okay on input line 12.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 12.
-LaTeX Font Info:    ... okay on input line 12.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 12.
-LaTeX Font Info:    ... okay on input line 12.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 12.
-LaTeX Font Info:    ... okay on input line 12.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 12.
-LaTeX Font Info:    ... okay on input line 12.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 12.
-LaTeX Font Info:    ... okay on input line 12.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 12.
-LaTeX Font Info:    ... okay on input line 12.
-LaTeX Info: Redefining \it@ocap on input line 12.
-LaTeX Info: Redefining \it@ccap on input line 12.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 13.
+LaTeX Font Info:    ... okay on input line 13.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 13.
+LaTeX Font Info:    ... okay on input line 13.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 13.
+LaTeX Font Info:    ... okay on input line 13.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 13.
+LaTeX Font Info:    ... okay on input line 13.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 13.
+LaTeX Font Info:    ... okay on input line 13.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 13.
+LaTeX Font Info:    ... okay on input line 13.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 13.
+LaTeX Font Info:    ... okay on input line 13.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 13.
+LaTeX Font Info:    ... okay on input line 13.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 13.
+LaTeX Font Info:    ... okay on input line 13.
+LaTeX Info: Redefining \it@ocap on input line 13.
+LaTeX Info: Redefining \it@ccap on input line 13.
 
 
 File italian.ldf warning: 
@@ -305,7 +316,7 @@ italian.ldf    With OT1 encoding guillemets are poorly faked
 italian.ldf    Use T1 encoding
 italian.ldf    or specify a font with command \CaporaliFrom
 italian.ldf    See the documentation concerning the babel-italian typesetting
-italian.ldf    on input line 12.
+italian.ldf    on input line 13.
 
 (C:\Users\alexl\AppData\Local\Programs\MiKTeX\tex/context/base/mkii\supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
@@ -326,7 +337,7 @@ Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 48
  (C:\Users\alexl\AppData\Local\Programs\MiKTeX\tex/latex/00miktex\epstopdf-sys.cfg
 File: epstopdf-sys.cfg 2021/03/18 v2.0 Configuration of epstopdf for MiKTeX
 ))
-Package hyperref Info: Link coloring OFF on input line 12.
+Package hyperref Info: Link coloring OFF on input line 13.
  (tesi.out) (tesi.out)
 \@outlinefile=\write3
 \openout3 = `tesi.out'.
@@ -336,27 +347,27 @@ Package hyperref Info: Link coloring OFF on input line 12.
 *geometry* detected driver: pdftex
 *geometry* verbose mode - [ preamble ] result:
 * driver: pdftex
-* paper: <default>
+* paper: a4paper
 * layout: <same size as paper>
 * layoutoffset:(h,v)=(0.0pt,0.0pt)
 * modes: 
-* h-part:(L,W,R)=(85.35826pt, 443.57848pt, 85.35826pt)
-* v-part:(T,H,B)=(85.35826pt, 624.25346pt, 85.35826pt)
-* \paperwidth=614.295pt
-* \paperheight=794.96999pt
-* \textwidth=443.57848pt
-* \textheight=624.25346pt
+* h-part:(L,W,R)=(85.35826pt, 426.79135pt, 85.35826pt)
+* v-part:(T,H,B)=(85.35826pt, 674.33032pt, 85.35826pt)
+* \paperwidth=597.50787pt
+* \paperheight=845.04684pt
+* \textwidth=426.79135pt
+* \textheight=674.33032pt
 * \oddsidemargin=13.08827pt
 * \evensidemargin=13.08827pt
 * \topmargin=-23.91173pt
 * \headheight=12.0pt
 * \headsep=25.0pt
-* \topskip=10.0pt
+* \topskip=12.0pt
 * \footskip=30.0pt
-* \marginparwidth=65.0pt
-* \marginparsep=11.0pt
+* \marginparwidth=35.0pt
+* \marginparsep=10.0pt
 * \columnsep=10.0pt
-* \skip\footins=9.0pt plus 4.0pt minus 2.0pt
+* \skip\footins=10.8pt plus 4.0pt minus 2.0pt
 * \hoffset=0.0pt
 * \voffset=0.0pt
 * \mag=1000
@@ -366,11 +377,11 @@ Package hyperref Info: Link coloring OFF on input line 12.
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-LaTeX Font Info:    Trying to load font information for U+msa on input line 17.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 18.
 (C:\Users\alexl\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 17.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 18.
  (C:\Users\alexl\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
@@ -387,7 +398,7 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.20 \chapter
+l.21 \chapter
              {Introduzione} [1
 
 ]
@@ -405,57 +416,77 @@ Capitolo 2.
 [4
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 110--115
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 127--132
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 142--147
-
- []
-
-
 
 [5]
+<imgs/grafico_base.png, id=106, 1610.26593pt x 879.285pt>
+File: imgs/grafico_base.png Graphic file (type png)
+<use imgs/grafico_base.png>
+Package pdftex.def Info: imgs/grafico_base.png  used on input line 196.
+(pdftex.def)             Requested size: 426.79135pt x 233.04967pt.
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+
 
 [6]
+<imgs/grafico_0_200.png, id=115, 1595.20969pt x 896.59969pt>
+File: imgs/grafico_0_200.png Graphic file (type png)
+<use imgs/grafico_0_200.png>
+Package pdftex.def Info: imgs/grafico_0_200.png  used on input line 207.
+(pdftex.def)             Requested size: 426.79135pt x 239.8825pt.
+<imgs/grafico_0_2000.png, id=116, 1576.38937pt x 886.06032pt>
+File: imgs/grafico_0_2000.png Graphic file (type png)
+<use imgs/grafico_0_2000.png>
+Package pdftex.def Info: imgs/grafico_0_2000.png  used on input line 216.
+(pdftex.def)             Requested size: 426.79135pt x 239.88846pt.
+
+
+[7 <./imgs/grafico_base.png> <./imgs/grafico_0_200.png>]
+<imgs/grafico_2000_35000.png, id=125, 1586.92876pt x 869.49844pt>
+File: imgs/grafico_2000_35000.png Graphic file (type png)
+<use imgs/grafico_2000_35000.png>
+Package pdftex.def Info: imgs/grafico_2000_35000.png  used on input line 223.
+(pdftex.def)             Requested size: 426.79135pt x 233.83899pt.
+
+
+[8 <./imgs/grafico_0_2000.png> <./imgs/grafico_2000_35000.png>]
 Capitolo 3.
 
 
-[7
+[9
 
 ]
 Appendice A.
 No file tesi.bbl.
 
 
-[8
+[10
 
 ] (tesi.aux)
  ***********
 LaTeX2e <2024-06-01> patch level 2
 L3 programming layer <2024-09-10>
  ***********
+
+
+LaTeX Warning: There were multiply-defined labels.
+
 Package rerunfilecheck Info: File `tesi.out' has not changed.
-(rerunfilecheck)             Checksum: 704D0D6DEAAAEEE0CCD17E074F339EAA;1282.
+(rerunfilecheck)             Checksum: C7D9A973A3AA4BF298B881D5C6A306A2;1372.
  ) 
 Here is how much of TeX's memory you used:
- 11377 strings out of 473898
- 177747 string characters out of 5726478
- 588903 words of memory out of 5000000
- 34082 multiletter control sequences out of 15000+600000
- 567183 words of font info for 71 fonts, out of 8000000 for 9000
+ 11427 strings out of 473898
+ 178896 string characters out of 5726478
+ 591020 words of memory out of 5000000
+ 34121 multiletter control sequences out of 15000+600000
+ 568123 words of font info for 75 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 75i,8n,79p,611b,536s stack positions out of 10000i,1000n,20000p,200000b,200000s
-<C:/Users/alexl/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C:/Users/alexl/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/alexl/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/alexl/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/alexl/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/alexl/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/alexl/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr17.pfb><C:/Users/alexl/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr6.pfb><C:/Users/alexl/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Users/alexl/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Users/alexl/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/alexl/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti10.pfb>
-Output written on tesi.pdf (9 pages, 172406 bytes).
+ 75i,8n,79p,611b,524s stack positions out of 10000i,1000n,20000p,200000b,200000s
+<C:/Users/alexl/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/alexl/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/alexl/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi12.pfb><C:/Users/alexl/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/alexl/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/alexl/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr17.pfb><C:/Users/alexl/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Users/alexl/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Users/alexl/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/alexl/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti12.pfb>
+Output written on tesi.pdf (11 pages, 335946 bytes).
 PDF statistics:
- 172 PDF objects out of 1000 (max. 8388607)
- 30 named destinations out of 1000 (max. 500000)
- 81 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 196 PDF objects out of 1000 (max. 8388607)
+ 41 named destinations out of 1000 (max. 500000)
+ 109 words of extra memory for PDF output out of 10000 (max. 10000000)
 

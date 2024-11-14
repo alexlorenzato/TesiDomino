@@ -1,5 +1,5 @@
 % !TEX root =path to root.tex
-\documentclass[a4paper.12pt]{report} % "report" è ottimo per tesi, include chapter
+\documentclass[a4paper,12pt]{report} % "report" è ottimo per tesi, include chapter
 
 \usepackage[utf8]{inputenc}          % Supporta caratteri con accenti
 \usepackage[italian]{babel}
@@ -7,6 +7,7 @@
 \usepackage{graphicx}                 % Per inserire immagini
 \usepackage{hyperref}                 % Per link interni
 \usepackage{geometry}                 % Imposta margini del documento
+
 \geometry{left=3cm, right=3cm, top=3cm, bottom=3cm}
 
 \begin{document}
@@ -72,32 +73,38 @@ Il numero totale di configurazioni delle mani iniziali, corrispondente al numero
 
 Testare l'algoritmo su tutte le possibili partite non è temporalmente possibile con gli strumenti a disposizione, questo perché supponendo una media di 70ms a partita (media calcolata sui dati raccolti) ci vorrebbero \(137.281.098.240 * 70  = 9.609.676.876.800\) ms, equivalenti a \(304.7\) anni su un sistema monoprocessore; avendo avuto a disposizione un server con 40 processori, il tempo di calcolo necessario sarebbe stato \(304 / 40 \tilde= 7.5\) anni. 
 
-%todo calcolare numero di partite con una sola foglia
-%todo convertire ogni numero in %
-%todo grafico della distribuzione del numero di foglie
+\vspace{0.5cm}
 
-%?
-Durata media della partita: 71.56 ms
-Numero medio di foglie: 1023.36
-Percentuale media di foglie con 'X': 48.13%
-
-Partita con il maggior numero di foglie globale:
-Numero di foglie: 32172
-Mano giocatore 1: [(0, 2), (1, 2), (1, 5), (2, 2), (2, 6), (4, 4), (5, 6)]
-Mano giocatore 2: [(0, 4), (1, 4), (1, 6), (2, 4), (2, 5), (4, 5), (4, 6)]
-%?
-
-Altre statistiche interessanti: 
+Altre statistiche raccolte:
 \begin{enumerate}
-    \item ci sono \( X \) partite con una sola foglia, equivalenti al \( X\%\), questo accade perché\dots
-    \item ci sono X partite in cui l'ordine in cui si giocano le tessere non cambia (come calcolarlo?)
+    \item Durata media della partita: 71.56 ms
+    \item Numero medio di foglie: 1023.36
+    \item Percentuale media di foglie in cui nessun giocatore aveva esaurito le tessere: 48.13\%
 \end{enumerate}
+
+La partita con il maggior numero di foglie in assoluto, ovvero 32.172, è quella in cui i giocatori hanno le seguenti mani:
+
+\begin{quote}
+    \textbf{Mano giocatore 1:} \(0|2, 1|2, 1|5, 2|2, 2|6, 4|4, 5|6\)
+\end{quote}
+
+\begin{quote}
+    \textbf{Mano giocatore 2:} \(0|4, 1|4, 1|6, 2|4, 2|5, 4|5, 4|6\) 
+\end{quote}
+
+
+
+Un'altra statistica interessante è che ci sono \( 356.142 \) partite con una sola foglia, equivalenti al \( 9\%\), questo accade perché un giocatore ha una doppia tessera con cui partire ma poi né lui né l'avversario hanno una tessera che si può attaccare a quella inizialmente giocata.
+
 
 Il numero di foglie è indice della complessità della partita, con una sola foglia la partita è banale e non necessita che vengano prese decisioni, al contrario se si hanno migliaia di foglie la partita permette molta libertà d'azione e l'ordine in cui vengono giocate le tessere assume molta più importanza.
 
+
 Un esempio banale di partita ad una sola foglia è dato da un giocatore che parte con la tessera doppio-6 e nessuno dei due giocatori ha altre tessere in cui compaia un 6, la partita quindi termina immediatamente procedendo al calcolo del punteggio.
 
+
 Non è comunque garantito che un alto numero di foglie indichi una partita complessa, spesso si presentano dinamiche per cui l'ordine in cui vengono giocate le tessere è ininfluente ai fini del risultato finale; questo tipo di partite hanno solo una complessità apparente, ma di fatto sono banali quanto quelle con poche foglie.
+
 
 \section{Statistiche di set specifici}
 
@@ -107,11 +114,21 @@ Ho investigato dei set specifici di tessere alla ricerca di mani più o meno van
 \begin{quote}
     \textbf{Mano:} \(0|0, 0|1, 0|2, 0|3, 0|4, 0|5, 0|6\)
 \end{quote}
-Match considerati: 65 \\
-Durata media delle partite: 88.35 ms \\
-Numero medio di foglie: 2257.60 \\
-Percentuale di vittorie: 100.00\% \\
-Percentuale di partite in cui nessun giocatore esauriva la mano: 24.65\% \\
+
+\begin{table}[h!]
+    \centering
+    \begin{tabular}{|l|c|}
+        \hline
+        Match considerati & 65 \\
+        Durata media delle partite & 88.35 ms \\
+        Numero medio di foglie & 2257.60 \\
+        Percentuale di vittorie & 100.00\% \\
+        Percentuale di partite in cui nessun giocatore esauriva la mano & 24.65\% \\
+        \hline
+    \end{tabular}
+    \caption{Statistiche per la mano \(0|0, 0|1, 0|2, 0|3, 0|4, 0|5, 0|6\)}
+    \label{tab:stats_1}
+\end{table}
 
 Questa configurazione di mano iniziale è chiaramente vantaggiosa dato sono state vinte tutte le partite affrontate.
 
@@ -124,11 +141,21 @@ due estremità del tavolo è spesso bloccata dal numero 0.
 \begin{quote}
     \textbf{Mano:} \(0|0, 1|1, 2|2, 3|3, 4|4, 5|5, 6|6\)
 \end{quote}
-Match trovati: 64 \\
-Durata media delle partite: 43.84 ms \\
-Numero medio di foglie: 55.72 \\
-Percentuale di vittorie: 34.38\% \\
-Percentuale di partite in cui nessun giocatore esauriva la mano: 73.81\% \\
+
+\begin{table}[h!]
+    \centering
+    \begin{tabular}{|l|c|}
+        \hline
+        Match considerati & 64 \\
+        Durata media delle partite & 43.84 ms \\
+        Numero medio di foglie & 55.72 \\
+        Percentuale di vittorie & 34.38\% \\
+        Percentuale di partite in cui nessun giocatore esauriva la mano & 73.81\% \\
+        \hline
+    \end{tabular}
+    \caption{Statistiche per la mano \(0|0, 1|1, 2|2, 3|3, 4|4, 5|5, 6|6\)}
+    \label{tab:stats_1}
+\end{table}
 
 Ho scelto di investigare questa mano per la particolarità di avere tutte le doppie, i risultati non sono stati buoni visto che il rateo di vittoria è di 1 su 3.
 
@@ -139,29 +166,71 @@ Presenta solo due vantaggi, chiaramente insufficienti: garanzia di iniziare per 
 \begin{quote}
     \textbf{Mano:} \(0|0, 0|1, 0|2, 0|3, 1|1, 1|2, 1|3\)
 \end{quote}
-Match trovati: 69 \\
-Durata media delle partite: 75.39 ms \\
-Numero medio di foglie: 1580.77 \\
-Percentuale di vittorie: 55.07\% \\
-Percentuale di partite in cui nessun giocatore esauriva la mano: 31.81\% \\
+
+\begin{table}[h!]
+    \centering
+    \begin{tabular}{|l|c|}
+        \hline
+        Match considerati & 69 \\
+        Durata media delle partite & 75.39 ms \\
+        Numero medio di foglie & 1580.77 \\
+        Percentuale di vittorie & 55.07\% \\
+        Percentuale di partite in cui nessun giocatore esauriva la mano & 31.81\% \\
+        \hline
+    \end{tabular}
+    \caption{Statistiche per la mano \(0|0, 1|1, 2|2, 3|3, 4|4, 5|5, 6|6\)}
+    \label{tab:stats_1}
+\end{table}
 
 Questa mano è caratterizzata da una distribuzione di tessere dai valori bassi, i risultati sono relativamente scarsi, appena al di sopra del tiro di una moneta in quanto a probabilità di vittoria.
 Il potenziale di questa mano era quello di avere tessere ben connesse e coese tra loro, cercando di tagliare le possibilità all'avversario andando a creare un "circuito chiuso".
 Un grosso svantaggio è quello di avere poche probabilità di iniziare per primi, andando a limitare fin dall'inizio la possibilità di creare un tavolo formato da tessere basse.
 
+\section{Grafici}
+
+Di seguito sono rappresentati dei grafici, il primo dei quali (figura 2.1) è quello generale, gli altri sono ingrandimenti di specifici intervalli.
+
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=1\textwidth]{imgs/grafico_base.png} % Specifica il percorso e il nome del file
+    \caption{Grafico generale}
+    \label{fig:etichetta}
+\end{figure}
+
+Si nota subito il picco sul valore 0, indicando che ci sono poco più di 356.142 partite con una sola foglia, corrispondenti approssimativamente a un 9\% del totale delle partite testate.
+
+Queste sono partite banali, in cui si parte con una tessera doppia e poi nessuno dei due giocatori ha una seconda tessera che contenga il numero giocato come mossa iniziale.
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=1\textwidth]{imgs/grafico_0_200.png} % Specifica il percorso e il nome del file
+    \caption{Ingrandimento dominio 0-200}
+    \label{fig:etichetta}
+\end{figure}
+
+Curiosa l'alternanza dei valori, probabilmente solo una coincidenza che non porta a nulla di significativo.
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=1\textwidth]{imgs/grafico_0_2000.png} % Specifica il percorso e il nome del file
+    \caption{Ingrandimento dominio 0-2000}
+    \label{fig:etichetta}
+\end{figure}
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=1\textwidth]{imgs/grafico_2000_35000.png} % Specifica il percorso e il nome del file
+    \caption{Ingrandimento dominio 2000-35000}
+    \label{fig:etichetta}
+\end{figure}
+
+
+
+
 \chapter{Conclusioni}
 
-Il set più forte trovato è sicuramente \textbf{Mano:} \(0|0, 0|1, 0|2, 0|3, 0|4, 0|5, 0|6\) che ha vinto la totalità delle 65 partite giocate.
-
-Il set più scarso è...?
-
-%todo investigare i seguenti set di tessere
-Set da investigare:
-6|6 6|5 6|4 6|3 6|2 6|1 6|0 -> come la precedente ma con numeri atli
-0|1 1|2 2|3 3|4 4|5 5|6 6|0 -> tessere consecutive e connettibili
-
-Nessuna partita trovata con la mano 6|6 6|5 6|4 6|3 6|2 6|1 6|0.
-Nessuna partita trovata con la mano 0|1 1|2 2|3 3|4 4|5 5|6 6|0.
+Il set più forte trovato è sicuramente \(0|0, 0|1, 0|2, 0|3, 0|4, 0|5, 0|6\) che ha vinto la totalità delle 65 partite giocate.
 
 
 

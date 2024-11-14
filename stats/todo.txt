@@ -1,24 +1,53 @@
 
-Recap:
 
-1. Scrivere programma global_stats.py: deve poter leggere tutti i log ed estrarre i dati desiderati.
-2. Scrivere programma set_stats.py:    deve poter leggere tutti i log ed estrarre i dati desiderati dalle righe in cui un giocatore ha la mano specificata in input.
-3. Riordinare i log già calcolati mettendo in ordine le mani dei giocatori. 
+Nella Sezione 2.2, ti suggerisco di lanciare nuovi test per completarla. 
+aggiungi alla tesi una sezione in cui descrivi cos'è l’albero di gioco e una in cui descrivi cos'è il minimax. 
 
+Nelle sezioni “game tree” e “minimax” puoi aggiungere una figura di un albero di gioco completo in cui si veda chiaramente quali sono le foglie,
+si capisca qual è il risultato del minimax, ecc. 
 
-statistiche da estrarre:
-- per ogni set di tile: 
-	- numero di partite giocabili con 2 set (numero medio)
-	- di queste partite giocabili, in media quante finiscono in patta o terminando tessere o altro
-- dati 2 set di tile, quante partite (foglie) sono possibili? e di queste, quante finiscono perché uno si è bloccato?
+Scegli tra le configurazioni che hai generato una che abbia poche foglie (direi sull’ordine della decina) e possibilmente varietà di risultati: ha foglie in cui vince il primo e foglie in cui vince il secondo, (anche patta, 0, magari), ha foglie che rappresentano partite finite in block e foglie in cui uno dei due ha giocato tutte le tessere. Semplicemente scegli dagli esempi che hai generato uno che sembra interessante e non complesso: se ci sono poche foglie puoi facilmente generare tutto l’albero di gioco. 
 
 
-
-Futuro:
-- prendere dei set specifici e verificare se vince sempre (tutti tile con 0) o perde sempre (formato da tutte le coppie) oppure come si comporta in generale, partendo sia come primo che come secondo
-
-
-
+Sezione 1.1/1.3
+1. Aggiungi una figura con il set di tessere del domino
+2. Aggiungi una figura in cui fai vedere lo stato di una partita: il serpente, le mosse disponibili al giocatore corrente, ecc. Puoi usare lo stesso esempio
+che poi utilizzerai per generare tutto l’albero di gioco, come suggerito sopra.
 
 
+Sezione 2.1
+1. Nella sezione risultati dovresti fare riferimento all’albero di gioco. Questo verrà descritto in una sezione a parte, non è necessario descriverlo qui,  ma quando parli di foglie 
+deve essere chiaro che si tratta delle foglie del game tree. Quindi, prima di parlare dei risultati, “ricorda” che le statistiche sono state estratte dall’albero di gioco relativo ad ogni partita testata, che le foglie di 
+tale albero rappresentano le configurazioni terminali, ecc. Insomma, descrivi brevemente cosa sono i numeri che commenti.
+2. Devi descrivere anche quali e quanti test abbiamo effettuato: non è chiaro da dove tu abbia estratto tali dati. Prima di commentare le statistiche semplicemente spiega che abbiamo
+selezionato in modo casuale 40 milioni di configurazioni in modo che ogni set possibile di 14 tessere sia rappresentato. In poche parole, spiega come hai generato il set di test.
+3. Aggiungerei anche un commento relativamente alle percentuale di partite che hanno solo un possibile vincitore: tutte le foglie hanno score negativi o positivi. Se tutte le foglie
+hanno valori <=0 allora significa che il primo giocatore non può mai guadagnare punti (indipendentemente da come gioca), al massimo può pareggiare. Se tutte le foglie hanno valori >= 0, allora
+vale lo stesso per il secondo giocatore. Non mi pare che ci siano casi in cui tutte le foglie abbiano valore 0, verifica. Ci sono di sicuro casi in cui tutte le foglie hanno valore <0 oppure >0. Può essere utile
+calcolare le statistiche anche in questi casi. Queste partite sono poco interessanti da usare per testare un giocatore software (anche quando il game tree contiene molte figlie), così come le partite il cui game tree ha poche foglie. Quando testeremo il nostro giocatore basato sull’esenzione del minimax ad informazione imperfetta escluderemo queste configurazioni. E’ bene quindi descrivere questi casi prima. 
 
+Sezione 2.2
+1. Da quanto ho notato, tutte le configurazioni del tipo x|0 x|1 .. x|x .. x|6 sono “vittoriose” (non solo la 0|0,0|1,0|2,0|3,0|4,0|5,0|6) e bisognerebbe commentarlo.  Bisogna
+innanzitutto spiegare cosa si intende per “vittoriose” (risultato del minimax). Non è necessario spiegare qui cosa sia il minimax (sarà oggetto di un altro capitolo)
+ma bisogna comunque spiegare/ricordare cosa cosa sono i risultati nelle tabelle. Per intenderci, per queste partite non ricadiamo nel caso 3. del punto 2.1 sopra, dato che l’altro giocatore ha comunque
+qualche possibilità di vincere grazie al fatto che si tratta di un gioco con informazione imperfetta (le foglie del game tree non sono sempre tutte positive o negative): queste statistiche sono il risultato di una partita ottimale giocata con informazione completa. Implicitamente questo implica che tali configurazioni sono difficili da battere, non che sono impossibili da battere. Questo è vero almeno in linea di principio, poi magari scopriamo che sono imbattibili anche con informazione imperfetta se il giocatore è sufficientemente smart. 
+2. Per fare in modo che questa sezione sia interessante bisogna lanciare tutte le partite che coinvolgono i set del tipo x|0 x|1 .. x|x .. x|6 e calcolarne le statistiche complete.  Non si tratta di numeri alti, si fa in poco tempo:
+dato un set di 7 tessere, ad esempio 0|0,0|1,0|2,0|3,0|4,0|5,0|6, ci sono 116.280 set possibili di 14 tessere in cui uno dei due giocatori ha 0|0,0|1,0|2,0|3,0|4,0|5,0|6. I set del tipo x|0 x|1 .. x|x .. x|6  sono solo 
+7, quindi in totale bisogna testare meno di 1 milione di configurazioni.  Quindi,  spieghi che abbiamo deciso di analizzare tutte queste configurazioni “interessanti", generando statistiche per tutte le partite che coinvolgono set del tipo x|0 x|1 .. x|x .. x|6 e commenti i risultati completi.
+3. Per quanto riguarda  la configurazione 0|0,1|1,2|2,3|3,4|4,5|5,6|6 mi pareva di aver notato che ricada nel caso 3. del punto 2.1 sopra: o vince uno o l’altro. Se questo è vero allora tale configurazione
+merita di essere commentata, altrimenti no (non vedo nulla di speciale). Anche in questo caso, bisogna verificare che questo sia vero analizzando tutti i 116.280 possibili set  che la includono.
+4. Non hai trovato configurazioni che “perdono” sempre relativamente al risultato del minimax? Se c’è qualche candidato allora bisogna testare se questo è vero lanciando tutti i test, come sopra.
+5. Non so se sia il caso di commentare la configurazione 0|0,0|1,0|2,0|3,1|1,1|2,1|3 dato che non mi pare abbia nulla di davvero speciale. Capisco l’idea di testare il set che ha il minor numero di punti
+iniziali in partenza ma concretamente alla fine non viene fuori nulla di sorprendente. Se vuoi lasciarla, per simmetria commenterei anche i risultati del set che ha il maggior numero di punti iniziali. Anche in questo
+caso, non ha molto senso commentare risultati parziali: bisogna testare tutte le configurazioni possibili che la/le includono. I risultati parziali dovrebbero solo essere usati per individuare configurazioni potenzialmente
+interessanti. 
+
+
+Sezione 2.3
+1. Alcune delle cose che commenti qui sono già commentate nella nella sezione 2.1. Se vuoi tenerle separate, sposta tutto qui, altrimenti sposta quello che dici qui nella sezione 2.1
+2. Non è vero che le 356k partite il cui albero di gioco ha una sola foglia corrispondono a partite in cui si gioca la prima tessera e poi nessuno può agganciare altro: ci possono essere partite con una sola foglia in cui
+vengono giocate più tessere. Sarebbe interessante verificare se ci possa essere una partita in cui il game tree ha una sola foglia e uno dei due giocatori termina le tessere. Non riesco a costruire un esempio semplice
+ma penso che sia possibile. Vedi se c’è qualche caso nei nostri test: verifica che ci sia almeno un caso con una sola foglia e senza la X.
+3. Prova a calcolare quante sono in totale le partite in cui viene giocata solo la prima tessera e calcola in percentuale quante sono rispetto al totale di 137 miliardi. E’ un esercizio di statistica, ti aiuta fare pratica coi l’uso dei coefficienti binomiali. 
+4. Il grafico 2.4 sarebbe più chiaro se il range sull’asse y fosse più ristretto rispetto ai valori che osserviamo, adesso la curva è tutta schiacciata in basso.
+5. Prova ad utilizzare una log-scale per tutti gli altri grafici per vedere se sono più chiari. Con la log scale f(0) = log(356.142) che è circa 18.4, usando la base 2 per il logaritmo. Lascia entrambe le tipologie di grafici, poi scegliamo quale sia la migliore.
