@@ -15,7 +15,7 @@ password: d0min099
 
 ## Scaricare file
 
-scp lorenzato@turing.disi.unibo.it:/work/lorenzato/mano3.log .
+scp lorenzato@turing.disi.unibo.it:/work/lorenzato/seconda_raccolta_dati/cmd3.log .
 
 ## Github pull via terminale
 
@@ -30,9 +30,6 @@ git clone git@github.com:alexlorenzato/TesiDomino.git, serve per il primo pull, 
 
 
 
-## Bug di righe inaccessibili
-
-awk 'NR==973960' cmd1.log
 
 
 # Scripting

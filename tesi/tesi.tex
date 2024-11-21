@@ -387,6 +387,11 @@ Un grosso svantaggio è quello di avere poche probabilità di iniziare per primi
     \label{tab:stats_tutti_6}
 \end{table}
 
+Ho approfondito le configurazioni del tipo x|0 ... x|6 perché dopo aver notato la \% di vittorie del set 0|0 ... 0|6 era ipotizzabile che anche gli altri set "mononumerici" potessero ottenere risultati simili e così è stato.
+
+Il motivo per cui questa tipologia di set è così prestante risiede nella sua efficacia di bloccare l'avversario, ad esempio: se possiedo tutte le tessere con il 6 l'avversario ovviamente non ne avrà, aggiungendo il fatto che oltre ad avere tutti i 6 sull'altra faccia ho tutti i numeri, sono pronto a rispondere a qualsiasi mossa venga giocata, e nel rispondere è implicito che chiuderò una delle due estremità all'avversario, che ora non potrà attaccare nulla al 6 che ho giocato; ripetendo questa cosa anche per l'altra estremità è banale chiudere entrambe le estremità all'avversario, facendogli saltare il turno.
+
+
 
 \section{Grafici}
 
@@ -435,13 +440,22 @@ Il set più forte trovato è sicuramente \(0|0, 0|1, 0|2, 0|3, 0|4, 0|5, 0|6\) c
 
 \chapter{Altro (da sistemare)}
 
-Numero di partite in cui viene giocata una sola tessera:
+Le partite in cui viene giocate una sola tessera seguono uno schema preciso: la partita inizia giocando una tessera doppia, successivamente nessuno dei due giocatori possiede delle tessere che raffigurino il numero della tessera giocata alla prima mossa, difatto terminando immediatamente la partita.
 
-parto dalla 6|6 -> quanti gruppi di 14 tessere posso formare t.c. non contengano nessun 6
-(21, 13) = 203490 , numero di set da 14 tessere
-poi ognuno di questi set può essere suddiviso in (14, 7)
+Il numero di partite in cui viene giocata una sola tessera, spiegato tramite il caso delle tessere con il 6, si può calcolare così:
 
-che in \% rispetto ai 137 miliardi sono: X\%
+\begin{enumerate}
+    \item le tessere utilizzabili sono 22, questo perché oltre al 6|6 le altre sei tessere che rappresentano il numero 6 non possono essere usate nella distrubuzione delle mani dei gocatori o si andrebbe a negare il fatto che verrà giocata una sola tessera 
+    \item di queste 22 tessere una è il 6|6, che diamo in mano al giocatore 1
+    \item ci sono \(\binom{21}{6} = 54.264\) modi di distribuire le restanti 6 tessere al giocatore 1
+    \item e \(\binom{15}{7} = 6.435\) modi di distruibuire la mano al giocatore 2
+    \item il totale di partite in cui un giocatore ha un 6|6 e nessun altro dei due ha un'altra tessera con un 6 sono: \(54.264*6.435 = 349,188,840\)
+    \item questo numero va raddoppiato in quanto il procedimento appena eseguito va applicato anche al giocatore 2, quindi \(349.188.840 * 2 = 698,377,680\)
+    \item ripetendo il procedimento per i set di tessere da 0 a 5, il totale è \(4.888.643.760\)
+\end{enumerate}
+
+Concludendo, le partite in cui viene giocata una sola tessera sono \(4.888.643.760\), che in \% rispetto ai \(137.281.098.240\) miliardi di partite possibili sono il: \(3.56\%\)
+
 
 
 
