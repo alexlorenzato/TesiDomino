@@ -16,7 +16,9 @@ with open(file_path, 'r') as file:
 # Crea il grafico
 plt.figure(figsize=(10, 6))
 plt.plot(x_values, y_values, marker='o', linestyle='-', color='b')
-plt.xlim(1950, 35000)
+plt.xlim(0, 35000)
+plt.ylim(0, 80000)
+#plt.yscale('log')  # Scala logaritmica con base 2
 
 # Aggiungi etichette e titolo
 plt.xlabel("Numero foglie (asse x)")

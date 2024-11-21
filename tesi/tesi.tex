@@ -55,12 +55,38 @@ Assieme alla variante "Block", esiste la variante "Draw", che differisce per l'u
 
 Queste varianti danno origine a una vasta gamma di regole aggiuntive e variazioni del gioco. Esistono inoltre numerose versioni del domino fan-made e competitive, ognuna con modifiche più o meno significative alle regole delle varianti "Block" e "Draw". Per esempio, oltre all’obiettivo tradizionale di esaurire la propria mano, alcune modalità premiano configurazioni particolari di tessere sul tavolo, rendendo il gioco ancora più strategico e vario.
 
+\section{L'albero di gioco}
+
+Un albero di gioco è una struttura utilizzata per rappresentare tutte le possibili sequenze di mosse in un gioco a turni, in questo caso il domino, partendo da una situazione iniziale fino a tutte le configurazioni finali possibili, dette "foglie" dell'albero. 
+
+Ogni possibile situazione di gioco è rappresentata da un "nodo" dell'albero e ciascun "ramo" rappresenta una possibile mossa effettuata dal giocatore corrente.
+
+Il nodo radice rappresenta lo stato iniziale, con le mani iniziali dei giocatori e il turno del primo giocatore. Ogni nodo discendente rappresenta uno stato raggiungibile in base alla tessera che un giocatore gioca e al cambiamento delle condizioni di gioco.
+
+L’albero di gioco ha lo scopo di esplorare tutte le mosse possibili per individuare le mosse ottimali, in modo da massimizzare la probabilità di vittoria. 
+
+Accade molto facilmente che un albero di gioco si allarghi moltissimo, questo comporta un peso computazionale maggiore, ed è per questo che si possono adottare delle ottimizzazioni algoritmiche per ridurne la complessità e di conseguenza le tempistiche di calcolo.
+
+\section{Minimax}
+
+L'algoritmo Minimax è un algoritmo utilizzato nella teoria dei giochi. L’obiettivo di Minimax è massimizzare il punteggio del giocatore principale (di solito detto “Max”) e minimizzare quello dell’avversario (detto “Min”). 
+
+Questo approccio presuppone che entrambi i giocatori siano perfettamente razionali, cioè che massimizzino sempre il loro vantaggio, ossia giochino sempre la mossa migliore possibile.
+
+Ogni foglia dell’albero è associata a un punteggio tendente al positivo se vince il giocatore iniziale e viceversa, che rappresenta l’esito finale della partita per i due giocatori. Il giocatore Max cerca di scegliere mosse che massimizzino il suo punteggio, mentre il giocatore Min cerca di fare mosse che minimizzino il punteggio di Max. 
+
+Una volta calcolate tutte le foglie il Minimax "risale" l'albero partendo dal punteggio delle foglie per arrivare fino al nodo radice, dove può scegliere la mossa migliore per Max visto che ora conosce i punteggi che ogni ramo può garantirgli.
+
+Per rendere il Minimax più efficiente, si può utilizzare la tecnica di potatura alpha-beta, che consente di eliminare nodi dell’albero che non influenzano la decisione finale, riducendo drasticamente il numero di nodi da esaminare. 
 
 \chapter{Risultati}
 
+Di seguito vengono commentati i risultati globali ottenuti dalle partite analizzate, si ricorda che quando si parla di foglie si intendono quelle dell'albero di gioco, dove ognuna corrisponde a una situazione di fine partita. 
+
 \section{Statistiche Globali}
 
-Il numero totale di configurazioni delle mani iniziali, corrispondente al numero di partite diverse giocabili nel domino è: \(137.281.098.240\), calcolato nel seguente modo:
+Il numero totale di configurazioni delle mani iniziali, corrispondente al numero di partite diverse giocabili nel domino è: \(137.281.098.240\); più precisamente, questo è il numero di set da 14 tessere formabili senza che ci sia mai un set che sia formato dalle stesse tessere di un altro, che si traduce nel distribuire queste 14 tessere tra i 2 giocatori avendo sempre delle mani differenti.
+Questo numero è calcolato nel seguente modo:
 
 
 \begin{enumerate}
@@ -73,14 +99,26 @@ Il numero totale di configurazioni delle mani iniziali, corrispondente al numero
 
 Testare l'algoritmo su tutte le possibili partite non è temporalmente possibile con gli strumenti a disposizione, questo perché supponendo una media di 70ms a partita (media calcolata sui dati raccolti) ci vorrebbero \(137.281.098.240 * 70  = 9.609.676.876.800\) ms, equivalenti a \(304.7\) anni su un sistema monoprocessore; avendo avuto a disposizione un server con 40 processori, il tempo di calcolo necessario sarebbe stato \(304 / 40 \tilde= 7.5\) anni. 
 
+Per trovare un compromesso temporale sulla raccolta dati, sul totale delle partite teoriche, ho preso un campione di 40.000.320 configurazioni iniziali per fare in modo che ogni possibile set fosse rappresentato, e testato l'algoritmo su queste partite raccogliendone i dati.
+
+Il processo è stato parallelizzato dividendo il file in sotto-file da 1 milione di righe.
+
 \vspace{0.5cm}
 
 Altre statistiche raccolte:
-\begin{enumerate}
-    \item Durata media della partita: 71.56 ms
-    \item Numero medio di foglie: 1023.36
-    \item Percentuale media di foglie in cui nessun giocatore aveva esaurito le tessere: 48.13\%
-\end{enumerate}
+
+\begin{table}[h!]
+    \centering
+    \begin{tabular}{|l|c|}
+        \hline
+        Durata media della partita & 71.56 ms \\
+        Numero medio di foglie & 1023.36 \\
+        Percentuale di vittorie & 100.00\% \\
+        Percentuale di partite in cui nessun giocatore esauriva la mano & 48.13\% \\
+        \hline
+    \end{tabular}
+    \label{tab:global_stats}
+\end{table}
 
 La partita con il maggior numero di foglie in assoluto, ovvero 32.172, è quella in cui i giocatori hanno le seguenti mani:
 
@@ -119,11 +157,11 @@ Ho investigato dei set specifici di tessere alla ricerca di mani più o meno van
     \centering
     \begin{tabular}{|l|c|}
         \hline
-        Match considerati & 65 \\
-        Durata media delle partite & 88.35 ms \\
-        Numero medio di foglie & 2257.60 \\
+        Match considerati & 116280 \\
+        Durata media delle partite & 47.87 ms \\
+        Numero medio di foglie & 2390.60 \\
         Percentuale di vittorie & 100.00\% \\
-        Percentuale di partite in cui nessun giocatore esauriva la mano & 24.65\% \\
+        Percentuale di partite in cui nessun giocatore esauriva la mano & 24.54\% \\
         \hline
     \end{tabular}
     \caption{Statistiche per la mano \(0|0, 0|1, 0|2, 0|3, 0|4, 0|5, 0|6\)}
@@ -146,11 +184,11 @@ due estremità del tavolo è spesso bloccata dal numero 0.
     \centering
     \begin{tabular}{|l|c|}
         \hline
-        Match considerati & 64 \\
-        Durata media delle partite & 43.84 ms \\
-        Numero medio di foglie & 55.72 \\
-        Percentuale di vittorie & 34.38\% \\
-        Percentuale di partite in cui nessun giocatore esauriva la mano & 73.81\% \\
+        Match considerati & 116280 \\
+        Durata media delle partite & 22.51 ms \\
+        Numero medio di foglie & 66.74 \\
+        Percentuale di vittorie & 28.91\% \\
+        Percentuale di partite in cui nessun giocatore esauriva la mano & 64.41\% \\
         \hline
     \end{tabular}
     \caption{Statistiche per la mano \(0|0, 1|1, 2|2, 3|3, 4|4, 5|5, 6|6\)}
@@ -171,20 +209,64 @@ Presenta solo due vantaggi, chiaramente insufficienti: garanzia di iniziare per 
     \centering
     \begin{tabular}{|l|c|}
         \hline
-        Match considerati & 69 \\
-        Durata media delle partite & 75.39 ms \\
-        Numero medio di foglie & 1580.77 \\
-        Percentuale di vittorie & 55.07\% \\
-        Percentuale di partite in cui nessun giocatore esauriva la mano & 31.81\% \\
+        Match considerati & 116280 \\
+        Durata media delle partite & 40.97 ms \\
+        Numero medio di foglie & 1609.93 \\
+        Percentuale di vittorie & 60.97\% \\
+        Percentuale di partite in cui nessun giocatore esauriva la mano & 41.50\% \\
         \hline
     \end{tabular}
-    \caption{Statistiche per la mano \(0|0, 1|1, 2|2, 3|3, 4|4, 5|5, 6|6\)}
+    \caption{Statistiche per la mano \(0|0, 0|1, 0|2, 0|3, 1|1, 1|2, 1|3\)}
     \label{tab:stats_1}
 \end{table}
 
 Questa mano è caratterizzata da una distribuzione di tessere dai valori bassi, i risultati sono relativamente scarsi, appena al di sopra del tiro di una moneta in quanto a probabilità di vittoria.
 Il potenziale di questa mano era quello di avere tessere ben connesse e coese tra loro, cercando di tagliare le possibilità all'avversario andando a creare un "circuito chiuso".
 Un grosso svantaggio è quello di avere poche probabilità di iniziare per primi, andando a limitare fin dall'inizio la possibilità di creare un tavolo formato da tessere basse.
+
+
+\begin{quote}
+    \textbf{Mano:} \(3|4, 4|4, 4|5, 5|5, 4|6, 5|6, 6|6\)
+\end{quote}
+
+\begin{table}[h!]
+    \centering
+    \begin{tabular}{|l|c|}
+        \hline
+        Match considerati & 116280 \\
+        Durata media delle partite & 34.62 ms \\
+        Numero medio di foglie & 801.53 \\
+        Percentuale di vittorie & 17.12\% \\
+        Percentuale di partite in cui nessun giocatore esauriva la mano & 50.13\% \\
+        \hline
+    \end{tabular}
+    \caption{Statistiche per la mano \(3|4, 4|4, 4|5, 5|5, 4|6, 5|6, 6|6\)}
+    \label{tab:stats_1}
+\end{table}
+
+
+
+
+
+\begin{quote}
+    \textbf{Mano:} \(3|3, 3|4, 4|4, 2|2, 2|3, 2|4, 4|5\)
+\end{quote}
+
+\begin{table}[h!]
+    \centering
+    \begin{tabular}{|l|c|}
+        \hline
+        Match considerati & 116280 \\
+        Durata media delle partite & 37.43 ms \\
+        Numero medio di foglie & 1013.82 \\
+        Percentuale di vittorie & 12.17\% \\
+        Percentuale di partite in cui nessun giocatore esauriva la mano & 49.17\% \\
+        \hline
+    \end{tabular}
+    \caption{Statistiche per la mano \(3|3, 3|4, 4|4, 2|2, 2|3, 2|4, 4|5\)}
+    \label{tab:stats_1}
+\end{table}
+
 
 \section{Grafici}
 
@@ -200,7 +282,6 @@ Di seguito sono rappresentati dei grafici, il primo dei quali (figura 2.1) è qu
 
 Si nota subito il picco sul valore 0, indicando che ci sono poco più di 356.142 partite con una sola foglia, corrispondenti approssimativamente a un 9\% del totale delle partite testate.
 
-Queste sono partite banali, in cui si parte con una tessera doppia e poi nessuno dei due giocatori ha una seconda tessera che contenga il numero giocato come mossa iniziale.
 
 \begin{figure}[h!]
     \centering
@@ -231,6 +312,17 @@ Curiosa l'alternanza dei valori, probabilmente solo una coincidenza che non port
 \chapter{Conclusioni}
 
 Il set più forte trovato è sicuramente \(0|0, 0|1, 0|2, 0|3, 0|4, 0|5, 0|6\) che ha vinto la totalità delle 65 partite giocate.
+
+\chapter{Altro (da sistemare)}
+
+Numero di partite in cui viene giocata una sola tessera:
+
+parto dalla 6|6 -> quanti gruppi di 14 tessere posso formare t.c. non contengano nessun 6
+(21, 13) = 203490 , numero di set da 14 tessere
+poi ognuno di questi set può essere suddiviso in (14, 7)
+
+che in \% rispetto ai 137 miliardi sono: X\%
+
 
 
 

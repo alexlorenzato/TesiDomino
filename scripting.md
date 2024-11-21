@@ -8,10 +8,14 @@ python3 reorder.py cmd1.log cmd2.log cmd3.log cmd4.log cmd5.log cmd6.log cmd7.lo
 
 ## Login
 
-ssh lorenzato@turing.disi.unibo.it
-password: d0min099
+ssh lorenzato@turing.disi.unibo.it 
+password: d0min099 
 `cd /work/lorenzato` 
 
+
+## Scaricare file
+
+scp lorenzato@turing.disi.unibo.it:/work/lorenzato/mano3.log .
 
 ## Github pull via terminale
 

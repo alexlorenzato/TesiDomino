@@ -23,12 +23,10 @@ all_tiles = [f"{i}|{j}" for i in range(7) for j in range(i, 7)]
 remaining_tiles = [tile for tile in all_tiles if tile not in player1_hand]
 
 # Apre il file in modalità scrittura
-with open("domino_matches.txt", "w") as file:
+with open("mano0.txt", "w") as file:
     # Genera tutte le combinazioni possibili di 7 tessere per il giocatore 2
     for player2_hand in combinations(remaining_tiles, 7):
         # Converte la mano del giocatore 2 in formato stringa
         player2_hand_str = " ".join(player2_hand)
         # Crea la riga nel formato specificato e la scrive nel file
         file.write(f"java -cp ./TesiDomino Manual '{' '.join(player1_hand)}' '{player2_hand_str}'\n")
-
-print("File 'domino_matches.txt' generato con successo.")
