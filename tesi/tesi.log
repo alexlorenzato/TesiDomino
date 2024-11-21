@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (MiKTeX 24.4) (preloaded format=pdflatex 2024.10.25)  20 NOV 2024 16:31
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (MiKTeX 24.4) (preloaded format=pdflatex 2024.10.25)  21 NOV 2024 10:58
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -436,63 +436,81 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 
 [7]
-<imgs/grafico_base.png, id=128, 1610.26593pt x 879.285pt>
-File: imgs/grafico_base.png Graphic file (type png)
-<use imgs/grafico_base.png>
-Package pdftex.def Info: imgs/grafico_base.png  used on input line 278.
-(pdftex.def)             Requested size: 426.79135pt x 233.04967pt.
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-<imgs/grafico_0_200.png, id=130, 1595.20969pt x 896.59969pt>
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+<imgs/grafico_base.png, id=128, 1610.26593pt x 879.285pt>
+File: imgs/grafico_base.png Graphic file (type png)
+<use imgs/grafico_base.png>
+Package pdftex.def Info: imgs/grafico_base.png  used on input line 398.
+(pdftex.def)             Requested size: 426.79135pt x 233.04967pt.
+
+
+[8]
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+<imgs/grafico_0_200.png, id=138, 1595.20969pt x 896.59969pt>
 File: imgs/grafico_0_200.png Graphic file (type png)
 <use imgs/grafico_0_200.png>
-Package pdftex.def Info: imgs/grafico_0_200.png  used on input line 288.
+Package pdftex.def Info: imgs/grafico_0_200.png  used on input line 408.
 (pdftex.def)             Requested size: 426.79135pt x 239.8825pt.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-<imgs/grafico_0_2000.png, id=131, 1576.38937pt x 886.06032pt>
+<imgs/grafico_0_2000.png, id=139, 1576.38937pt x 886.06032pt>
 File: imgs/grafico_0_2000.png Graphic file (type png)
 <use imgs/grafico_0_2000.png>
-Package pdftex.def Info: imgs/grafico_0_2000.png  used on input line 297.
+Package pdftex.def Info: imgs/grafico_0_2000.png  used on input line 417.
 (pdftex.def)             Requested size: 426.79135pt x 239.88846pt.
+
+
+[9]
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-<imgs/grafico_2000_35000.png, id=132, 672.26157pt x 416.30531pt>
+<imgs/grafico_2000_35000.png, id=149, 672.26157pt x 416.30531pt>
 File: imgs/grafico_2000_35000.png Graphic file (type png)
 <use imgs/grafico_2000_35000.png>
-Package pdftex.def Info: imgs/grafico_2000_35000.png  used on input line 304.
+Package pdftex.def Info: imgs/grafico_2000_35000.png  used on input line 424.
 (pdftex.def)             Requested size: 426.79135pt x 264.29376pt.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 
 
-[8]
+[10 <./imgs/grafico_base.png> <./imgs/grafico_0_200.png>]
 
-[9 <./imgs/grafico_base.png> <./imgs/grafico_0_200.png>]
-
-[10 <./imgs/grafico_0_2000.png> <./imgs/grafico_2000_35000.png>]
+[11 <./imgs/grafico_0_2000.png> <./imgs/grafico_2000_35000.png>]
 Capitolo 3.
 
 
-[11
+[12
 
 ]
 Capitolo 4.
 
 
-[12
+[13
 
 ]
 Appendice A.
 No file tesi.bbl.
 
 
-[13
+[14
 
 ] (tesi.aux)
  ***********
@@ -507,17 +525,17 @@ Package rerunfilecheck Info: File `tesi.out' has not changed.
 (rerunfilecheck)             Checksum: 82F8E9C2A5024C1B59CB1FBDDC702E01;1764.
  ) 
 Here is how much of TeX's memory you used:
- 11436 strings out of 473898
- 179002 string characters out of 5726478
- 592062 words of memory out of 5000000
- 34125 multiletter control sequences out of 15000+600000
+ 11449 strings out of 473898
+ 179179 string characters out of 5726478
+ 600570 words of memory out of 5000000
+ 34131 multiletter control sequences out of 15000+600000
  568123 words of font info for 75 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  75i,8n,79p,611b,526s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Users/alexl/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/alexl/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/alexl/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi12.pfb><C:/Users/alexl/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/alexl/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/alexl/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr17.pfb><C:/Users/alexl/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Users/alexl/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Users/alexl/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/alexl/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti12.pfb>
-Output written on tesi.pdf (14 pages, 334145 bytes).
+Output written on tesi.pdf (15 pages, 337059 bytes).
 PDF statistics:
- 224 PDF objects out of 1000 (max. 8388607)
- 46 named destinations out of 1000 (max. 500000)
+ 235 PDF objects out of 1000 (max. 8388607)
+ 53 named destinations out of 1000 (max. 500000)
  133 words of extra memory for PDF output out of 10000 (max. 10000000)
 
