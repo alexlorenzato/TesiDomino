@@ -1,0 +1,15 @@
+=== Risultati per file: fakedata.txt ===
+Mano Giocatore 1: [(0, 0), (0, 1), (0, 2), (0, 3), (0, 5), (0, 6), (1, 5)]
+Mano Giocatore 2: [(1, 6), (2, 4), (2, 6), (3, 3), (3, 4), (3, 6), (5, 6)]
+Foglia: [(12, False)]
+
+
+=== Risultati per file: fakedata2.txt ===
+Mano Giocatore 1: [(2, 4), (2, 6), (4, 4), (3, 3), (3, 4), (4, 6), (1, 6)]
+Mano Giocatore 2: [(0, 6), (0, 0), (0, 1), (0, 3), (0, 2), (0, 5), (1, 5)]
+Foglia: [(13, False)]
+
+
+=== Risultati per file: fakedata3.txt ===
+Nessuna partita trovata con una sola foglia senza X.
+

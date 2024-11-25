@@ -28,6 +28,24 @@ L'obiettivo generale del gioco, sebbene esistano diverse varianti, è di liberar
 
 Nella variante classica, la partita inizia con il giocatore che possiede la tessera doppia con il valore più alto, di conseguenza il doppio-6 è la tessera che garantisce di partire per primi. Questa versione è particolarmente popolare nella modalità a 2 giocatori, ma può essere giocata anche da un massimo di 4 o 6 giocatori, con regole e adattamenti per gestire il numero di tessere e i turni.
 
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=1\textwidth]{imgs/domino_set.png} % Specifica il percorso e il nome del file
+    \caption{Set base di tessere del domino}
+    \label{fig:etichetta}
+\end{figure}
+
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=1\textwidth]{imgs/domino_table.png} % Specifica il percorso e il nome del file
+    \caption{Esempio di partita in corso}
+    \label{fig:etichetta}
+\end{figure}
+
+Esempio di aprtita in cui..
+
+
 \section{Storia del Domino}
 
 Il domino con tessere nacque in Cina intorno al XII secolo e si ritiene che sia stato sviluppato da uno statista nel 1120, come dono per l'imperatore Hui Tsung. Inizialmente, il domino aveva anche un ruolo come strumento di divinazione intorno al XIII secolo, diventando poi un gioco da tavolo vero e proprio.
@@ -66,6 +84,26 @@ Il nodo radice rappresenta lo stato iniziale, con le mani iniziali dei giocatori
 L’albero di gioco ha lo scopo di esplorare tutte le mosse possibili per individuare le mosse ottimali, in modo da massimizzare la probabilità di vittoria. 
 
 Accade molto facilmente che un albero di gioco si allarghi moltissimo, questo comporta un peso computazionale maggiore, ed è per questo che si possono adottare delle ottimizzazioni algoritmiche per ridurne la complessità e di conseguenza le tempistiche di calcolo.
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=1\textwidth]{imgs/gametree.png} % Specifica il percorso e il nome del file
+    \caption{Esempio di albero di gioco}
+    \label{fig:etichetta}
+\end{figure}
+
+In figura si può vedere un esempio di albero da gioco, gli elementi visibili sono i seguenti:
+
+\begin{enumerate}
+    \item i due set da 4 tessere rappresentati in cima sono le mani iniziali dei due giocatori
+    \item il nodo radice, ovvero il 6|6 verde in cima all'albero, è la prima mossa giocata
+    \item i 3 nodi immediatamente sotto sono le possibili mosse che può fare l'avversario
+    \item i numeri rappresentati all'immediata sinistra di ogni tessera dell'albero è il valore della testa e della coda nel tavolo facendo quella mossa
+    \item le foglie sono le tessere dove l'albero si interrompe e ciascuna rappresenta un fine partita
+    \item il numero sotto alle foglie rappresenta il punteggio di fine partita: positivo se vince il primo giocatore e viceversa  
+\end{enumerate}
+
+
 
 \section{Minimax}
 
@@ -391,6 +429,7 @@ Ho approfondito le configurazioni del tipo x|0 ... x|6 perché dopo aver notato 
 
 Il motivo per cui questa tipologia di set è così prestante risiede nella sua efficacia di bloccare l'avversario, ad esempio: se possiedo tutte le tessere con il 6 l'avversario ovviamente non ne avrà, aggiungendo il fatto che oltre ad avere tutti i 6 sull'altra faccia ho tutti i numeri, sono pronto a rispondere a qualsiasi mossa venga giocata, e nel rispondere è implicito che chiuderò una delle due estremità all'avversario, che ora non potrà attaccare nulla al 6 che ho giocato; ripetendo questa cosa anche per l'altra estremità è banale chiudere entrambe le estremità all'avversario, facendogli saltare il turno.
 
+Queste configurazioni sono dunque le più vittoriose offrendo certezza di vittoria nel caso in cui le mosse giocate siano sempre quelle ottimali; in un contesto reale, quindi a informazione imperfetta, non è comunque detto che la vittoria sia necessariamente garantita usando uno di questi set: una mossa sbagliata potrebbe portare a un ramo dell'albero perdente, ovvero in cui il punteggio è negativo.
 
 
 \section{Grafici}

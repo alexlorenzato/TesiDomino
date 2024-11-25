@@ -1,14 +1,6 @@
 
 
-Nelle sezioni “game tree” e “minimax” puoi aggiungere una figura di un albero di gioco completo in cui si veda chiaramente quali sono le foglie,
-si capisca qual è il risultato del minimax, ecc. 
 
-
-
-Sezione 1.1/1.3
-1. Aggiungi una figura con il set di tessere del domino
-2. Aggiungi una figura in cui fai vedere lo stato di una partita: il serpente, le mosse disponibili al giocatore corrente, ecc. Puoi usare lo stesso esempio
-che poi utilizzerai per generare tutto l’albero di gioco, come suggerito sopra.
 
 
 Sezione 2.1
@@ -22,16 +14,6 @@ Queste partite sono poco interessanti da usare per testare un giocatore software
 così come le partite il cui game tree ha poche foglie. 
 Quando testeremo il nostro giocatore basato sull’esenzione del minimax ad informazione imperfetta escluderemo queste configurazioni. 
 
-Sezione 2.2
-1. Da quanto ho notato, tutte le configurazioni del tipo x|0 x|1 .. x|x .. x|6 sono “vittoriose” (non solo la 0|0,0|1,0|2,0|3,0|4,0|5,0|6) 
-e bisognerebbe commentarlo.  Bisogna innanzitutto spiegare cosa si intende per “vittoriose” (risultato del minimax). 
-Non è necessario spiegare qui cosa sia il minimax (sarà oggetto di un altro capitolo) ma bisogna comunque spiegare/ricordare cosa sono i risultati nelle tabelle. 
-Per intenderci, per queste partite non ricadiamo nel caso 3. del punto 2.1 sopra, dato che l’altro giocatore ha comunque
-qualche possibilità di vincere grazie al fatto che si tratta di un gioco con informazione imperfetta 
-(le foglie del game tree non sono sempre tutte positive o negative): queste statistiche sono il risultato di una partita ottimale giocata 
-con informazione completa. Implicitamente questo implica che tali configurazioni sono difficili da battere, non che sono impossibili da battere. 
-Questo è vero almeno in linea di principio, poi magari scopriamo che sono imbattibili anche con informazione imperfetta se il giocatore è 
-sufficientemente smart. 
 
 
 Sezione 2.3

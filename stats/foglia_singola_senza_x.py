@@ -1,13 +1,3 @@
-"""
-Cerca partite che hanno una sola foglia e non hanno la X (quindi un giocatore ha esaurito le tessere) 
-e scrive sul file specificato da terminale la mano in questione e il valore della foglia.
-
-Comando:
-
-python3 foglia_singola_senza_x.py cmd1.log cmd2.log cmd3.log cmd4.log cmd5.log cmd6.log cmd7.log cmd8.log cmd9.log cmd10.log cmd11.log cmd12.log cmd13.log cmd14.log cmd15.log cmd16.log cmd17.log cmd18.log cmd19.log cmd20.log cmd21.log cmd22.log cmd23.log cmd24.log cmd25.log cmd26.log cmd27.log cmd28.log cmd29.log cmd30.log cmd31.log cmd32.log cmd33.log cmd34.log cmd35.log cmd36.log cmd37.log cmd38.log cmd39.log cmd40.log cmd41.log --output foglia_singola.txt
-python foglia_singola_senza_x.py cmd3.log  --output foglia_singola.txt
-"""
-
 import re
 import argparse
 
@@ -71,7 +61,6 @@ def findSingleLeafNoX(game_data_list):
         if len(game.minimax_scores) == 1:  # Controlla se c'è solo una foglia
             score, has_x = game.minimax_scores[0]
             if not has_x:  # Controlla se il punteggio non ha la X
-                print("Trovata")
                 matching_games.append(game)
     return matching_games
 
@@ -83,23 +72,23 @@ def main():
     parser.add_argument('--output', type=str, default="matching_games.txt", help="File di output per le partite trovate.")
     args = parser.parse_args()
 
-    all_game_data = []
-    
-    for file_path in args.file_paths:
-        print(f"Processando file: {file_path}")
-        game_data_list = parseFile(file_path)
-        all_game_data.extend(game_data_list)
+    with open(args.output, 'w') as output_file:
+        for file_path in args.file_paths:
+            print(f"Processando file: {file_path}")
+            game_data_list = parseFile(file_path)
+            matching_games = findSingleLeafNoX(game_data_list)
 
-    if all_game_data:
-        matching_games = findSingleLeafNoX(all_game_data)
-
-        with open(args.output, 'w') as output_file:
-            output_file.write(f"Partite con una sola foglia e senza X: {len(matching_games)}\n")
-            for game in matching_games:
-                output_file.write(f"Mano Giocatore 1: {game.player1_hand}\n")
-                output_file.write(f"Mano Giocatore 2: {game.player2_hand}\n")
-                output_file.write(f"Foglia: {game.minimax_scores}\n")
-                output_file.write("\n")
+            # Scrivi l'intestazione per indicare il file corrente
+            output_file.write(f"=== Risultati per file: {file_path} ===\n")
+            if matching_games:
+                for game in matching_games:
+                    output_file.write(f"Mano Giocatore 1: {game.player1_hand}\n")
+                    output_file.write(f"Mano Giocatore 2: {game.player2_hand}\n")
+                    output_file.write(f"Foglia: {game.minimax_scores}\n")
+                    output_file.write("\n")
+            else:
+                output_file.write("Nessuna partita trovata con una sola foglia senza X.\n")
+            output_file.write("\n")  # Separatore tra i file
 
 # Avvia il programma
 if __name__ == "__main__":
