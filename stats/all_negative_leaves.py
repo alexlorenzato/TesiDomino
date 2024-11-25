@@ -1,6 +1,6 @@
 """
-python3 foglia_singola_senza_x.py cmd1.log cmd2.log cmd3.log cmd4.log cmd5.log cmd6.log cmd7.log cmd8.log cmd9.log cmd10.log cmd11.log cmd12.log cmd13.log cmd14.log cmd15.log cmd16.log cmd17.log cmd18.log cmd19.log cmd20.log cmd21.log cmd22.log cmd23.log cmd24.log cmd25.log cmd26.log cmd27.log cmd28.log cmd29.log cmd30.log cmd31.log cmd32.log cmd33.log cmd34.log cmd35.log cmd36.log cmd37.log cmd38.log cmd39.log cmd40.log cmd41.log  --output foglia_singola.txt
 
+python all_positive_leaves.py cmd1.log cmd2.log cmd3.log cmd4.log cmd5.log cmd6.log cmd7.log cmd8.log cmd9.log cmd10.log cmd11.log cmd12.log cmd13.log cmd14.log cmd15.log cmd16.log cmd17.log cmd18.log cmd19.log cmd20.log cmd21.log cmd22.log cmd23.log cmd24.log cmd25.log cmd26.log cmd27.log cmd28.log cmd29.log cmd30.log cmd31.log cmd32.log cmd33.log cmd34.log cmd35.log cmd36.log cmd37.log cmd38.log cmd39.log cmd40.log cmd41.log --output all_positive.txt
 """
 
 import re
@@ -60,40 +60,48 @@ def parseFile(file_path):
 
 ###### Funzione per analizzare le partite ######
 
-def findSingleLeafNoX(game_data_list):
+def findGamesWithAllPositiveLeaves(game_data_list):
     matching_games = []
     for game in game_data_list:
-        if len(game.minimax_scores) == 1:  # Controlla se c'è solo una foglia
-            score, has_x = game.minimax_scores[0]
-            if not has_x:  # Controlla se il punteggio non ha la X
+        try:
+            all_positive = all(score < 0 for score, _ in game.minimax_scores)
+            if all_positive:
                 matching_games.append(game)
+        except Exception as e:
+            print(f"Errore durante l'analisi della partita: {game} -- {e}")
     return matching_games
 
 ###### Codice principale ######
 
 def main():
-    parser = argparse.ArgumentParser(description="Trova partite con una sola foglia senza X.")
+    parser = argparse.ArgumentParser(description="Trova partite con tutte le foglie > 0.")
     parser.add_argument('file_paths', type=str, nargs='+', help="Il percorso dei file di dati domino.")
-    parser.add_argument('--output', type=str, default="matching_games.txt", help="File di output per le partite trovate.")
+    parser.add_argument('--output', type=str, default="positive_leaves_games.txt", help="File di output per le partite trovate.")
     args = parser.parse_args()
 
     with open(args.output, 'w') as output_file:
+        total_matching_games = 0
+
         for file_path in args.file_paths:
             print(f"Processando file: {file_path}")
-            game_data_list = parseFile(file_path)
-            matching_games = findSingleLeafNoX(game_data_list)
+            try:
+                game_data_list = parseFile(file_path)
+                if game_data_list:
+                    matching_games = findGamesWithAllPositiveLeaves(game_data_list)
+                    total_matching_games += len(matching_games)
 
-            # Scrivi l'intestazione per indicare il file corrente
-            output_file.write(f"=== Risultati per file: {file_path} ===\n")
-            if matching_games:
-                for game in matching_games:
-                    output_file.write(f"Mano Giocatore 1: {game.player1_hand}\n")
-                    output_file.write(f"Mano Giocatore 2: {game.player2_hand}\n")
-                    output_file.write(f"Foglia: {game.minimax_scores}\n")
+                    # Scrive i risultati nel file di output
+                    output_file.write(f"File: {file_path}\n")
+                    output_file.write(f"Partite con tutte le foglie < 0: {len(matching_games)}\n")
+                    for game in matching_games:
+                        output_file.write(f"Mano Giocatore 1: {game.player1_hand}\n")
+                        output_file.write(f"Mano Giocatore 2: {game.player2_hand}\n")
+                        output_file.write("\n")
                     output_file.write("\n")
-            else:
-                output_file.write("Nessuna partita trovata con una sola foglia senza X.\n")
-            output_file.write("\n")  # Separatore tra i file
+            except Exception as e:
+                print(f"Errore nell'elaborazione del file {file_path}: {e}")
+        
+        output_file.write(f"Totale partite con tutte le foglie < 0: {total_matching_games}\n")
 
 # Avvia il programma
 if __name__ == "__main__":

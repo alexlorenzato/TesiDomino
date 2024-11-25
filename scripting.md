@@ -13,6 +13,12 @@ password: d0min099
 `cd /work/lorenzato` 
 
 
+## Screen
+screen -S nome_sessione   -> s1
+screen -ls
+screen -r ID_oppure_nome_sessione
+
+
 ## Scaricare file
 
 scp lorenzato@turing.disi.unibo.it:/work/lorenzato/seconda_raccolta_dati/cmd3.log .

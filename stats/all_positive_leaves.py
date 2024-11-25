@@ -1,9 +1,6 @@
 """
-Codice per cercare partite che abbiano solamente foglie positive, scrive nel file le partite trovate.
 
-Comando:
-python all_positive_leaves.py cmd1.log cmd2.log cmd3.log cmd4.log cmd5.log cmd6.log cmd7.log cmd8.log cmd9.log cmd10.log cmd11.log cmd12.log cmd13.log cmd14.log cmd15.log cmd16.log cmd17.log cmd18.log cmd19.log cmd20.log cmd21.log cmd22.log cmd23.log cmd24.log cmd25.log cmd26.log cmd27.log cmd28.log cmd29.log cmd30.log cmd31.log cmd32.log cmd33.log cmd34.log cmd35.log cmd36.log cmd37.log cmd38.log cmd39.log cmd40.log cmd41.log  --output all_positive.txt
-python3 all_positive_leaves.py cmd1.log  --output all_positive.txt
+python all_positive_leaves.py cmd1.log cmd2.log cmd3.log cmd4.log cmd5.log cmd6.log cmd7.log cmd8.log cmd9.log cmd10.log cmd11.log cmd12.log cmd13.log cmd14.log cmd15.log cmd16.log cmd17.log cmd18.log cmd19.log cmd20.log cmd21.log cmd22.log cmd23.log cmd24.log cmd25.log cmd26.log cmd27.log cmd28.log cmd29.log cmd30.log cmd31.log cmd32.log cmd33.log cmd34.log cmd35.log cmd36.log cmd37.log cmd38.log cmd39.log cmd40.log cmd41.log --output all_positive.txt
 """
 
 import re
@@ -82,22 +79,29 @@ def main():
     parser.add_argument('--output', type=str, default="positive_leaves_games.txt", help="File di output per le partite trovate.")
     args = parser.parse_args()
 
-    all_game_data = []
-    
-    for file_path in args.file_paths:
-        print(f"Processando file: {file_path}")
-        game_data_list = parseFile(file_path)
-        all_game_data.extend(game_data_list)
+    with open(args.output, 'w') as output_file:
+        total_matching_games = 0
 
-    if all_game_data:
-        matching_games = findGamesWithAllPositiveLeaves(all_game_data)
+        for file_path in args.file_paths:
+            print(f"Processando file: {file_path}")
+            try:
+                game_data_list = parseFile(file_path)
+                if game_data_list:
+                    matching_games = findGamesWithAllPositiveLeaves(game_data_list)
+                    total_matching_games += len(matching_games)
 
-        with open(args.output, 'w') as output_file:
-            output_file.write(f"Partite con tutte le foglie > 0: {len(matching_games)}\n")
-            for game in matching_games:
-                output_file.write(f"Mano Giocatore 1: {game.player1_hand}\n")
-                output_file.write(f"Mano Giocatore 2: {game.player2_hand}\n")
-                output_file.write("\n")
+                    # Scrive i risultati nel file di output
+                    output_file.write(f"File: {file_path}\n")
+                    output_file.write(f"Partite con tutte le foglie > 0: {len(matching_games)}\n")
+                    for game in matching_games:
+                        output_file.write(f"Mano Giocatore 1: {game.player1_hand}\n")
+                        output_file.write(f"Mano Giocatore 2: {game.player2_hand}\n")
+                        output_file.write("\n")
+                    output_file.write("\n")
+            except Exception as e:
+                print(f"Errore nell'elaborazione del file {file_path}: {e}")
+        
+        output_file.write(f"Totale partite con tutte le foglie > 0: {total_matching_games}\n")
 
 # Avvia il programma
 if __name__ == "__main__":
