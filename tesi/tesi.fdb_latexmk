@@ -1,5 +1,5 @@
 # Fdb version 4
-["bibtex tesi"] 0 "tesi.aux" "tesi.bbl" "tesi" 1732288768.6664 0
+["bibtex tesi"] 0 "tesi.aux" "tesi.bbl" "tesi" 1733406653.12078 0
   "C:/Users/alexl/AppData/Local/Programs/MiKTeX/bibtex/bst/bibtex/plain.bst" 1291864736 20613 bd3fbfa9f64872b81ac57a0dd2ed855f ""
   "bibliografia.bib" 0 -1 0 ""
   "tesi.aux" 0 -1 0 "pdflatex"
@@ -7,9 +7,11 @@
   "tesi.bbl"
   "tesi.blg"
   (rewritten before read)
-["pdflatex"] 1732288767.11711 "d:/User Directories/Documents/GitHub/TesiDomino/tesi/tesi.tex" "tesi.pdf" "tesi" 1732288768.66676 0
+["pdflatex"] 1733406651.528 "d:/User Directories/Documents/GitHub/TesiDomino/tesi/tesi.tex" "tesi.pdf" "tesi" 1733406653.12115 0
   "C:/Users/alexl/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1729866165 80909 eab91d9745dd2edfd62a31d53cd5fe15 ""
+  "C:/Users/alexl/AppData/Local/MiKTeX/fonts/pk/ljfour/jknappen/ec/dpi600/tcrm1200.pk" 1732873536 14064 b56ee36dfa4b66c0a4aed3a2e015a7b8 ""
   "C:/Users/alexl/AppData/Local/MiKTeX/miktex/data/le/pdftex/pdflatex.fmt" 1729865522 11948279 0100d9d566f56e2286f1c5737be549f9 ""
+  "C:/Users/alexl/AppData/Local/Programs/MiKTeX/fonts/tfm/jknappen/ec/tcrm1200.tfm" 993062508 1444 95ffe0f19b974d50849790c8225c7ef7 ""
   "C:/Users/alexl/AppData/Local/Programs/MiKTeX/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1233951848 1004 54797486969f23fa377b128694d548df ""
   "C:/Users/alexl/AppData/Local/Programs/MiKTeX/fonts/tfm/public/amsfonts/cmextra/cmex8.tfm" 1233951848 988 bdf658c3bfc2d96d3c8b02cfc1c94c20 ""
   "C:/Users/alexl/AppData/Local/Programs/MiKTeX/fonts/tfm/public/amsfonts/symbols/msam10.tfm" 1233951854 916 f87d7c45f9c908e672703b83b72241a3 ""
@@ -30,7 +32,9 @@
   "C:/Users/alexl/AppData/Local/Programs/MiKTeX/fonts/tfm/public/cm/cmsy10.tfm" 1136765053 1124 6c73e740cf17375f03eec0ee63599741 ""
   "C:/Users/alexl/AppData/Local/Programs/MiKTeX/fonts/tfm/public/cm/cmsy6.tfm" 1136765053 1116 933a60c408fc0a863a92debe84b2d294 ""
   "C:/Users/alexl/AppData/Local/Programs/MiKTeX/fonts/tfm/public/cm/cmsy8.tfm" 1136765053 1120 8b7d695260f3cff42e636090a8002094 ""
+  "C:/Users/alexl/AppData/Local/Programs/MiKTeX/fonts/tfm/public/cm/cmti10.tfm" 1136765053 1480 aa8e34af0eb6a2941b776984cf1dfdc4 ""
   "C:/Users/alexl/AppData/Local/Programs/MiKTeX/fonts/tfm/public/cm/cmti12.tfm" 1136765053 1484 ed72f8f5cf654cda15ecc8e32bfcbee5 ""
+  "C:/Users/alexl/AppData/Local/Programs/MiKTeX/fonts/tfm/public/cm/cmtt10.tfm" 1136765053 768 1321e9409b4137d6fb428ac9dc956269 ""
   "C:/Users/alexl/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb" 1247596666 32080 340ef9bf63678554ee606688e7b5339d ""
   "C:/Users/alexl/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb" 1247596667 30251 6afa5cb1d0204815a708a080681d4674 ""
   "C:/Users/alexl/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi12.pfb" 1247596667 36741 0ee9e374ec3e30da87cdfb0ea3575226 ""
@@ -40,7 +44,9 @@
   "C:/Users/alexl/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr7.pfb" 1247596667 32762 7fee39e011c23b3589931effd97b9702 ""
   "C:/Users/alexl/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr8.pfb" 1247596667 32726 39f0f9e62e84beb801509898a605dbd5 ""
   "C:/Users/alexl/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb" 1247596667 32569 5e5ddc8df908dea60932f3c484a54c0d ""
+  "C:/Users/alexl/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti10.pfb" 1247596667 37944 359e864bd06cde3b1cf57bb20757fb06 ""
   "C:/Users/alexl/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti12.pfb" 1247596667 36118 fad905eba93cff5bce1e185fe980a177 ""
+  "C:/Users/alexl/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt10.pfb" 1247596667 31099 342ef5a582aacbd3346f3cf4579679fa ""
   "C:/Users/alexl/AppData/Local/Programs/MiKTeX/tex/context/base/mkii/supp-pdf.mkii" 1580390158 71627 94eb9990bed73c364d7f53f960cc8c5b ""
   "C:/Users/alexl/AppData/Local/Programs/MiKTeX/tex/generic/atbegshi/atbegshi.sty" 1575571100 24708 5584a51a7101caf7e6bbf1fc27d8f7b1 ""
   "C:/Users/alexl/AppData/Local/Programs/MiKTeX/tex/generic/babel/babel.sty" 1728116595 146637 c6f107c31e90888b08c062a67ea340e7 ""
@@ -76,6 +82,7 @@
   "C:/Users/alexl/AppData/Local/Programs/MiKTeX/tex/latex/base/atbegshi-ltx.sty" 1719393830 2963 e56732bbb93cfa019febfd0c7eaf1d21 ""
   "C:/Users/alexl/AppData/Local/Programs/MiKTeX/tex/latex/base/atveryend-ltx.sty" 1719393830 2378 05fbb4f2b23b0e142f8cd3440c37e72e ""
   "C:/Users/alexl/AppData/Local/Programs/MiKTeX/tex/latex/base/inputenc.sty" 1719393830 5048 7ebf0f2edf1ef6783e8fe2201a95d0e8 ""
+  "C:/Users/alexl/AppData/Local/Programs/MiKTeX/tex/latex/base/omscmr.fd" 1719393830 2469 74341109f164f230581718c66211c718 ""
   "C:/Users/alexl/AppData/Local/Programs/MiKTeX/tex/latex/base/report.cls" 1719393830 23203 02a38c89d2f3aef55ce8b1288a372bbb ""
   "C:/Users/alexl/AppData/Local/Programs/MiKTeX/tex/latex/base/size12.clo" 1719393830 8449 30d84ec2eac77409e31fe51403c1ed64 ""
   "C:/Users/alexl/AppData/Local/Programs/MiKTeX/tex/latex/epstopdf-pkg/epstopdf-base.sty" 1623003186 13886 d1306dcf79a944f6988e688c1785f9ce ""
@@ -100,7 +107,7 @@
   "C:/Users/alexl/AppData/Local/Programs/MiKTeX/tex/latex/refcount/refcount.sty" 1576433952 9878 9e94e8fa600d95f9c7731bb21dfb67a4 ""
   "C:/Users/alexl/AppData/Local/Programs/MiKTeX/tex/latex/rerunfilecheck/rerunfilecheck.sty" 1657800696 9714 ba3194bd52c8499b3f1e3eb91d409670 ""
   "C:/Users/alexl/AppData/Local/Programs/MiKTeX/tex/latex/url/url.sty" 1388490452 12796 8edb7d69a20b857904dd0ea757c14ec9 ""
-  "d:/User Directories/Documents/GitHub/TesiDomino/tesi/tesi.tex" 1732288763 26987 bfe294ad47c5e39c9443a26c6bc00db2 ""
+  "d:/User Directories/Documents/GitHub/TesiDomino/tesi/tesi.tex" 1733406647 35064 aea20774ce24e2d826204e164f9f022c ""
   "imgs/domino_set.png" 1732284652 228409 71f2d28e08034b834b7b064ce95746d4 ""
   "imgs/domino_table.png" 1732287244 6547 9de392d0dbe0c8cddb0709bc72030295 ""
   "imgs/gametree.png" 1732285121 69973 b6c8b01293135fff2ca7e227a80ef2a2 ""
@@ -108,11 +115,11 @@
   "imgs/grafico_0_2000.png" 1731407116 48477 bb06921f89dfc4d1603c92a5c6efed00 ""
   "imgs/grafico_2000_35000.png" 1732104715 26010 179a91142e11c1747f0da5609e891f7d ""
   "imgs/grafico_base.png" 1731406499 40129 e35a43810447d7b417ad60c2c966d036 ""
-  "tesi.aux" 1732288768 7114 71bbcc648a8d03818b009121938c319a "pdflatex"
+  "tesi.aux" 1733406652 7746 1d4d19abf7f8fb3b13e0fd7d386f9ffa "pdflatex"
   "tesi.bbl" 0 -1 0 "bibtex tesi"
-  "tesi.out" 1732288768 1764 82f8e9c2a5024c1b59cb1fbddc702e01 "pdflatex"
-  "tesi.tex" 1732288763 26987 bfe294ad47c5e39c9443a26c6bc00db2 ""
-  "tesi.toc" 1732288768 1090 a3055a420b0778bd312187476cee60e8 "pdflatex"
+  "tesi.out" 1733406652 2718 6dbc152e6d1f32c3699b103c2d222876 "pdflatex"
+  "tesi.tex" 1733406647 35064 aea20774ce24e2d826204e164f9f022c ""
+  "tesi.toc" 1733406652 1469 5d5f2828237e44daacec1c21f8bbecff "pdflatex"
   (generated)
   "tesi.aux"
   "tesi.log"

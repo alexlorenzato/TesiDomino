@@ -21,7 +21,7 @@ screen -r ID_oppure_nome_sessione
 
 ## Scaricare file
 
-scp lorenzato@turing.disi.unibo.it:/work/lorenzato/seconda_raccolta_dati/cmd3.log .
+scp lorenzato@turing.disi.unibo.it:/work/lorenzato/seconda_raccolta_dati/foglia_singola.txt .
 
 ## Github pull via terminale
 

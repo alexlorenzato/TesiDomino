@@ -1,0 +1,153 @@
+
+cerca di dare maggiore continuità al discorso e di fare in modo che sia sempre chiaro cosa hai fatto
+e perché lo hai fatto. Quale suggerimento è nei commenti sotto. Oltre a questo dovremmo fissare
+un meeting per gli step successivi (vedi la parte in fondo all’eamail). Per me andrebbe bene mercoledì mattina, 
+fammi sapere.
+
+
+2. Come esempio ti chiedevo di generare un albero di gioco per un paio di configurazioni complete (7 tessere per giocatore).
+Considera ad esempio le seguenti configurazioni
+
+1|4 1|5 1|6 3|4 4|4 5|5 6|6
+0|0 0|1 2|2 2|3 2|4 3|3 5|6
+
+
+L’albero di gioco per queste due configurazioni ha 10 foglie, ci sono possibili partite in cui vince un giocatore o l’altro oppure nessuno dei due (score zero). Ci sono inoltre
+partite che finiscono in blocco e partite che finiscono per esaurimento tessere. Dato che ci sono solo 10 foglie l’albero sarà semplice
+da disegnare. Questo rappresenta un esempio completo in cui c’è un po’ di tutto. Lo mostri per descrivere qual è l’albero di gioco
+e poi lo fai rivedere mostrando qual è il risultato del minimax (fai vedere come si propagano gli score fino alla radice). Se ci riesci
+utilizza direttamente le figure delle tessere del domino, non come ho fatto io con i numeri,
+
+
+
+
+7. Nella sezione 2.2 spiega cosa fai all’inizio del paragrafo: dato che alcuni set sembrano interessanti allora hai
+deciso di analizzare l’albero di gioco di tutte le loro possibili partite. Anche in questo caso, immagina chi legge:
+non si capisce cosa tu abbia fatto. Relativamente a questo paragrafo, se ho capito bene dei set x|0 ... x|6 
+solo quello con x=0 “vince” sempre, giusto? Mi fai vedere questi dati? Sono curioso d vedere quali sono i
+set “nemici” della 0|6, 1|6, 2|6, 3|6, 4|6, 5|6, 6|6, ad esempio.
+
+8. Le statistiche relative alle partite che terminano immediatamente non sono completamente corrette. 
+Sono ok per 6|6
+mentre quando valuti 5|5 devi escludere dal set totale il 6|6 (non potrà mai essere scelto). Allo stesso modo
+quando valuti 4|4 devi rimuovere 5|5 e 6|6, e così via. Alla fine il numero finale è più basso di 7 x 698.377.680.
+
+
+
+10. Fondi la sezione 2.6 con la 2.5. 
+Dopo aver discusso quante sono le partite il cui albero di gioco ha una sola foglia, 
+fai vedere qual è la distribuzione del numero di foglie di tutti gli albero di gioco, 
+in modo da far capire che è effettivamente abbastanza probabile incappare in partite 
+in cui nessuno dei due giocatori dovrà mai scegliere tra due tessere.
+DOMANDA: non ho mica capito quale è il senso di sta cosa, i grafici sono già lì sotto e ho pure scritto il numero di partite a foglia singola.
+
+
+
+Oltre a questo, l’ultimo step è implementare un algoritmo minimax con informazione imperfetta e poi
+testarlo contro altri giocatori di base (direi, un giocatore greedy e il random). Ti spiego cosa c’è da fare.
+
+Non ha senso testare le 40M di configurazioni (abbiamo spiegato che molti giochi sono banali) quindi
+tra le 40M scegli soltanto 1M (mi sembra ragionevole) di set nel seguente modo:
+a. Elimina i set in cui solo uno dei due giocatori può vincere (nessuna foglia negativa o nessuna foglia positiva)
+b. Riordina i set in modo decrescente rispetto al numero di foglie del game tree e seleziona il primo milione di tali configurazioni
+
+Fai giocare tutti contro tutti su questo milione di configurazioni una volta come primo ed una volta come secondo giocatore (in tutto sono
+6M di partite). Ti mando il software che ho preparato per il test. Troverai già l’implementazione dei giocatori Greedy e Random.
+Puoi lanciarlo con
+
+java DominoGame RandomPlayer GreedyPlayer -1 '1|4 1|5 1|6 3|4 4|4 5|5 6|6' -2 '0|0 0|1 2|2 2|3 2|4 3|3 5|6' -v
+
+
+
+Ho aggiunto anche un po’ di commenti ai metodi, puoi usare javadoc per generare tutta la documentazione.
+Il tuo obiettivo è:
+1. Implementare il giocatore MinimaxPlayer (che implementa l’interfaccia DominoPlayer)
+2. Lanciare i test
+3. Preparare un’interfaccia grafica (usando java swing) per permettere ad un umano di giocare con i tre giocatori
+implementati
+
+Lascia perdere il punto 1 per il momento e cerca di capire come puoi organizzare il tutto per il punto 2. Il punto 3 sarebbe
+carino ma non è fondamentale. Se riesci ad implementare l’interfaccia grafica durante la presentazione puoi
+fare vedere un video di qualche secondo in cui mostri che hai anche implementato tutto il gioco.Buongiorno,
+  ti mando di sotto alcuni commenti relativamente a quanto hai fatto finora. Come commento generale: 
+cerca di dare maggiore continuità al discorso e di fare in modo che sia sempre chiaro cosa hai fatto
+e perché lo hai fatto. Quale suggerimento è nei commenti sotto. Oltre a questo dovremmo fissare
+un meeting per gli step successivi (vedi la parte in fondo all’eamail). Per me andrebbe bene mercoledì mattina, 
+fammi sapere.
+
+ 
+1. Crea un capitolo “Teoria dei giochi” in cui spieghi brevemente di che si tratta e in cui poi andrai a spostare i paragrafi 1.5 ed 1.6.
+
+2. Come esempio ti chiedevo di generare un albero di gioco per un paio di configurazioni complete (7 tessere per giocatore).
+Considera ad esempio le seguenti configurazioni
+
+1|4 1|5 1|6 3|4 4|4 5|5 6|6
+0|0 0|1 2|2 2|3 2|4 3|3 5|6
+
+
+L’albero di gioco per queste due configurazioni ha 10 foglie, ci sono possibili partite in cui vince un giocatore o l’altro oppure nessuno dei due (score zero). Ci sono inoltre
+partite che finiscono in blocco e partite che finiscono per esaurimento tessere. Dato che ci sono solo 10 foglie l’albero sarà semplice
+da disegnare. Questo rappresenta un esempio completo in cui c’è un po’ di tutto. Lo mostri per descrivere qual è l’albero di gioco
+e poi lo fai rivedere mostrando qual è il risultato del minimax (fai vedere come si propagano gli score fino alla radice). Se ci riesci
+utilizza direttamente le figure delle tessere del domino, non come ho fatto io con i numeri,
+
+3. La sezione relativa al minimax è alquanto povera. Dovresti descrivere meglio di cosa si tratta. Guarda sulla pagina
+wikipedia e leggi cosa dice relativamente al “principio” minimax e all’algoritmo minimax nei giochi a turni.
+
+4. Il capitolo “Teoria dei giochi” deve contenere delle referenze (è impensabile che tu scriva una tesi senza nessuna referenza).
+Aggiungi referenze relativamente alla teoria dei giochi, principio minimax, algoritmo minimax, ecc.
+
+5. Il capitolo 2 dovrebbe iniziare con una sezione in cui spieghi che tipo di test hai effettuato: hai analizzato l’albero di gioco
+di 40M di configurazioni. Quindi devi spiegare come hai scelto le 40M di configurazioni e come hai lanciato i test. Immagina qualcuno che
+legga la tua tesi: non si capisce cosa tu abbia fatto poiché non spieghi da nessuna parte che hai scelto 40M di configurazioni
+e come ha analizzato l’albero di gioco. La parte in cui spieghi quanti sono tutti i set possibili puoi metterla in tale sezione, così
+è chiaro subito perché non le hai analizzate tutte.
+
+6. Che cosa sono 100% vittorie nella tabella che dovrebbe essere la 2.0?
+
+7. Nella sezione 2.2 spiega cosa fai all’inizio del paragrafo: dato che alcuni set sembrano interessanti allora hai
+deciso di analizzare l’albero di gioco di tutte le loro possibili partite. Anche in questo caso, immagina chi legge:
+non si capisce cosa tu abbia fatto. Relativamente a questo paragrafo, se ho capito bene dei set x|0 ... x|6 
+solo quello con x=0 “vince” sempre, giusto? Mi fai vedere questi dati? Sono curioso d vedere quali sono i
+set “nemici” della 0|6, 1|6, 2|6, 3|6, 4|6, 5|6, 6|6, ad esempio.
+
+8. Le statistiche relative alle partite che terminano immediatamente non sono completamente corrette. Sono ok per 6|6
+mentre quando valuti 5|5 devi escludere dal set totale il 6|6 (non potrà mai essere scelto). Allo stesso modo
+quando valuti 4|4 devi rimuovere 5|5 e 6|6, e così via. Alla fine il numero finale è più basso di 7 x 698.377.680.
+
+9. Nelle sezioni 2.4 e 2.5 mostra anche in percentuale quante sono rispetto ai 40M di configurazioni, in modo da far capire
+a chi legge che non si tratta di casi così rari: giocando nella vita reale può capitare di ritrovarsi in una situazione
+in cui, indipendentemente da come si gioca, si perde sempre (o viceversa). 
+
+10. Fondi la sezione 2.6 con la 2.5. Dopo aver discusso quante sono le partite il cui albero di gioco ha una sola foglia, fai vedere
+qual è la distribuzione del numero di foglie di tutti gli albero di gioco, in modo da far capire che è effettivamente
+abbastanza probabile incappare in partite in cui nessuno dei due giocatori dovrà mai scegliere tra due tessere.
+
+
+
+Oltre a questo, l’ultimo step è implementare un algoritmo minimax con informazione imperfetta e poi
+testarlo contro altri giocatori di base (direi, un giocatore greedy e il random). Ti spiego cosa c’è da fare.
+
+Non ha senso testare le 40M di configurazioni (abbiamo spiegato che molti giochi sono banali) quindi
+tra le 40M scegli soltanto 1M (mi sembra ragionevole) di set nel seguente modo:
+a. Elimina i set in cui solo uno dei due giocatori può vincere (nessuna foglia negativa o nessuna foglia positiva)
+b. Riordina i set in modo decrescente rispetto al numero di foglie del game tree e seleziona il primo milione di tali configurazioni
+
+Fai giocare tutti contro tutti su questo milione di configurazioni una volta come primo ed una volta come secondo giocatore (in tutto sono
+6M di partite). Ti mando il software che ho preparato per il test. Troverai già l’implementazione dei giocatori Greedy e Random.
+Puoi lanciarlo con
+
+java DominoGame RandomPlayer GreedyPlayer -1 '1|4 1|5 1|6 3|4 4|4 5|5 6|6' -2 '0|0 0|1 2|2 2|3 2|4 3|3 5|6' -v
+
+
+
+Ho aggiunto anche un po’ di commenti ai metodi, puoi usare javadoc per generare tutta la documentazione.
+Il tuo obiettivo è:
+1. Implementare il giocatore MinimaxPlayer (che implementa l’interfaccia DominoPlayer)
+2. Lanciare i test
+3. Preparare un’interfaccia grafica (usando java swing) per permettere ad un umano di giocare con i tre giocatori
+implementati
+
+Lascia perdere il punto 1 per il momento e cerca di capire come puoi organizzare il tutto per il punto 2. Il punto 3 sarebbe
+carino ma non è fondamentale. Se riesci ad implementare l’interfaccia grafica durante la presentazione puoi
+fare vedere un video di qualche secondo in cui mostri che hai anche implementato tutto il gioco.
