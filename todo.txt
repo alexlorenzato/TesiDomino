@@ -1,10 +1,4 @@
 
-cerca di dare maggiore continuità al discorso e di fare in modo che sia sempre chiaro cosa hai fatto
-e perché lo hai fatto. Quale suggerimento è nei commenti sotto. Oltre a questo dovremmo fissare
-un meeting per gli step successivi (vedi la parte in fondo all’eamail). Per me andrebbe bene mercoledì mattina, 
-fammi sapere.
-
-
 2. Come esempio ti chiedevo di generare un albero di gioco per un paio di configurazioni complete (7 tessere per giocatore).
 Considera ad esempio le seguenti configurazioni
 
@@ -27,10 +21,7 @@ non si capisce cosa tu abbia fatto. Relativamente a questo paragrafo, se ho capi
 solo quello con x=0 “vince” sempre, giusto? Mi fai vedere questi dati? Sono curioso d vedere quali sono i
 set “nemici” della 0|6, 1|6, 2|6, 3|6, 4|6, 5|6, 6|6, ad esempio.
 
-8. Le statistiche relative alle partite che terminano immediatamente non sono completamente corrette. 
-Sono ok per 6|6
-mentre quando valuti 5|5 devi escludere dal set totale il 6|6 (non potrà mai essere scelto). Allo stesso modo
-quando valuti 4|4 devi rimuovere 5|5 e 6|6, e così via. Alla fine il numero finale è più basso di 7 x 698.377.680.
+
 
 
 
@@ -40,6 +31,9 @@ fai vedere qual è la distribuzione del numero di foglie di tutti gli albero di 
 in modo da far capire che è effettivamente abbastanza probabile incappare in partite 
 in cui nessuno dei due giocatori dovrà mai scegliere tra due tessere.
 DOMANDA: non ho mica capito quale è il senso di sta cosa, i grafici sono già lì sotto e ho pure scritto il numero di partite a foglia singola.
+
+
+
 
 
 

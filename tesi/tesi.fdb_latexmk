@@ -1,5 +1,5 @@
 # Fdb version 4
-["bibtex tesi"] 0 "tesi.aux" "tesi.bbl" "tesi" 1733406653.12078 0
+["bibtex tesi"] 0 "tesi.aux" "tesi.bbl" "tesi" 1733765963.80451 0
   "C:/Users/alexl/AppData/Local/Programs/MiKTeX/bibtex/bst/bibtex/plain.bst" 1291864736 20613 bd3fbfa9f64872b81ac57a0dd2ed855f ""
   "bibliografia.bib" 0 -1 0 ""
   "tesi.aux" 0 -1 0 "pdflatex"
@@ -7,7 +7,7 @@
   "tesi.bbl"
   "tesi.blg"
   (rewritten before read)
-["pdflatex"] 1733406651.528 "d:/User Directories/Documents/GitHub/TesiDomino/tesi/tesi.tex" "tesi.pdf" "tesi" 1733406653.12115 0
+["pdflatex"] 1733765962.19674 "d:/User Directories/Documents/GitHub/TesiDomino/tesi/tesi.tex" "tesi.pdf" "tesi" 1733765963.80492 0
   "C:/Users/alexl/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1729866165 80909 eab91d9745dd2edfd62a31d53cd5fe15 ""
   "C:/Users/alexl/AppData/Local/MiKTeX/fonts/pk/ljfour/jknappen/ec/dpi600/tcrm1200.pk" 1732873536 14064 b56ee36dfa4b66c0a4aed3a2e015a7b8 ""
   "C:/Users/alexl/AppData/Local/MiKTeX/miktex/data/le/pdftex/pdflatex.fmt" 1729865522 11948279 0100d9d566f56e2286f1c5737be549f9 ""
@@ -107,7 +107,7 @@
   "C:/Users/alexl/AppData/Local/Programs/MiKTeX/tex/latex/refcount/refcount.sty" 1576433952 9878 9e94e8fa600d95f9c7731bb21dfb67a4 ""
   "C:/Users/alexl/AppData/Local/Programs/MiKTeX/tex/latex/rerunfilecheck/rerunfilecheck.sty" 1657800696 9714 ba3194bd52c8499b3f1e3eb91d409670 ""
   "C:/Users/alexl/AppData/Local/Programs/MiKTeX/tex/latex/url/url.sty" 1388490452 12796 8edb7d69a20b857904dd0ea757c14ec9 ""
-  "d:/User Directories/Documents/GitHub/TesiDomino/tesi/tesi.tex" 1733406647 35064 aea20774ce24e2d826204e164f9f022c ""
+  "d:/User Directories/Documents/GitHub/TesiDomino/tesi/tesi.tex" 1733765958 39041 4d089b91785ff6f2f0f97b31f9fe6597 ""
   "imgs/domino_set.png" 1732284652 228409 71f2d28e08034b834b7b064ce95746d4 ""
   "imgs/domino_table.png" 1732287244 6547 9de392d0dbe0c8cddb0709bc72030295 ""
   "imgs/gametree.png" 1732285121 69973 b6c8b01293135fff2ca7e227a80ef2a2 ""
@@ -115,11 +115,11 @@
   "imgs/grafico_0_2000.png" 1731407116 48477 bb06921f89dfc4d1603c92a5c6efed00 ""
   "imgs/grafico_2000_35000.png" 1732104715 26010 179a91142e11c1747f0da5609e891f7d ""
   "imgs/grafico_base.png" 1731406499 40129 e35a43810447d7b417ad60c2c966d036 ""
-  "tesi.aux" 1733406652 7746 1d4d19abf7f8fb3b13e0fd7d386f9ffa "pdflatex"
+  "tesi.aux" 1733765963 7746 339a4d0eac8e98fb4886ac6e8fe62506 "pdflatex"
   "tesi.bbl" 0 -1 0 "bibtex tesi"
-  "tesi.out" 1733406652 2718 6dbc152e6d1f32c3699b103c2d222876 "pdflatex"
-  "tesi.tex" 1733406647 35064 aea20774ce24e2d826204e164f9f022c ""
-  "tesi.toc" 1733406652 1469 5d5f2828237e44daacec1c21f8bbecff "pdflatex"
+  "tesi.out" 1733765963 2718 6dbc152e6d1f32c3699b103c2d222876 "pdflatex"
+  "tesi.tex" 1733765958 39041 4d089b91785ff6f2f0f97b31f9fe6597 ""
+  "tesi.toc" 1733765963 1469 934ec490aee041ecbc234a07e808c747 "pdflatex"
   (generated)
   "tesi.aux"
   "tesi.log"

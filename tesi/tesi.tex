@@ -243,7 +243,7 @@ Alcune statistiche globali raccolte:
         \hline
         Durata media della partita & 71.56 ms \\
         Numero medio di foglie & 1023.36 \\
-        Percentuale di vittorie & 100.00\% \\
+        Percentuale di vittorie del giocatore iniziale & 100.00\% \\
         Percentuale di partite in cui nessun giocatore esauriva la mano & 48.13\% \\
         \hline
     \end{tabular}
@@ -277,7 +277,9 @@ Non è comunque garantito che un alto numero di foglie indichi una partita compl
 % STATS SET SPECIFICI %
 \section{Statistiche di set specifici}
 
-Ho investigato dei set specifici di tessere alla ricerca di mani più o meno interessanti o vantaggiose in termini di partite vinte, i risultati sono i seguenti:
+Ho investigato dei set specifici di tessere alla ricerca di mani più o meno interessanti o vantaggiose in termini di partite vinte.
+
+Questa ricerca è stata condotta lanciando dei test su tutte le possibili partite in cui un giocatore ha la mano specificata e analizzandone l'albero di gioco risultante.
 
 \begin{quote}
     \textbf{Mano:} \(0|0, 0|1, 0|2, 0|3, 0|4, 0|5, 0|6\)
@@ -290,7 +292,7 @@ Ho investigato dei set specifici di tessere alla ricerca di mani più o meno int
         Match considerati & 116280 \\
         Durata media delle partite & 47.87 ms \\
         Numero medio di foglie & 2390.60 \\
-        Percentuale di vittorie & 100.00\% \\
+        Percentuale di vittorie del giocatore iniziale & 100.00\% \\
         Percentuale di partite in cui nessun giocatore esauriva la mano & 24.54\% \\
         \hline
     \end{tabular}
@@ -317,7 +319,7 @@ due estremità del tavolo è spesso bloccata dal numero 0, e anche la seconda es
         Match considerati & 116280 \\
         Durata media delle partite & 22.51 ms \\
         Numero medio di foglie & 66.74 \\
-        Percentuale di vittorie & 28.91\% \\
+        Percentuale di vittorie del giocatore iniziale & 28.91\% \\
         Percentuale di partite in cui nessun giocatore esauriva la mano & 64.41\% \\
         \hline
     \end{tabular}
@@ -342,7 +344,7 @@ Presenta solo due vantaggi, chiaramente insufficienti: garanzia di iniziare per 
         Match considerati & 116280 \\
         Durata media delle partite & 40.97 ms \\
         Numero medio di foglie & 1609.93 \\
-        Percentuale di vittorie & 60.97\% \\
+        Percentuale di vittorie del giocatore iniziale & 60.97\% \\
         Percentuale di partite in cui nessun giocatore esauriva la mano & 41.50\% \\
         \hline
     \end{tabular}
@@ -366,7 +368,7 @@ Un grosso svantaggio è quello di avere poche probabilità di iniziare per primi
         Match considerati & 116280 \\
         Durata media delle partite & 34.62 ms \\
         Numero medio di foglie & 801.53 \\
-        Percentuale di vittorie & 17.12\% \\
+        Percentuale di vittorie del giocatore iniziale & 17.12\% \\
         Percentuale di partite in cui nessun giocatore esauriva la mano & 50.13\% \\
         \hline
     \end{tabular}
@@ -386,7 +388,7 @@ Un grosso svantaggio è quello di avere poche probabilità di iniziare per primi
         Match considerati & 116280 \\
         Durata media delle partite & 37.43 ms \\
         Numero medio di foglie & 1013.82 \\
-        Percentuale di vittorie & 12.17\% \\
+        Percentuale di vittorie del giocatore iniziale & 12.17\% \\
         Percentuale di partite in cui nessun giocatore esauriva la mano & 49.17\% \\
         \hline
     \end{tabular}
@@ -406,7 +408,7 @@ Un grosso svantaggio è quello di avere poche probabilità di iniziare per primi
         Match considerati & 116280 \\
         Durata media delle partite & 52.85 ms \\
         Numero medio di foglie &  2580.79 \\
-        Percentuale di vittorie & 100.00\% \\
+        Percentuale di vittorie del giocatore iniziale & 100.00\% \\
         Percentuale di partite in cui nessun giocatore esauriva la mano &  23.38\% \\
         \hline
     \end{tabular}
@@ -426,7 +428,7 @@ Un grosso svantaggio è quello di avere poche probabilità di iniziare per primi
         Match considerati & 116280 \\
         Durata media delle partite &  54.74 ms \\
         Numero medio di foglie &  2843.77 \\
-        Percentuale di vittorie & 100.00\% \\
+        Percentuale di vittorie del giocatore iniziale & 100.00\% \\
         Percentuale di partite in cui nessun giocatore esauriva la mano &  22.15\% \\
         \hline
     \end{tabular}
@@ -446,7 +448,7 @@ Un grosso svantaggio è quello di avere poche probabilità di iniziare per primi
         Match considerati & 116280 \\
         Durata media delle partite &  57.32 ms \\
         Numero medio di foglie &  3199.19 \\
-        Percentuale di vittorie & 99.99\% \\
+        Percentuale di vittorie del giocatore iniziale & 99.99\% \\
         Percentuale di partite in cui nessun giocatore esauriva la mano &  20.97\% \\
         \hline
     \end{tabular}
@@ -466,7 +468,7 @@ Un grosso svantaggio è quello di avere poche probabilità di iniziare per primi
         Match considerati & 116280 \\
         Durata media delle partite &  60.73 ms \\
         Numero medio di foglie &  3670.20 \\
-        Percentuale di vittorie & 99.93\% \\
+        Percentuale di vittorie del giocatore iniziale & 99.93\% \\
         Percentuale di partite in cui nessun giocatore esauriva la mano &  19.93\% \\
         \hline
     \end{tabular}
@@ -486,7 +488,7 @@ Un grosso svantaggio è quello di avere poche probabilità di iniziare per primi
         Match considerati & 116280 \\
         Durata media delle partite &  65.31 ms \\
         Numero medio di foglie &   4283.70 \\
-        Percentuale di vittorie & 99.82\% \\
+        Percentuale di vittorie del giocatore iniziale & 99.82\% \\
         Percentuale di partite in cui nessun giocatore esauriva la mano &  19.11\% \\
         \hline
     \end{tabular}
@@ -506,7 +508,7 @@ Un grosso svantaggio è quello di avere poche probabilità di iniziare per primi
         Match considerati & 116280 \\
         Durata media delle partite &  71.24 ms \\
         Numero medio di foglie &  5070.79 \\
-        Percentuale di vittorie & 99.89\% \\
+        Percentuale di vittorie del giocatore iniziale & 99.89\% \\
         Percentuale di partite in cui nessun giocatore esauriva la mano &  18.58\% \\
         \hline
     \end{tabular}
@@ -540,8 +542,63 @@ Il numero di partite in cui viene giocata una sola tessera è calcolabile, di se
     \item ripetendo il procedimento per i set di tessere da 0 a 5 si va a moltiplicare per 7 il risultato precedente, il totale è \(698.377.680 \cdot 7 = 4.888.643.760\)
 \end{enumerate}
 
-Concludendo, le partite in cui viene giocata una sola tessera sono \(4.888.643.760\), che in \% rispetto ai \(137.281.098.240\) miliardi di partite possibili sono il \(3.56\%\).
+Lo stesso procedimento va fatto per i numeri da 0 a 5, facendo un'ulteriore sottrazione: nel calcolo del 5|5 ad esempio vanno tolti tutti i set che contengono la tessera 6|6, mentre nel calcolo del 4|4 vanno tolti sia quelli con il 6|6 che quelli con il 5|5, e così via; di seguito i calcoli.
 
+Caso in cui venga giocato solo il \(5|5\):
+\begin{enumerate}
+    \item le tessere utilizzabili sono 21 perché devo rimuovere la tessera 6|6 e tutte le tessere che riportano il numero 5 (ad eccezione della \(5|5\) 
+    \item di queste 21 tessere una è la \(5|5\), che do in mano al giocatore 1
+    \item ci sono \(\binom{20}{6} = 38.760\) modi di distribuire le restanti 6 tessere al giocatore 1
+    \item e \(\binom{14}{7} = 3.432\) modi di distruibuire la mano al giocatore 2
+    \item il totale di partite in cui un giocatore ha un \(5|5\), nessuno dei due ha un'altra tessera con un 5 e non è mai presente la \(6|6\) sono: \(38.760 \cdot 3.432 = 133.024.320\)
+\end{enumerate}
+
+Caso con il \(4|4\):
+\begin{enumerate}
+    \item 20 tessere utilizzabili, rimosse la \(6|6\), \(5|5\) e quelle con il 4 
+    \item tessera \(4|4\) in mano al giocatore 1
+    \item \(\binom{19}{6} = 27.132\) modi di distribuire le restanti 6 tessere al giocatore 1
+    \item e \(\binom{13}{7} = 1.716\) modi di distruibuire la mano al giocatore 2
+    \item totale: \( 27.132 \cdot 1.716 = 46.558.512 \)
+\end{enumerate}
+
+Caso con il \(3|3\):
+\begin{enumerate}
+    \item 19 tessere utilizzabili, rimosse la \(6|6\), \(5|5\), \(4|4\) e quelle con il 3 
+    \item tessera \(3|3\) in mano al giocatore 1
+    \item \(\binom{18}{6} = 18.564\) modi di distribuire le restanti 6 tessere al giocatore 1
+    \item e \(\binom{12}{7} = 792\) modi di distruibuire la mano al giocatore 2
+    \item totale: \( 18.564 \cdot 792 = 14.702.688 \)
+\end{enumerate}
+
+Caso con il \(2|2\):
+\begin{enumerate}
+    \item 18 tessere utilizzabili, rimosse la \(6|6\), \(5|5\), \(4|4\), \(3|3\) e quelle con il 2 
+    \item tessera \(2|2\) in mano al giocatore 1
+    \item \(\binom{17}{6} = 12.376\) modi di distribuire le restanti 6 tessere al giocatore 1
+    \item e \(\binom{11}{7} = 330\) modi di distruibuire la mano al giocatore 2
+    \item totale: \( 12.376 \cdot 330 = 4.084.080 \)
+\end{enumerate}
+
+Caso con il \(1|1\):
+\begin{enumerate}
+    \item 17 tessere utilizzabili, rimosse la \(6|6\), \(5|5\), \(4|4\), \(3|3\), \(2|2\) e quelle con l'1
+    \item tessera \(1|1\) in mano al giocatore 1
+    \item \(\binom{16}{6} = 8.008\) modi di distribuire le restanti 6 tessere al giocatore 1
+    \item e \(\binom{10}{7} = 120\) modi di distruibuire la mano al giocatore 2
+    \item totale: \( 8.008 \cdot 120 = 960.960 \)
+\end{enumerate}
+
+Caso con il \(0|0\):
+\begin{enumerate}
+    \item 16 tessere utilizzabili, rimosse la \(6|6\), \(5|5\), \(4|4\), \(3|3\), \(2|2\), \(1|1\) e quelle con lo 0
+    \item tessera \(0|0\) in mano al giocatore 1
+    \item \(\binom{15}{6} = 5.005\) modi di distribuire le restanti 6 tessere al giocatore 1
+    \item e \(\binom{9}{7} = 36\) modi di distruibuire la mano al giocatore 2
+    \item totale: \( 5.005 \cdot 36 = 180.180 \)
+\end{enumerate}
+
+Concludendo, le partite in cui viene giocata una sola tessera sono \( 698.377.680 + 133.024.320 + 46.558.512 + 14.702.688 + 4.084.080 + 960.960 + 180.180 = 897.999.420\) che corrispondono allo \( 0.65\%\) del totale delle partite totali.
 
 % PARTITE CON FOGLIE A SEGNO UGUALE %
 \section{Partite con tutte le foglie a segno uguale}
@@ -576,8 +633,10 @@ Ragionamento speculare si può fare se sono tutte negative o se sono tutte ugual
     \textbf{Mano Giocatore 2:} \(0|3, 0|4, 1|1, 1|2, 3|4, 4|5, 5|5\)
 \end{quote}
 
+Sommando queste partite si ottiene \(309.634 + 890.965 + 14.051 = 1.214.650 \), che rapportato ai \( 40.000.320 \) di partite testate corrisponde a un \( 3.03 \% \) del totale delle partite testate, un numero non indifferente, indice del fatto che quasi 1 partita su 30 è banale.
 
 
+% PARTITE A FOGLIA SINGOLA %
 \section{Partite a foglia singola (deterministiche)}
 
 Un ultimo caso di partite particolari è quello in cui l'albero di gioco ha una foglia singola.
@@ -596,7 +655,7 @@ Questa tipologia di partite è estremamente banale in quanto non ci sono decisio
 
 \section{Grafici}
 
-Di seguito sono rappresentati dei grafici, il primo dei quali (figura 2.1) è quello generale, gli altri sono ingrandimenti di specifici intervalli.
+Di seguito sono rappresentati dei grafici, il primo dei quali (figura 3.1) è quello generale, gli altri sono ingrandimenti di specifici intervalli.
 
 Sull'asse x è rappresentato il numero di foglie e sull'asse y il numero di partite.
 
