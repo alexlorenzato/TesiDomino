@@ -155,22 +155,22 @@ def save_lost_games(games, output_file, target_hand):
             lost_games.append(game)
         elif player_position == 2 and game.best_value > 0:  # Giocatore 2 perde se il punteggio è positivo
             lost_games.append(game)
-    
+
     with open(output_file, 'w') as f:
-        f.write(f"Mano specificata: {target_hand}\n\n")
         if lost_games:
-            f.write(f"Partite perse trovate: {len(lost_games)}\n")
             for game in lost_games:
-                f.write(f"Mano Giocatore 1: {game.player1_hand}\n")
-                f.write(f"Mano Giocatore 2: {game.player2_hand}\n")
-                f.write(f"Best Value: {game.best_value}\n")
-                f.write(f"Durata: {game.game_duration} ms\n")
-                f.write("Minimax Scores: " + ", ".join([f"{score}{'X' if has_x else ''}" for score, has_x in game.minimax_scores]) + "\n")
-                f.write("\n")
+                # Costruire la riga in formato tab-separated
+                player1_hand = " ".join(f"{d[0]}|{d[1]}" for d in game.player1_hand)
+                player2_hand = " ".join(f"{d[0]}|{d[1]}" for d in game.player2_hand)
+                minimax_scores = " ".join(
+                    f"{score}{'X' if has_x else ''}" for score, has_x in game.minimax_scores
+                )
+                line = f"{player1_hand}\t{player2_hand}\t{minimax_scores}\t{game.best_value}\t{game.game_duration}"
+                f.write(line + "\n")
         else:
             f.write(f"Nessuna partita persa trovata con la mano {target_hand}.\n")
     
-    print(f"Partite perse scritte su {output_file}")
+    print(f"Partite perse scritte su {output_file} (formato originale).")
 
 def main():
     parser = argparse.ArgumentParser(description="Processa file di domino e calcola statistiche per mani specifiche.")
