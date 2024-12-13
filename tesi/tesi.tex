@@ -137,29 +137,24 @@ Accade molto facilmente che un albero di gioco si allarghi moltissimo, questo co
 
 \begin{figure}[h!]
     \centering
-    \includegraphics[width=1\textwidth]{imgs/gametree.png} 
+    \includegraphics[width=1\textwidth]{imgs/partita_completa.png} 
     \caption{Esempio di albero di gioco}
     \label{fig:etichetta}
 \end{figure}
 
-In figura 1.3 si può vedere un esempio di albero da gioco, gli elementi sono i seguenti:
+In figura 2.1 si può vedere un esempio di albero da gioco, gli elementi sono i seguenti:
 
 \begin{enumerate}
-    \item i due set da 4 tessere rappresentati in cima sono le mani iniziali dei due giocatori
-    \item il nodo radice, ovvero il \(6|6\) verde in cima all'albero, è la prima mossa giocata; il verde quindi è il giocatore 1 (iniziale)
-    \item i 3 nodi immediatamente sotto sono le possibili mosse che può fare l'avversario
-    \item i numeri rappresentati all'immediata sinistra di ogni tessera dell'albero sono il valore della testa e della coda nel tavolo facendo quella mossa
-    \item le foglie sono le tessere dove l'albero si interrompe e ciascuna rappresenta un fine partita differente
+    \item i set di tessere rappresentati in cima sono le mani iniziali dei due giocatori
+    \item il \(6|6\) in cima all'albero è il nodo radice
+    \item i numeri rappresentati subito sotto ad ogni tessera sono il valore della testa e della coda nel tavolo facendo quella mossa
+    \item le foglie sono le tessere dove l'albero si interrompe, ciascuna rappresenta un fine partita differente
     \item il numero sotto alle foglie rappresenta il punteggio di fine partita: positivo se vince il primo giocatore e viceversa  
 \end{enumerate}
 
-Il valore delle foglie è calcolato facendo la differenza tra i punti del giocatore 1 e quelli del giocatore 2, usando l'esempio del ramo più a sinistra:
+Il valore delle foglie è calcolato con la formula: 
 
-\begin{itemize}
-    \item il giocatore 1 (verde) rimane con le tessere \( 0|4, 4|5\) in mano, totalizzando 13 punti
-    \item il giocatore 2 (rosso) rimane con la tessera \(0|0\) in mano, totalizzando 0 punti
-    \item il giocatore 1 perde, il punteggio della foglia è banalmente dato dalla differenza \(13 - 0\)
-\end{itemize}
+\(punti\_giocatore\_iniziale - punti\_secondo\_giocatore\)
 
 
 % MINIMAX %
@@ -652,12 +647,11 @@ Questa tipologia di partite è estremamente banale in quanto non ci sono decisio
     \textbf{Mano Giocatore 2:} \(0|0, 0|4, 1|1, 1|2, 2|2, 2|5, 3|3\)
 \end{quote}
 
-
-\section{Grafici}
-
-Di seguito sono rappresentati dei grafici, il primo dei quali (figura 3.1) è quello generale, gli altri sono ingrandimenti di specifici intervalli.
+Di seguito sono rappresentati dei grafici, il primo dei quali è quello generale, gli altri sono ingrandimenti di specifici intervalli.
 
 Sull'asse x è rappresentato il numero di foglie e sull'asse y il numero di partite.
+
+Si nota subito il picco sul valore 0, indicando che ci sono 356.142 partite con una sola foglia, corrispondenti approssimativamente a un 9\% del totale delle partite testate.
 
 \begin{figure}[h!]
     \centering
@@ -665,9 +659,6 @@ Sull'asse x è rappresentato il numero di foglie e sull'asse y il numero di part
     \caption{Grafico generale}
     \label{fig:etichetta}
 \end{figure}
-
-Si nota subito il picco sul valore 0, indicando che ci sono 356.142 partite con una sola foglia, corrispondenti approssimativamente a un 9\% del totale delle partite testate.
-
 
 \begin{figure}[h!]
     \centering
@@ -691,8 +682,6 @@ Curiosa l'alternanza dei valori, probabilmente solo una coincidenza che non port
     \caption{Ingrandimento dominio 2000-35000}
     \label{fig:etichetta}
 \end{figure}
-
-
 
 
 \chapter{Conclusioni}

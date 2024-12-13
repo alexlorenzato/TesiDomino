@@ -1,17 +1,4 @@
 
-2. Come esempio ti chiedevo di generare un albero di gioco per un paio di configurazioni complete (7 tessere per giocatore).
-Considera ad esempio le seguenti configurazioni
-
-1|4 1|5 1|6 3|4 4|4 5|5 6|6
-0|0 0|1 2|2 2|3 2|4 3|3 5|6
-
-
-L’albero di gioco per queste due configurazioni ha 10 foglie, ci sono possibili partite in cui vince un giocatore o l’altro oppure nessuno dei due (score zero). Ci sono inoltre
-partite che finiscono in blocco e partite che finiscono per esaurimento tessere. Dato che ci sono solo 10 foglie l’albero sarà semplice
-da disegnare. Questo rappresenta un esempio completo in cui c’è un po’ di tutto. Lo mostri per descrivere qual è l’albero di gioco
-e poi lo fai rivedere mostrando qual è il risultato del minimax (fai vedere come si propagano gli score fino alla radice). Se ci riesci
-utilizza direttamente le figure delle tessere del domino, non come ho fatto io con i numeri,
-
 
 
 
@@ -25,13 +12,7 @@ set “nemici” della 0|6, 1|6, 2|6, 3|6, 4|6, 5|6, 6|6, ad esempio.
 
 
 
-10. Fondi la sezione 2.6 con la 2.5. 
-Dopo aver discusso quante sono le partite il cui albero di gioco ha una sola foglia, 
-fai vedere qual è la distribuzione del numero di foglie di tutti gli albero di gioco, 
-in modo da far capire che è effettivamente abbastanza probabile incappare in partite 
-in cui nessuno dei due giocatori dovrà mai scegliere tra due tessere.
-DOMANDA: non ho mica capito quale è il senso di sta cosa, i grafici sono già lì sotto e ho pure scritto il numero di partite a foglia singola.
-
+ì
 
 
 

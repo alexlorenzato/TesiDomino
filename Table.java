@@ -15,7 +15,7 @@ public class Table {
     ArrayList<ArrayList<Tile>> p_hands;
     GameState game_state;
     Stack<Character> history;
-    boolean DEBUG = false;
+    boolean DEBUG = true;
 
 
 
