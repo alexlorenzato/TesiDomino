@@ -42,7 +42,7 @@ def parse_line(line):
         return None
 
 # Funzione per determinare il primo giocatore in base al doppio più alto
-def determine_first_player(player1_hand, player2_hand):
+def determine_first_player(player1_hand, player2_hand, best_value):
     # Filtra le tessere doppie (es. 0|0, 1|1, ecc.)
     player1_doubles = [d for d in player1_hand if d[0] == d[1]]
     player2_doubles = [d for d in player2_hand if d[0] == d[1]]
@@ -53,8 +53,12 @@ def determine_first_player(player1_hand, player2_hand):
 
     # Determina chi ha il doppio più alto
     if highest_double_player1 > highest_double_player2:
+        if(best_value < 0):
+            print("Errore", highest_double_player1, ", ", highest_double_player2, ", ", best_value)
         return 1  # Giocatore 1
     elif highest_double_player2 > highest_double_player1:
+        if(best_value > 0):
+            print("Errore", highest_double_player1, ", ", highest_double_player2, ", ", best_value)
         return 2  # Giocatore 2
     else:
         return 0  # Nessuno ha un doppio (raro, ma possibile)
@@ -74,7 +78,7 @@ def verify_first_player(file_path):
                 continue
 
             # Determiniamo il primo giocatore
-            first_player = determine_first_player(game_data.player1_hand, game_data.player2_hand)
+            first_player = determine_first_player(game_data.player1_hand, game_data.player2_hand, game_data.best_value)
 
             # Controlliamo se il primo giocatore è associato alla prima colonna
             if first_player == 1:
