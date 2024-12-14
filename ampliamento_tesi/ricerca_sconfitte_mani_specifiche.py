@@ -2,7 +2,10 @@
 Questo file serve per cercare le partite in cui i set del tipo x|0...x|6 perdono, di solito
 hanno il 99.9% di possiblilità di vincere, devo trovare contro chi perdono.
 
-python3 ricerca_sconfitte_mani_specifiche.py --hand "0|3 1|3 2|3 3|3 3|4 3|5 3|6" tutti_3.log --output perdite_tutti3.txt
+python3 ricerca_sconfitte_mani_specifiche.py --hand "0|3 1|3 2|3 3|3 3|4 3|5 3|6" tutti_3.log --output to_delete.txt --lost_games lost_tutti3.txt
+python3 ricerca_sconfitte_mani_specifiche.py --hand "0|4 1|4 2|4 3|4 4|4 4|5 4|6" tutti_4.log --output to_delete.txt --lost_games lost_tutti4.txt
+python3 ricerca_sconfitte_mani_specifiche.py --hand "0|5 1|5 2|5 3|5 4|5 5|5 5|6" tutti_5.log --output to_delete.txt --lost_games lost_tutti5.txt
+python3 ricerca_sconfitte_mani_specifiche.py --hand "0|6 1|6 2|6 3|6 4|6 5|6 6|6" tutti_6.log --output to_delete.txt --lost_games lost_tutti6.txt
 """
 
 import re
