@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (MiKTeX 24.4) (preloaded format=pdflatex 2024.10.25)  13 DEC 2024 16:08
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (MiKTeX 24.4) (preloaded format=pdflatex 2024.10.25)  14 DEC 2024 14:17
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -499,12 +499,12 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 <imgs/grafico_base.png, id=263, 1610.26593pt x 879.285pt>
 File: imgs/grafico_base.png Graphic file (type png)
 <use imgs/grafico_base.png>
-Package pdftex.def Info: imgs/grafico_base.png  used on input line 658.
+Package pdftex.def Info: imgs/grafico_base.png  used on input line 670.
 (pdftex.def)             Requested size: 426.79135pt x 233.04967pt.
 <imgs/grafico_0_200.png, id=264, 1595.20969pt x 896.59969pt>
 File: imgs/grafico_0_200.png Graphic file (type png)
 <use imgs/grafico_0_200.png>
-Package pdftex.def Info: imgs/grafico_0_200.png  used on input line 665.
+Package pdftex.def Info: imgs/grafico_0_200.png  used on input line 677.
 (pdftex.def)             Requested size: 426.79135pt x 239.8825pt.
 
 
@@ -513,7 +513,7 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 <imgs/grafico_0_2000.png, id=265, 1576.38937pt x 886.06032pt>
 File: imgs/grafico_0_2000.png Graphic file (type png)
 <use imgs/grafico_0_2000.png>
-Package pdftex.def Info: imgs/grafico_0_2000.png  used on input line 674.
+Package pdftex.def Info: imgs/grafico_0_2000.png  used on input line 686.
 (pdftex.def)             Requested size: 426.79135pt x 239.88846pt.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
@@ -521,7 +521,7 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 <imgs/grafico_2000_35000.png, id=266, 672.26157pt x 416.30531pt>
 File: imgs/grafico_2000_35000.png Graphic file (type png)
 <use imgs/grafico_2000_35000.png>
-Package pdftex.def Info: imgs/grafico_2000_35000.png  used on input line 681.
+Package pdftex.def Info: imgs/grafico_2000_35000.png  used on input line 693.
 (pdftex.def)             Requested size: 426.79135pt x 264.29376pt.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
@@ -570,9 +570,9 @@ Here is how much of TeX's memory you used:
  34187 multiletter control sequences out of 15000+600000
  568974 words of font info for 78 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 75i,8n,79p,711b,538s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 75i,8n,79p,711b,540s stack positions out of 10000i,1000n,20000p,200000b,200000s
  <C:\Users\alexl\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm1200.pk><C:/Users/alexl/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/alexl/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/alexl/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi12.pfb><C:/Users/alexl/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/alexl/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/alexl/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr17.pfb><C:/Users/alexl/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Users/alexl/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Users/alexl/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/alexl/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti10.pfb><C:/Users/alexl/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti12.pfb><C:/Users/alexl/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
-Output written on tesi.pdf (25 pages, 1408112 bytes).
+Output written on tesi.pdf (25 pages, 1408685 bytes).
 PDF statistics:
  381 PDF objects out of 1000 (max. 8388607)
  117 named destinations out of 1000 (max. 500000)
