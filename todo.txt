@@ -1,20 +1,39 @@
+buttare via le partite banali: soltanto uno dei due può vincere, tutte quelle che hanno albero di gioco molto piccolo
+
+dopo aver rimosso le partite banali, faccio sorting delle partite rimanenti rispetto al numero di foglie e seleziono le prime 100'000, se ho tempo poi estendo mano a mano il set
+
+modaliutà partite singole e tournament
+
+implementare minimax 
+
+GRAFICO ALCUNE CONFIG NON TERMINANO IN BLOCCO, MODIFICA 		
+
+seconod giocatore può giocare max 7 tessere (modifiche al minimax)
+altra modifica al minimax da fare è difficile che uno salti, bisogna aggiungere il nodo pass quando nel set esteso esiste un sottoinsieme di X tessere che non permette di giocare nulla allora va aggiunnto anche il nodo pass
+
+scrivere pseudocodice minimax a informazione perfetta
+scrivere pseucocode minimax con informazione imperfetta e poi cerco di implementarlo: gestione pass (inizialmente posso ignorarlo), posso usare alhpa-beta pruning
 
 
 
+IMPLEMENTARE INTERFACCIA DOMINOPLAYER
+a me interessa sopratutto selectTile() che usa la view
+se la view dice che posso giocare solo 1 tile o solo passare "skippo", se ho almeno 2 possibilità lancio il minimax esteso su una delle 2 mossse, che mi ritornerà uno score, lo confronto con l'altra mossa e prendo la migliore (maggiore)
+quindi la selectTile ritornauna tile e il minimimax che scrivo io ritornerà un numero
 
-7. Nella sezione 2.2 spiega cosa fai all’inizio del paragrafo: dato che alcuni set sembrano interessanti allora hai
-deciso di analizzare l’albero di gioco di tutte le loro possibili partite. Anche in questo caso, immagina chi legge:
-non si capisce cosa tu abbia fatto. Relativamente a questo paragrafo, se ho capito bene dei set x|0 ... x|6 
-solo quello con x=0 “vince” sempre, giusto? Mi fai vedere questi dati? Sono curioso d vedere quali sono i
-set “nemici” della 0|6, 1|6, 2|6, 3|6, 4|6, 5|6, 6|6, ad esempio.
+sostanzialmente devo imple,mentare interfaccia dominoPlayer, e cosa fa? se ho più di 1 mossa allora devo fare tutti i calcoli
+
+prendo in input la board, ci metto le mie tessere e tutte le tessere candidate dell'avversario, gli permetto di giocarle tutte però ne potrà giocare al max 7 
+quindi il minimax deve prendere in considerazione che l'altro ha unsacco di tessere in mano, non 7, e deve anche tenere conto che può giocarne max 7
+e poi c'é la questione del passo 
+
+il greedy ha un "difetto", in debug è una rogna perché a volte ti fa tornare risultati diversi a causa di questo comportamento aleatorio
+
+avvertire prima di fare test intemsivi
 
 
 
-
-
-ì
-
-
+---------------------
 
 
 
